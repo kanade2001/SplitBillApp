@@ -1,4 +1,4 @@
-export default function PaymentButton({
+export default function EditButton({
   onClick,
   item,
 }: {
@@ -11,7 +11,7 @@ export default function PaymentButton({
         className="bg-blue-500 text-white font-bold py-4 px-8 rounded-full"
         onClick={() => onClick(item)}
       >
-        追加
+        編集
       </button>
     </div>
   );

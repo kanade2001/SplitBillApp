@@ -1,7 +1,9 @@
 "use client";
-
-import PaymentButton from "./_components/payment-button";
 import { useState } from "react";
+
+import AddButton from "./_components/add-button";
+import EditButton from "./_components/edit-button";
+import CompleteButton from "./_components/complete-button";
 import PaymentList from "./_components/payment-list";
 
 type Props = {
@@ -22,8 +24,12 @@ export default function Page({ params, searchParams }: Props) {
     <div>
       <h1>TRIP_ID = {params.tripId}</h1>
       <h2>{key}</h2>
-      <PaymentButton onClick={handleSetItem} item="ITEM" />
+      <AddButton onClick={handleSetItem} item="ITEM" />
       <PaymentList items={items} />
+      <div className="flex">
+        <EditButton onClick={handleSetItem} item="ITEM" />
+        <CompleteButton onClick={handleSetItem} item="ITEM" />
+      </div>
     </div>
   );
 }
