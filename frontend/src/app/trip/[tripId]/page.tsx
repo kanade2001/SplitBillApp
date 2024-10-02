@@ -20,6 +20,8 @@ export default function Page({ params, searchParams }: Props) {
     setItems([...items, item]);
   };
 
+  const [isEditable, setIsEditable] = useState<boolean>(false);
+
   return (
     <div>
       <h1>TRIP_ID = {params.tripId}</h1>
@@ -27,8 +29,8 @@ export default function Page({ params, searchParams }: Props) {
       <AddButton onClick={handleSetItem} item="ITEM" />
       <PaymentList items={items} />
       <div className="flex">
-        <EditButton onClick={handleSetItem} item="ITEM" />
-        <CompleteButton onClick={handleSetItem} item="ITEM" />
+        <EditButton onClick={setIsEditable} isEditable={isEditable} />
+        <CompleteButton item={items} />
       </div>
     </div>
   );
