@@ -13,6 +13,12 @@ export default function Home() {
           <li>
             <Link href="/trip/123">/trip/123</Link>
           </li>
+          <li>
+            <Link href="/user/login">/user/login</Link>
+          </li>
+          <li>
+            <Link href="/user/register">/user/register</Link>
+          </li>
         </ul>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
