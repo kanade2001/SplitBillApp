@@ -6,35 +6,66 @@ import { useState } from "react";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [agreed, setAgreed] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [agreedError, setAgreedError] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    let hasError = false;
+
+    if (email === "" || email === "email") {
+      setEmailError(true);
+      hasError = true;
+    } else {
+      setEmailError(false);
+    }
+
     if (!agreed) {
-      {
-        /* TODO 画面上にエラーメッセージを表示する */
-      }
-      alert("Please agree to the terms and conditions.");
+      setAgreedError(true);
+      hasError = true;
+    } else {
+      setAgreedError(false);
+    }
+
+    if (hasError) {
       return;
     }
+
+    // TODO ログイン処理
+
     console.log("email", email);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center mt-10">
+    <div className="mt-10 flex flex-col items-center justify-center">
       <h1 className="text-2xl font-bold my-4">LOGIN</h1>
       <form onSubmit={handleSubmit}>
-        <div className="my-2">
+        <div
+          className={`my-2 ${
+            emailError ? "border rounded border-red-500" : ""
+          }`}
+        >
           <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {emailError ? (
+            <p className="text-red-500 text-xs italic">
+              Please enter a valid email address.
+            </p>
+          ) : null}
         </div>
 
-        <div className="my-2">
+        <div
+          className={`my-2 ${
+            agreedError ? "border rounded border-red-500" : ""
+          }`}
+        >
           <input
             type="checkbox"
             id="terms"
@@ -49,6 +80,11 @@ export default function Login() {
               Terms and Conditions
             </a>
           </label>
+          {agreedError ? (
+            <p className="text-red-500 text-xs italic">
+              Please agree to the terms and conditions.
+            </p>
+          ) : null}
         </div>
         <div className="my-8">
           <button
@@ -61,9 +97,9 @@ export default function Login() {
         </div>
         <div className="my-8">{/* TODO Google認証でログイン */}</div>
         <div className="my-8 flex">
-          <p>Don&apos;t have an account? &nbsp;</p>
-          <Link href="/user/register" className="text-blue-500 hover:underline">
-            Sign up
+          <p>Have an account already? &nbsp;</p>
+          <Link href="/user/login" className="text-blue-500 hover:underline">
+            Log in
           </Link>
         </div>
       </form>
