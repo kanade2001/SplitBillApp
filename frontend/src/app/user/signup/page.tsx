@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { useReducer, FormEvent } from "react";
 import InputField from "@/components/InputField";
 import CheckboxField from "@/components/Field/CheckboxField";
-import { Input } from "postcss";
 
 interface FormState {
   email: string;
@@ -18,7 +16,7 @@ type FormAction =
   | { type: "FORM_UPDATE"; field: keyof FormState; value: string | boolean }
   | {
       type: "CHECK_ERROR";
-      errors: { emailError: Boolean; agreedError: Boolean };
+      errors: { emailError: boolean; agreedError: boolean };
     };
 
 const initialState: FormState = {
