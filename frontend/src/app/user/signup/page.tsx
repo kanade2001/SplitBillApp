@@ -1,91 +1,122 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useReducer, FormEvent } from "react";
+import InputField from "@/components/InputField";
+import CheckboxField from "@/components/Field/CheckboxField";
+
+interface FormState {
+  email: string;
+  agreed: boolean;
+  emailError: string;
+  termsError: string;
+}
+
+type FormAction =
+  | { type: "FORM_UPDATE"; field: keyof FormState; value: string | boolean }
+  | {
+      type: "CHECK_ERROR";
+      errors: { emailError: boolean; agreedError: boolean };
+    };
+
+const initialState: FormState = {
+  email: "",
+  agreed: false,
+  emailError: "",
+  termsError: "",
+};
+
+const formReducer = (state: FormState, action: FormAction): FormState => {
+  switch (action.type) {
+    // フォームの更新
+    case "FORM_UPDATE":
+      return {
+        ...state,
+        [action.field]: action.value,
+      };
+    // バリデーションチェック
+    case "CHECK_ERROR":
+      return {
+        ...state,
+        emailError: action.errors.emailError
+          ? "Please enter a valid email address."
+          : "",
+        termsError: action.errors.agreedError
+          ? "Please agree to the terms and conditions."
+          : "",
+      };
+  }
+};
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [agreed, setAgreed] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [agreedError, setAgreedError] = useState(false);
+  const [state, dispatch] = useReducer(formReducer, initialState);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
     let hasError = false;
+    const errors = {
+      emailError: false,
+      agreedError: false,
+    };
 
-    if (email === "" || email === "email") {
-      setEmailError(true);
+    // Emailのチェック
+    if (!state.email) {
+      errors.emailError = true;
       hasError = true;
     } else {
-      setEmailError(false);
+      errors.emailError = false;
     }
 
-    if (!agreed) {
-      setAgreedError(true);
+    // 利用規約のチェック
+    if (!state.agreed) {
+      errors.agreedError = true;
       hasError = true;
     } else {
-      setAgreedError(false);
+      errors.agreedError = false;
     }
 
+    dispatch({ type: "CHECK_ERROR", errors });
     if (hasError) {
       return;
     }
 
     // TODO ログイン処理
 
-    console.log("email", email);
+    console.log("email", state.email);
   };
 
   return (
     <div className="mt-10 flex flex-col items-center justify-center">
       <h1 className="text-2xl font-bold my-4">LOGIN</h1>
       <form onSubmit={handleSubmit}>
-        <div
-          className={`my-2 ${
-            emailError ? "border rounded border-red-500" : ""
-          }`}
-        >
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {emailError ? (
-            <p className="text-red-500 text-xs italic">
-              Please enter a valid email address.
-            </p>
-          ) : null}
-        </div>
+        <InputField
+          label="Email"
+          type="email"
+          id="email"
+          value={state.email}
+          onChange={(e) =>
+            dispatch({
+              type: "FORM_UPDATE",
+              field: "email",
+              value: e.target.value,
+            })
+          }
+          error={state.emailError}
+        />
 
-        <div
-          className={`my-2 ${
-            agreedError ? "border rounded border-red-500" : ""
-          }`}
-        >
-          <input
-            type="checkbox"
-            id="terms"
-            className="rounded forcus:ring-blue-500 focus:ring-2"
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-          />
-          <label htmlFor="terms" className="ml-2">
-            I agee to the &nbsp;
-            {/* TODO 利用規約へのリンクの確認 */}
-            <a href="/terms" className="text-blue-500 hover:underline">
-              Terms and Conditions
-            </a>
-          </label>
-          {agreedError ? (
-            <p className="text-red-500 text-xs italic">
-              Please agree to the terms and conditions.
-            </p>
-          ) : null}
-        </div>
+        <CheckboxField
+          id="terms"
+          checked={state.agreed}
+          onChange={(e) =>
+            dispatch({
+              type: "FORM_UPDATE",
+              field: "agreed",
+              value: e.target.checked,
+            })
+          }
+          error={state.termsError}
+        />
+
         <div className="my-8">
           <button
             type="submit"
