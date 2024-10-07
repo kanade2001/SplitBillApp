@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useReducer, FormEvent } from "react";
-import InputField from "@/components/InputField";
+import InputField from "@/components/Field/InputField";
 import CheckboxField from "@/components/Field/CheckboxField";
 
 interface FormState {
