@@ -14,10 +14,13 @@ export default function Home() {
             <Link href="/trip/123">/trip/123</Link>
           </li>
           <li>
+            <Link href="/user">/user</Link>
+          </li>
+          <li>
             <Link href="/user/login">/user/login</Link>
           </li>
           <li>
-            <Link href="/user/register">/user/register</Link>
+            <Link href="/user/signup">/user/signup</Link>
           </li>
         </ul>
       </main>
