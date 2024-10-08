@@ -8,7 +8,7 @@ export default function AddButton({
   return (
     <div>
       <button
-        className="bg-blue-500 text-white font-bold py-4 px-8 rounded-full"
+        className="rounded-full bg-blue-500 px-8 py-4 font-bold text-white"
         onClick={() => onClick(item)}
       >
         追加

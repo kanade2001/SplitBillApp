@@ -87,7 +87,7 @@ export default function Login() {
 
   return (
     <div className="mt-10 flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold my-4">LOGIN</h1>
+      <h1 className="my-4 text-2xl font-bold">LOGIN</h1>
       <form onSubmit={handleSubmit}>
         <InputField
           label="Email"
@@ -120,7 +120,7 @@ export default function Login() {
         <div className="my-8">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white rounded w-full font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+            className="focus:shadow-outline w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
           >
             {/* TODO 連続で押された場合、処理が重複して行われないようにする */}
             Sign up

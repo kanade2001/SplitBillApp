@@ -13,15 +13,15 @@ export default function Login() {
     console.log("password", password);
   };
   return (
-    <div className="flex flex-col items-center justify-center mt-10">
-      <h1 className="text-2xl font-bold my-4">LOGIN</h1>
+    <div className="mt-10 flex flex-col items-center justify-center">
+      <h1 className="my-4 text-2xl font-bold">LOGIN</h1>
       <form onSubmit={handleSubmit}>
         <div className="my-2">
           <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -32,7 +32,7 @@ export default function Login() {
           <input
             type="password"
             id="password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -40,7 +40,7 @@ export default function Login() {
         <div className="my-8">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white rounded w-full font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+            className="focus:shadow-outline w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
           >
             {/* TODO 連続で押された場合、処理が重複して行われないようにする */}
             Login

@@ -9,12 +9,12 @@ export default function Menu() {
 
   return (
     <div className="relative h-full">
-      <div className="absolute top-0 right-0 px-5 h-full w-20 flex items-center bg-white-900">
+      <div className="bg-white-900 absolute right-0 top-0 flex h-full w-20 items-center px-5">
         <button onClick={toggleMenu}>User</button>
       </div>
       <nav
         className={
-          isOpen ? "absolute top-full right-0 bg-white-100 w-20 p-2" : "hidden"
+          isOpen ? "bg-white-100 absolute right-0 top-full w-20 p-2" : "hidden"
         }
       >
         <ul className="flex flex-col items-center">
