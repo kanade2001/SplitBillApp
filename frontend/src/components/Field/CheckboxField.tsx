@@ -15,12 +15,12 @@ const CheckboxField: React.FC<CheckboxProps> = ({
 }) => {
   return (
     <div
-      className={`my-2 ${error !== "" ? "border rounded border-red-500" : ""}`}
+      className={`my-2 ${error !== "" ? "rounded border border-red-500" : ""}`}
     >
       <input
         type="checkbox"
         id={id}
-        className="rounded forcus:ring-blue-500 focus:ring-2"
+        className="forcus:ring-blue-500 rounded focus:ring-2"
         checked={checked}
         onChange={onChange}
       />
@@ -32,7 +32,7 @@ const CheckboxField: React.FC<CheckboxProps> = ({
         </a>
       </label>
       {error !== "" ? (
-        <p className="text-red-500 text-xs italic">{error}</p>
+        <p className="text-xs italic text-red-500">{error}</p>
       ) : null}
     </div>
   );

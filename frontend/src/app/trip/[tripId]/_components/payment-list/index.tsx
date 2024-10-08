@@ -3,13 +3,13 @@ export default function PaymentList({ items }: { items: string[] }) {
     <div>
       LIST
       {/* TODO 要素がない場合の処理*/}
-      <div className="mx-10 border bor-der-gray-100">
+      <div className="bor-der-gray-100 mx-10 border">
         {items.map((item, index) => (
           <div
             key={index}
             className={`grid grid-cols-5 items-center text-center bg-${
               index % 2 === 0 ? "gray-600" : "gray-500"
-            }  py-4 `}
+            } py-4`}
           >
             <div>{item}</div>
             <div>1</div>

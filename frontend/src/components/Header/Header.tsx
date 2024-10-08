@@ -1,10 +1,16 @@
+"use client";
+
+import Menu from "./_components/menu";
+
 const Header = () => {
   return (
-    <header className="bg-blue-900 h-10 flex items-center justify-between">
-      <div className="p-5">
+    <header className="flex h-10 items-center justify-between bg-blue-900">
+      <div className="text-white-900 flex h-full items-center px-5">
         <h1>Header</h1>
       </div>
-      <div className="p-5">User</div>
+      <div className="h-full">
+        <Menu />
+      </div>
     </header>
   );
 };
