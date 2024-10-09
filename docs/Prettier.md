@@ -16,3 +16,7 @@ Add file ".prettierrc"
   "plugins": ["prettier-plugin-tailwindcss"]
 }
 ```
+
+```bash
+npx prettier . --write
+```
