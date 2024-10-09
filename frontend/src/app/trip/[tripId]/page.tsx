@@ -23,7 +23,7 @@ export default function Page({ params, searchParams }: Props) {
   const [isEditable, setIsEditable] = useState<boolean>(false);
 
   return (
-    <div>
+    <div className="space-y-5 p-5">
       <h1>TRIP_ID = {params.tripId}</h1>
       <h2>{key}</h2>
       <AddButton onClick={handleSetItem} item="ITEM" />
