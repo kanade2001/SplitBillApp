@@ -7,7 +7,7 @@ interface ItemState {
   member_id: bigint;
   currency: string;
   currency_id: string;
-  amount: bigint;
+  amount: number;
   datetime: Date;
 }
 
@@ -127,7 +127,7 @@ const EditRow: React.FC<TableProps> = ({ dispatch }) => {
     console.log("handleAdd");
     e.preventDefault();
     let hasError = false;
-    let errors = {
+    const errors = {
       titleError: false,
       memberError: false,
       currencyError: false,
@@ -175,7 +175,7 @@ const EditRow: React.FC<TableProps> = ({ dispatch }) => {
           member_id: BigInt(0),
           currency: state.currency,
           currency_id: "jp",
-          amount: BigInt(state.amount),
+          amount: state.amount,
           datetime: new Date(state.datetime),
         },
       },
@@ -186,6 +186,10 @@ const EditRow: React.FC<TableProps> = ({ dispatch }) => {
   const handleReset = () => {
     dispatchItem({ type: "FORM_RESET" });
     dispatchError({ type: "ERROR_RESET" });
+  };
+
+  const handleDelete = () => {
+    dispatch({ type: "DELETE_ITEM", payload: { id: BigInt(0) } });
   };
 
   const items: EditRowItem[] = [
@@ -240,7 +244,10 @@ const EditRow: React.FC<TableProps> = ({ dispatch }) => {
         <th></th>
         <th colSpan={5}>
           <div className="flex justify-end p-2">
-            <button className="x-20 ms-2 rounded-md bg-red-800 px-2 text-center text-sm text-white">
+            <button
+              className="x-20 ms-2 rounded-md bg-red-800 px-2 text-center text-sm text-white"
+              onClick={() => handleDelete()}
+            >
               Delete
             </button>
             <button
@@ -253,7 +260,7 @@ const EditRow: React.FC<TableProps> = ({ dispatch }) => {
               className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
               onClick={(e) => handleAdd(e)}
             >
-              Complete
+              Add
             </button>
           </div>
         </th>

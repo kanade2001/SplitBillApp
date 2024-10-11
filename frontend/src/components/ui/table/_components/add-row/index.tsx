@@ -7,7 +7,7 @@ interface ItemState {
   member_id: bigint;
   currency: string;
   currency_id: string;
-  amount: bigint;
+  amount: number;
   datetime: Date;
 }
 

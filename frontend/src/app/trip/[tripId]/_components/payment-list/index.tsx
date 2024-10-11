@@ -13,7 +13,7 @@ interface ItemState {
   member_id: bigint;
   currency: string;
   currency_id: string;
-  amount: bigint;
+  amount: number;
   datetime: Date;
 }
 
@@ -50,7 +50,7 @@ export default function PaymentList({ items }: { items: string[] }) {
 
   return (
     <div className="">
-      <Table dispatch={dispatch} />
+      <Table state={state} dispatch={dispatch} />
       {items.length === 0 /* 要素がない場合 */ && (
         <div className="">
           <Info title="データがありません" message="データを追加してください" />

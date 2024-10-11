@@ -7,25 +7,27 @@ interface HeaderRowItem {
 const HeaderRow = () => {
   const items: HeaderRowItem[] = [
     {
+      key: "icon",
       content: <PlusIcon />,
       className: "w-10  border-r-0",
     },
     {
+      key: "title",
       content: "Title",
-      className: "border-l-0 ",
+      className: "border-l-0",
     },
-    { content: "Member" },
-    { content: "Currency", className: "w-28" },
-    { content: "Amount" },
-    { content: "Date/Time" },
-    { content: "Edit", className: "w-16" },
+    { key: "member", content: "Member" },
+    { key: "currency", content: "Currency", className: "w-28" },
+    { key: "amount", content: "Amount" },
+    { key: "datetime", content: "Date/Time" },
+    { key: "editicon", content: "Edit", className: "w-16" },
   ];
   return (
     <tr>
       {items.map(({ key, content, className }) => (
         <th
           key={key}
-          className={[className, "border border-gray-400 p-2"].join("")}
+          className={[className, "border border-gray-400 p-2"].join(" ")}
         >
           {content}
         </th>
