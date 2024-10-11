@@ -1,10 +1,14 @@
 "use client";
-import { useState } from "react";
 
-import AddButton from "./_components/add-button";
-import EditButton from "./_components/edit-button";
-import CompleteButton from "./_components/complete-button";
-import PaymentList from "./_components/payment-list";
+import { useReducer } from "react";
+
+import { initialStateList, ItemReducer } from "./_types/type";
+
+import { Info } from "@/components/Alert/Alert";
+import HeaderRow from "./_components/header-row";
+import BodyRow from "./_components/body-row";
+import AddRow from "./_components/add-row";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 type Props = {
   params: { tripId: string }; // TripID
@@ -13,25 +17,30 @@ type Props = {
 
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
-
-  const [items, setItems] = useState<string[]>([]);
-
-  const handleSetItem = (item: string) => {
-    setItems([...items, item]);
-  };
-
-  const [isEditable, setIsEditable] = useState<boolean>(false);
+  const [state, dispatch] = useReducer(ItemReducer, initialStateList);
 
   return (
     <div className="space-y-5 p-5">
       <h1>TRIP_ID = {params.tripId}</h1>
-      <h2>{key}</h2>
-      <AddButton onClick={handleSetItem} item="ITEM" />
-      <PaymentList items={items} />
-      <div className="flex">
-        <EditButton onClick={setIsEditable} isEditable={isEditable} />
-        <CompleteButton item={items} />
-      </div>
+      <h2>PUBLIC_KEY = {key}</h2>
+
+      <table className="w-full table-fixed border border-gray-400">
+        <HeaderRow />
+
+        <tbody>
+          {state.map((item) => (
+            <BodyRow key={item.id} item={item} dispatch={dispatch} />
+          ))}
+        </tbody>
+        <tfoot className="bg-gray-800 text-white">
+          <AddRow dispatch={dispatch} />
+        </tfoot>
+      </table>
+      {state.length === 0 /* 要素がない場合 */ && (
+        <div className="">
+          <Info title="データがありません" message="データを追加してください" />
+        </div>
+      )}
     </div>
   );
 }
