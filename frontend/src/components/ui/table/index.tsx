@@ -1,7 +1,12 @@
+"use client";
+
 import React from "react";
+
+import AddRow from "./_components/add-row";
 
 interface TableProps {
   header: { content: string | JSX.Element; className: string }[];
+  footer: { content: string | JSX.Element; className: string }[];
 }
 
 const Table: React.FC<TableProps> = (props) => {
@@ -17,7 +22,7 @@ const Table: React.FC<TableProps> = (props) => {
         </tr>
       </thead>
       <tfoot className="bg-gray-800 text-white">
-        <tr></tr>
+        <AddRow />
       </tfoot>
     </table>
   );

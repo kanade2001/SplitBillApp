@@ -78,7 +78,7 @@ export default function PaymentList({ items }: { items: string[] }) {
             <th className="border border-l-0 border-double border-gray-400 p-2">
               Title
             </th>
-            <th className="border border-gray-400 p-2">Memeber</th>
+            <th className="border border-gray-400 p-2">Memeeeeeber</th>
             <th className="w-28 border border-gray-400 p-2">Currency</th>
             <th className="border border-gray-400 p-2">Amount</th>
             <th className="border border-gray-400 p-2">Date/Time</th>
