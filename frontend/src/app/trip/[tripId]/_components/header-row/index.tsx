@@ -23,16 +23,18 @@ const HeaderRow = () => {
     { key: "editicon", content: "Edit", className: "w-16" },
   ];
   return (
-    <tr>
-      {items.map(({ key, content, className }) => (
-        <th
-          key={key}
-          className={[className, "border border-gray-400 p-2"].join(" ")}
-        >
-          {content}
-        </th>
-      ))}
-    </tr>
+    <thead className="bg-blue-800 text-white">
+      <tr>
+        {items.map(({ key, content, className }) => (
+          <th
+            key={key}
+            className={[className, "border border-gray-400 p-2"].join(" ")}
+          >
+            {content}
+          </th>
+        ))}
+      </tr>
+    </thead>
   );
 };
 

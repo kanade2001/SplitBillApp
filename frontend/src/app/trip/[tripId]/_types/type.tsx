@@ -38,3 +38,20 @@ export const ItemReducer = (state: ItemState[], action: ItemAction) => {
       return state.filter((item) => item.id !== action.payload.id);
   }
 };
+
+export interface FormState {
+  title: string;
+  member: string;
+  currency: string;
+  // TODO セントとかの扱い
+  amount: number;
+  datetime: string;
+}
+
+export interface ErrorState {
+  titleError: boolean;
+  memberError: boolean;
+  currencyError: boolean;
+  amountError: boolean;
+  datetimeError: boolean;
+}

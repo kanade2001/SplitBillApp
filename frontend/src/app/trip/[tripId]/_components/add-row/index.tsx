@@ -1,28 +1,14 @@
-import { useState, Key } from "react";
+import { useState } from "react";
 
-interface ItemState {
-  id: Key;
-  title: string;
-  member: string;
-  member_id: bigint;
-  currency: string;
-  currency_id: string;
-  amount: number;
-  datetime: Date;
-}
+import { ItemAction } from "../../_types/type";
 
-type ItemAction =
-  | { type: "ADD_ITEM"; payload: { item: ItemState } }
-  | { type: "EDIT_ITEM"; payload: { item: ItemState } }
-  | { type: "DELETE_ITEM"; payload: { id: Key } };
-
-interface TableProps {
+interface AddRowProps {
   dispatch: React.Dispatch<ItemAction>;
 }
 
 import EditRow from "../edit-row";
 
-const AddRow: React.FC<TableProps> = ({ dispatch }) => {
+const AddRow: React.FC<AddRowProps> = ({ dispatch }) => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
 
   const handleIsAdd = () => {
@@ -63,7 +49,12 @@ const AddRow: React.FC<TableProps> = ({ dispatch }) => {
           </button>
         </th>
       </tr>
-      {isAdd && <EditRow dispatch={dispatch} />}
+      {isAdd && (
+        <EditRow
+          visible={{ add: true, edit: false, delete: false }}
+          dispatch={dispatch}
+        />
+      )}
     </>
   );
 };

@@ -1,40 +1,14 @@
-import React, { useReducer, FormEvent, Key } from "react";
+import React, { useReducer, FormEvent } from "react";
 
-interface ItemState {
-  id: Key;
-  title: string;
-  member: string;
-  member_id: bigint;
-  currency: string;
-  currency_id: string;
-  amount: number;
-  datetime: Date;
-}
+import { ItemAction, FormState, ErrorState } from "../../_types/type";
 
-type ItemAction =
-  | { type: "ADD_ITEM"; payload: { item: ItemState } }
-  | { type: "EDIT_ITEM"; payload: { item: ItemState } }
-  | { type: "DELETE_ITEM"; payload: { id: Key } };
-
-interface TableProps {
+interface EditRowProps {
+  visible: {
+    add: boolean;
+    edit: boolean;
+    delete: boolean;
+  };
   dispatch: React.Dispatch<ItemAction>;
-}
-
-interface FormState {
-  title: string;
-  member: string;
-  currency: string;
-  // TODO セントとかの扱い
-  amount: number;
-  datetime: string;
-}
-
-interface ErrorState {
-  titleError: boolean;
-  memberError: boolean;
-  currencyError: boolean;
-  amountError: boolean;
-  datetimeError: boolean;
 }
 
 interface EditRowItem {
@@ -119,7 +93,7 @@ const ErrorReducer: React.Reducer<ErrorState, ErrorAction> = (
   }
 };
 
-const EditRow: React.FC<TableProps> = ({ dispatch }) => {
+const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
   const [state, dispatchItem] = useReducer(ItemReducer, initialItemState);
   const [error, dispatchError] = useReducer(ErrorReducer, initialErrorState);
 
@@ -244,24 +218,36 @@ const EditRow: React.FC<TableProps> = ({ dispatch }) => {
         <th></th>
         <th colSpan={5}>
           <div className="flex justify-end p-2">
-            <button
-              className="x-20 ms-2 rounded-md bg-red-800 px-2 text-center text-sm text-white"
-              onClick={() => handleDelete()}
-            >
-              Delete
-            </button>
+            {visible.delete && (
+              <button
+                className="x-20 ms-2 rounded-md bg-red-800 px-2 text-center text-sm text-white"
+                onClick={() => handleDelete()}
+              >
+                Delete
+              </button>
+            )}
             <button
               className="x-20 ms-2 rounded-md bg-gray-800 px-2 text-center text-sm text-white"
               onClick={() => handleReset()}
             >
               Reset
-            </button>
-            <button
-              className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
-              onClick={(e) => handleAdd(e)}
-            >
-              Add
-            </button>
+            </button>{" "}
+            {visible.edit && (
+              <button
+                className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
+                onClick={(e) => handleAdd(e)}
+              >
+                Edit
+              </button>
+            )}
+            {visible.add && (
+              <button
+                className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
+                onClick={(e) => handleAdd(e)}
+              >
+                Add
+              </button>
+            )}
           </div>
         </th>
         <th></th>

@@ -1,22 +1,8 @@
-import { useState, Key } from "react";
+import { useState } from "react";
 
 import EditRow from "../edit-row";
 
-interface ItemState {
-  id: Key;
-  title: string;
-  member: string;
-  member_id: bigint;
-  currency: string;
-  currency_id: string;
-  amount: number;
-  datetime: Date;
-}
-
-type ItemAction =
-  | { type: "ADD_ITEM"; payload: { item: ItemState } }
-  | { type: "EDIT_ITEM"; payload: { item: ItemState } }
-  | { type: "DELETE_ITEM"; payload: { id: Key } };
+import { ItemState, ItemAction } from "../../_types/type";
 
 interface BodyRowProps {
   item: ItemState;
@@ -30,14 +16,17 @@ const BodyRow: React.FC<BodyRowProps> = ({ item, dispatch }) => {
     console.log("handleIsEdit");
     setIsEdit(!isEdit);
   };
+
   return (
     <>
       <tr>
         <th className="border border-r-0 border-gray-400 p-2">{}</th>
-        <th className="border border-l-0 border-gray-400 p-2">{item.title}</th>
+        <th className="border border-l-0 border-gray-400 p-2 text-left">
+          {item.title}
+        </th>
         <th className="border border-gray-400 p-2">{item.member}</th>
         <th className="border border-gray-400 p-2">{item.currency}</th>
-        <th className="border border-gray-400 p-2">{item.amount}</th>
+        <th className="border border-gray-400 p-2 text-right">{item.amount}</th>
         <th className="border border-gray-400 p-2">
           {item.datetime.toISOString()}
         </th>
@@ -50,7 +39,12 @@ const BodyRow: React.FC<BodyRowProps> = ({ item, dispatch }) => {
           </button>
         </th>
       </tr>
-      {isEdit && <EditRow dispatch={dispatch} />}
+      {isEdit && (
+        <EditRow
+          visible={{ add: false, edit: true, delete: true }}
+          dispatch={dispatch}
+        />
+      )}
     </>
   );
 };
