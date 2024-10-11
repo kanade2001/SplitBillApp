@@ -3,6 +3,7 @@
 import { Key, useReducer, useState } from "react";
 
 import { Info } from "@/components/Alert/Alert";
+import Table from "@/components/ui/table";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 interface ItemState {
@@ -126,6 +127,23 @@ export default function PaymentList({ items }: { items: string[] }) {
           <AddRow />
         </tfoot>
       </table>
+      <Table
+        header={[
+          {
+            content: <PlusIcon />,
+            className: "w-10 border border-r-0 border-gray-400 p-2",
+          },
+          {
+            content: "Title",
+            className: "border border-l-0 border-double border-gray-400 p-2",
+          },
+          { content: "Member", className: "border border-gray-400 p-2" },
+          { content: "Currency", className: "w-28 border border-gray-400 p-2" },
+          { content: "Amount", className: "border border-gray-400 p-2" },
+          { content: "Date/Time", className: "border border-gray-400 p-2" },
+          { content: "Edit", className: "w-16 border border-gray-400 p-2" },
+        ]}
+      />
 
       {items.length === 0 /* 要素がない場合 */ && (
         <div className="">
@@ -135,6 +153,31 @@ export default function PaymentList({ items }: { items: string[] }) {
     </div>
   );
 }
+
+const PlusIcon: React.FC = () => {
+  return (
+    <svg
+      className="h-6 w-6 text-gray-800 text-white"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <rect
+        width="12"
+        height="12"
+        x="6"
+        y="6"
+        stroke="currentColor"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        rx="1"
+      />
+    </svg>
+  );
+};
 
 interface ActionProps {
   id: bigint;
