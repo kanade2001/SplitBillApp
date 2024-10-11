@@ -104,6 +104,7 @@ const EditRow: React.FC = () => {
   const [error, dispatchError] = useReducer(ErrorReducer, initialErrorState);
 
   const handleAdd = (e: FormEvent) => {
+    console.log("handleAdd");
     e.preventDefault();
     let hasError = false;
     let errors = {
@@ -134,6 +135,7 @@ const EditRow: React.FC = () => {
       errors.datetimeError = true;
       hasError = true;
     }
+    console.log(state.datetime);
 
     dispatchError({ type: "ERROR_CHECK", payload: errors });
     if (hasError) console.log("has error");
@@ -170,7 +172,13 @@ const EditRow: React.FC = () => {
             <input
               type={type}
               id={id}
-              className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
+              className={[
+                "w-full rounded-md border px-2 text-sm text-gray-900",
+                error[`${id}Error` as keyof ErrorState]
+                  ? "border-red-600 bg-red-200"
+                  : "border-gray-600 bg-white",
+              ].join(" ")}
+              // TODO DateTimeが正常に表示されない
               value={state[id as keyof FormState]}
               onChange={(e) =>
                 dispatchItem({
@@ -192,13 +200,16 @@ const EditRow: React.FC = () => {
             </button>
             <button
               className="x-20 ms-2 rounded-md bg-gray-800 px-2 text-center text-sm text-white"
-              onClick={() => dispatchItem({ type: "FORM_RESET" })}
+              onClick={() => {
+                dispatchItem({ type: "FORM_RESET" });
+                dispatchError({ type: "ERROR_RESET" });
+              }}
             >
               Reset
             </button>
             <button
               className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
-              onClick={() => handleAdd}
+              onClick={(e) => handleAdd(e)}
             >
               Complete
             </button>
