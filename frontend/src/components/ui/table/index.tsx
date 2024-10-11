@@ -6,7 +6,7 @@ import AddRow from "./_components/add-row";
 
 interface TableProps {
   header: { content: string | JSX.Element; className: string }[];
-  footer: { content: string | JSX.Element; className: string }[];
+  footer: { id: string; type?: string; initialValue?: string }[];
 }
 
 const Table: React.FC<TableProps> = (props) => {

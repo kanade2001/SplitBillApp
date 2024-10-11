@@ -1,4 +1,4 @@
-import { FormEvent, useReducer } from "react";
+import { useReducer } from "react";
 
 interface ItemState {
   title: string;
@@ -13,6 +13,12 @@ interface ItemState {
   currencyError: boolean;
   amountError: boolean;
   datetimeError: boolean;
+}
+
+interface EditRowItem {
+  id: keyof ItemState;
+  type?: string;
+  initialValue?: string;
 }
 
 type ItemAction =
@@ -69,56 +75,67 @@ const ItemReducer: React.Reducer<ItemState, ItemAction> = (
 const EditRow: React.FC = () => {
   const [state, dispatch] = useReducer(ItemReducer, initialState);
 
-  const handleAdd = (e: FormEvent) => {
+  /*const handleAdd = (e: FormEvent) => {
     e.preventDefault();
     dispatch({ type: "CHECK_ERROR" });
     // TODO サーバー処理
     // TODO 親コンポーネントへアイテムを追加
   };
+  */
+
+  if (
+    state.titleError ||
+    state.memberError ||
+    state.currencyError ||
+    state.amountError ||
+    state.datetimeError
+  ) {
+    console.log("Error");
+  }
+
+  const items: EditRowItem[] = [
+    {
+      id: "title",
+    },
+    {
+      id: "member",
+    },
+    {
+      id: "currency",
+    },
+    {
+      id: "amount",
+      type: "number",
+    },
+    {
+      id: "datetime",
+      type: "datetime-local",
+    },
+  ];
 
   return (
-    <tr className="bg-gray-400">
-      <th></th>
-      <th className="p-2">
-        <input
-          type="text"
-          id="member"
-          className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-        />
-      </th>
-      <th className="p-2">
-        <input
-          type="text"
-          id="member"
-          className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-        />
-      </th>
-      <th className="p-2">
-        <input
-          type="text"
-          id="currency"
-          className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-          placeholder="JPY"
-        />
-      </th>
-      <th className="p-2">
-        <input
-          type="number"
-          id="amount"
-          className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-          placeholder="0"
-        />
-      </th>
-      <th className="p-2">
-        <input
-          type="datetime-local"
-          id="datetime"
-          className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-          placeholder={new Date().toISOString()}
-        />
-      </th>
-      <th></th>
-    </tr>
+    <>
+      <tr className="bg-gray-400">
+        <th></th>
+        {items.map(({ id, type = "text", initialValue = "" }) => (
+          <th key={id} className="p-2">
+            <input
+              type={type}
+              id={id}
+              className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
+              value={initialValue}
+              onChange={(e) =>
+                dispatch({
+                  type: "FORM_UPDATE",
+                  payload: { field: id, value: e.target.value },
+                })
+              }
+            />
+          </th>
+        ))}
+        <th></th>
+      </tr>
+    </>
   );
 };
 
