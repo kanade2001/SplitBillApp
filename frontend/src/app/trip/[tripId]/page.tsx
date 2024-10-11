@@ -2,13 +2,13 @@
 
 import { useReducer } from "react";
 
+import { initialStateList, ItemReducer } from "./_types/type";
+
 import { Info } from "@/components/Alert/Alert";
 import HeaderRow from "./_components/header-row";
 import BodyRow from "./_components/body-row";
 import AddRow from "./_components/add-row";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-
-import { initialStateList, ItemReducer } from "./_types/type";
 
 type Props = {
   params: { tripId: string }; // TripID

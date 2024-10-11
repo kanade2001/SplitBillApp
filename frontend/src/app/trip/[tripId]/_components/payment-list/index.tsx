@@ -2,13 +2,13 @@
 
 import { useReducer } from "react";
 
+import { initialStateList, ItemReducer } from "../../_types/type";
+
 import { Info } from "@/components/Alert/Alert";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import HeaderRow from "../header-row";
 import BodyRow from "../body-row";
 import AddRow from "../add-row";
-
-import { initialStateList, ItemReducer } from "../../_types/type";
 
 export default function PaymentList() {
   const [state, dispatch] = useReducer(ItemReducer, initialStateList);

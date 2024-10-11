@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import EditRow from "../edit-row";
-
 import { ItemState, ItemAction } from "../../_types/type";
+
+import EditRow from "../edit-row";
 
 interface BodyRowProps {
   item: ItemState;

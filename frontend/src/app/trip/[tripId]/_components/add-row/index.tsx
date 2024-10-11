@@ -2,11 +2,11 @@ import { useState } from "react";
 
 import { ItemAction } from "../../_types/type";
 
+import EditRow from "../edit-row";
+
 interface AddRowProps {
   dispatch: React.Dispatch<ItemAction>;
 }
-
-import EditRow from "../edit-row";
 
 const AddRow: React.FC<AddRowProps> = ({ dispatch }) => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
