@@ -136,7 +136,13 @@ export default function PaymentList({ items }: { items: string[] }) {
   );
 }
 
-const AddRow = () => {
+interface ActionProps {
+  id: bigint;
+  CompleteAction: (id: bigint) => void; // 追加 or 編集
+  DeleteAction?: (id: bigint) => void; // 削除(オプション)
+}
+
+const AddRow: React.FC<ActionProps> = (props) => {
   const [isVisibleAdd, setIsVisibleAdd] = useState<boolean>(false);
   const handleIsVisibleAdd = () => {
     setIsVisibleAdd(!isVisibleAdd);
@@ -176,66 +182,81 @@ const AddRow = () => {
           </button>
         </th>
       </tr>
-      {isVisibleAdd && (
-        <>
-          <tr className="bg-gray-400">
-            <th></th>
-            <th className="p-2">
-              <input
-                type="text"
-                id="member"
-                className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-              />
-            </th>
-            <th className="p-2">
-              <input
-                type="text"
-                id="member"
-                className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-              />
-            </th>
-            <th className="p-2">
-              <input
-                type="text"
-                id="currency"
-                className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-                placeholder="JPY"
-              />
-            </th>
-            <th className="p-2">
-              <input
-                type="number"
-                id="amount"
-                className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-                placeholder="0"
-              />
-            </th>
-            <th className="p-2">
-              <input
-                type="datetime-local"
-                id="datetime"
-                className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-                placeholder={new Date().toISOString()}
-              />
-            </th>
-            <th></th>
-          </tr>
-          <tr className="bg-gray-400">
-            <th></th>
-            <th colSpan={5} className="px-2 pb-2">
-              <div className="flex justify-end">
-                <button className="x-20 ms-2 rounded-md bg-gray-800 px-2 text-center text-sm text-white">
-                  Reset
-                </button>
-                <button className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white">
-                  Complete
-                </button>
-              </div>
-            </th>
-            <th></th>
-          </tr>
-        </>
-      )}
+      {isVisibleAdd && <EditRow {...props} />}
+    </>
+  );
+};
+
+const EditRow: React.FC<ActionProps> = (props) => {
+  return (
+    <>
+      <tr className="bg-gray-400">
+        <th></th>
+        <th className="p-2">
+          <input
+            type="text"
+            id="member"
+            className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
+          />
+        </th>
+        <th className="p-2">
+          <input
+            type="text"
+            id="member"
+            className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
+          />
+        </th>
+        <th className="p-2">
+          <input
+            type="text"
+            id="currency"
+            className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
+            placeholder="JPY"
+          />
+        </th>
+        <th className="p-2">
+          <input
+            type="number"
+            id="amount"
+            className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
+            placeholder="0"
+          />
+        </th>
+        <th className="p-2">
+          <input
+            type="datetime-local"
+            id="datetime"
+            className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
+            placeholder={new Date().toISOString()}
+          />
+        </th>
+        <th></th>
+      </tr>
+      <tr className="bg-gray-400">
+        <th></th>
+        <th colSpan={5} className="px-2 pb-2">
+          <div className="flex justify-end">
+            {props.DeleteAction && (
+              <button
+                className="x-20 ms-2 rounded-md bg-red-800 px-2 text-center text-sm text-white"
+                onClick={() => props.DeleteAction!(props.id)}
+              >
+                Delete
+              </button>
+            )}
+            <button className="x-20 ms-2 rounded-md bg-gray-800 px-2 text-center text-sm text-white">
+              Reset
+            </button>
+            <button
+              className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
+              onClick={() => props.CompleteAction(props.id)}
+            >
+              Complete
+            </button>
+          </div>
+        </th>
+        <th></th>
+      </tr>
     </>
   );
 };
