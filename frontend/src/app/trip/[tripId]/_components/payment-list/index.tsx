@@ -58,7 +58,7 @@ export default function PaymentList({ items }: { items: string[] }) {
           },
           {
             content: "Title",
-            className: "border border-l-0 border-double border-gray-400 p-2",
+            className: "border border-l-0 border-gray-400 p-2",
           },
           { content: "Member", className: "border border-gray-400 p-2" },
           { content: "Currency", className: "w-28 border border-gray-400 p-2" },

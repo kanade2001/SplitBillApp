@@ -1,13 +1,15 @@
-import { useReducer } from "react";
+import React, { useReducer, FormEvent } from "react";
 
-interface ItemState {
+interface FormState {
   title: string;
   member: string;
   currency: string;
   // TODO セントとかの扱い
-  amount: bigint;
-  datetime: Date;
+  amount: number;
+  datetime: string;
+}
 
+interface ErrorState {
   titleError: boolean;
   memberError: boolean;
   currencyError: boolean;
@@ -16,29 +18,42 @@ interface ItemState {
 }
 
 interface EditRowItem {
-  id: keyof ItemState;
+  id: keyof FormState;
   type?: string;
-  initialValue?: string;
 }
 
 type ItemAction =
   | {
       type: "FORM_UPDATE";
       payload: {
-        field: keyof ItemState;
-        value: string | bigint | Date;
+        field: keyof FormState;
+        value: string | number | Date;
       };
     }
-  | { type: "FORM_RESET" }
-  | { type: "CHECK_ERROR" };
+  | { type: "FORM_RESET" };
 
-const initialState: ItemState = {
+type ErrorAction =
+  | { type: "ERROR_RESET" }
+  | {
+      type: "ERROR_CHECK";
+      payload: {
+        titleError: boolean;
+        memberError: boolean;
+        currencyError: boolean;
+        amountError: boolean;
+        datetimeError: boolean;
+      };
+    };
+
+const initialItemState: FormState = {
   title: "",
   member: "",
   currency: "",
-  amount: BigInt(0),
-  datetime: new Date(),
+  amount: 0,
+  datetime: new Date().toISOString(),
+};
 
+const initialErrorState: ErrorState = {
   titleError: false,
   memberError: false,
   currencyError: false,
@@ -46,8 +61,8 @@ const initialState: ItemState = {
   datetimeError: false,
 };
 
-const ItemReducer: React.Reducer<ItemState, ItemAction> = (
-  state: ItemState,
+const ItemReducer: React.Reducer<FormState, ItemAction> = (
+  state: FormState,
   action: ItemAction,
 ) => {
   switch (action.type) {
@@ -57,41 +72,74 @@ const ItemReducer: React.Reducer<ItemState, ItemAction> = (
         [action.payload.field]: action.payload.value,
       };
     case "FORM_RESET":
-      return initialState;
-    case "CHECK_ERROR":
+      return initialItemState;
+    default:
+      return state;
+  }
+};
+
+const ErrorReducer: React.Reducer<ErrorState, ErrorAction> = (
+  state: ErrorState,
+  action: ErrorAction,
+) => {
+  switch (action.type) {
+    case "ERROR_CHECK":
       return {
         ...state,
-        titleError: !state.title,
-        memberError: !state.member,
-        currencyError: !state.currency,
-        amountError: !state.amount && isNaN(Number(state.amount)),
-        datetimeError: !state.datetime && isNaN(Date.parse(state.datetime)),
+        titleError: action.payload.titleError,
+        memberError: action.payload.memberError,
+        currencyError: action.payload.currencyError,
+        amountError: action.payload.amountError,
+        datetimeError: action.payload.datetimeError,
       };
+    case "ERROR_RESET":
+      return initialErrorState;
     default:
       return state;
   }
 };
 
 const EditRow: React.FC = () => {
-  const [state, dispatch] = useReducer(ItemReducer, initialState);
+  const [state, dispatchItem] = useReducer(ItemReducer, initialItemState);
+  const [error, dispatchError] = useReducer(ErrorReducer, initialErrorState);
 
-  /*const handleAdd = (e: FormEvent) => {
+  const handleAdd = (e: FormEvent) => {
     e.preventDefault();
-    dispatch({ type: "CHECK_ERROR" });
+    let hasError = false;
+    let errors = {
+      titleError: false,
+      memberError: false,
+      currencyError: false,
+      amountError: false,
+      datetimeError: false,
+    };
+
+    if (!state.title) {
+      errors.titleError = true;
+      hasError = true;
+    }
+    if (!state.member) {
+      errors.memberError = true;
+      hasError = true;
+    }
+    if (!state.currency) {
+      errors.currencyError = true;
+      hasError = true;
+    }
+    if (!state.amount) {
+      errors.amountError = true;
+      hasError = true;
+    }
+    if (!state.datetime) {
+      errors.datetimeError = true;
+      hasError = true;
+    }
+
+    dispatchError({ type: "ERROR_CHECK", payload: errors });
+    if (hasError) console.log("has error");
     // TODO サーバー処理
     // TODO 親コンポーネントへアイテムを追加
   };
-  */
-
-  if (
-    state.titleError ||
-    state.memberError ||
-    state.currencyError ||
-    state.amountError ||
-    state.datetimeError
-  ) {
-    console.log("Error");
-  }
 
   const items: EditRowItem[] = [
     {
@@ -117,15 +165,15 @@ const EditRow: React.FC = () => {
     <>
       <tr className="bg-gray-400">
         <th></th>
-        {items.map(({ id, type = "text", initialValue = "" }) => (
+        {items.map(({ id, type = "text" }) => (
           <th key={id} className="p-2">
             <input
               type={type}
               id={id}
               className="w-full rounded-md border border-gray-600 bg-white px-2 text-sm text-gray-900"
-              value={initialValue}
+              value={state[id as keyof FormState]}
               onChange={(e) =>
-                dispatch({
+                dispatchItem({
                   type: "FORM_UPDATE",
                   payload: { field: id, value: e.target.value },
                 })
@@ -133,6 +181,29 @@ const EditRow: React.FC = () => {
             />
           </th>
         ))}
+        <th></th>
+      </tr>
+      <tr className="bg-gray-400">
+        <th></th>
+        <th colSpan={5}>
+          <div className="flex justify-end p-2">
+            <button className="x-20 ms-2 rounded-md bg-red-800 px-2 text-center text-sm text-white">
+              Delete
+            </button>
+            <button
+              className="x-20 ms-2 rounded-md bg-gray-800 px-2 text-center text-sm text-white"
+              onClick={() => dispatchItem({ type: "FORM_RESET" })}
+            >
+              Reset
+            </button>
+            <button
+              className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
+              onClick={() => handleAdd}
+            >
+              Complete
+            </button>
+          </div>
+        </th>
         <th></th>
       </tr>
     </>
