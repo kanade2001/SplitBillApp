@@ -1,6 +1,6 @@
 "use client";
 
-import { Key, useReducer, useState } from "react";
+import { Key, useReducer } from "react";
 
 import { Info } from "@/components/Alert/Alert";
 import Table from "@/components/ui/table";
@@ -50,8 +50,7 @@ export default function PaymentList({ items }: { items: string[] }) {
 
   return (
     <div className="">
-      <Table />
-
+      <Table dispatch={dispatch} />
       {items.length === 0 /* 要素がない場合 */ && (
         <div className="">
           <Info title="データがありません" message="データを追加してください" />

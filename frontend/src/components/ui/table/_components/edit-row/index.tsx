@@ -1,4 +1,24 @@
-import React, { useReducer, FormEvent } from "react";
+import React, { useReducer, FormEvent, Key } from "react";
+
+interface ItemState {
+  id: Key;
+  title: string;
+  member: string;
+  member_id: bigint;
+  currency: string;
+  currency_id: string;
+  amount: bigint;
+  datetime: Date;
+}
+
+type ItemAction =
+  | { type: "ADD_ITEM"; payload: { item: ItemState } }
+  | { type: "EDIT_ITEM"; payload: { item: ItemState } }
+  | { type: "DELETE_ITEM"; payload: { id: Key } };
+
+interface TableProps {
+  dispatch: React.Dispatch<ItemAction>;
+}
 
 interface FormState {
   title: string;
@@ -22,7 +42,7 @@ interface EditRowItem {
   type?: string;
 }
 
-type ItemAction =
+type FormAction =
   | {
       type: "FORM_UPDATE";
       payload: {
@@ -61,9 +81,9 @@ const initialErrorState: ErrorState = {
   datetimeError: false,
 };
 
-const ItemReducer: React.Reducer<FormState, ItemAction> = (
+const ItemReducer: React.Reducer<FormState, FormAction> = (
   state: FormState,
-  action: ItemAction,
+  action: FormAction,
 ) => {
   switch (action.type) {
     case "FORM_UPDATE":
@@ -99,7 +119,7 @@ const ErrorReducer: React.Reducer<ErrorState, ErrorAction> = (
   }
 };
 
-const EditRow: React.FC = () => {
+const EditRow: React.FC<TableProps> = ({ dispatch }) => {
   const [state, dispatchItem] = useReducer(ItemReducer, initialItemState);
   const [error, dispatchError] = useReducer(ErrorReducer, initialErrorState);
 
@@ -115,6 +135,7 @@ const EditRow: React.FC = () => {
       datetimeError: false,
     };
 
+    // フォームに空欄がある場合はエラーを追加
     if (!state.title) {
       errors.titleError = true;
       hasError = true;
@@ -135,12 +156,36 @@ const EditRow: React.FC = () => {
       errors.datetimeError = true;
       hasError = true;
     }
-    console.log(state.datetime);
 
+    // エラーを更新
     dispatchError({ type: "ERROR_CHECK", payload: errors });
-    if (hasError) console.log("has error");
+
+    // エラーがある場合は処理を中断
+    if (hasError) return;
+
     // TODO サーバー処理
-    // TODO 親コンポーネントへアイテムを追加
+    // 親コンポーネントへアイテムを追加
+    dispatch({
+      type: "ADD_ITEM",
+      payload: {
+        item: {
+          id: BigInt(0), // TODO サーバーから返却されるID
+          title: state.title,
+          member: state.member,
+          member_id: BigInt(0),
+          currency: state.currency,
+          currency_id: "jp",
+          amount: BigInt(state.amount),
+          datetime: new Date(state.datetime),
+        },
+      },
+    });
+    handleReset(); // フォームをリセット
+  };
+
+  const handleReset = () => {
+    dispatchItem({ type: "FORM_RESET" });
+    dispatchError({ type: "ERROR_RESET" });
   };
 
   const items: EditRowItem[] = [
@@ -200,10 +245,7 @@ const EditRow: React.FC = () => {
             </button>
             <button
               className="x-20 ms-2 rounded-md bg-gray-800 px-2 text-center text-sm text-white"
-              onClick={() => {
-                dispatchItem({ type: "FORM_RESET" });
-                dispatchError({ type: "ERROR_RESET" });
-              }}
+              onClick={() => handleReset()}
             >
               Reset
             </button>

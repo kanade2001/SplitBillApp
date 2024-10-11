@@ -1,8 +1,28 @@
-import { useState } from "react";
+import { useState, Key } from "react";
+
+interface ItemState {
+  id: Key;
+  title: string;
+  member: string;
+  member_id: bigint;
+  currency: string;
+  currency_id: string;
+  amount: bigint;
+  datetime: Date;
+}
+
+type ItemAction =
+  | { type: "ADD_ITEM"; payload: { item: ItemState } }
+  | { type: "EDIT_ITEM"; payload: { item: ItemState } }
+  | { type: "DELETE_ITEM"; payload: { id: Key } };
+
+interface TableProps {
+  dispatch: React.Dispatch<ItemAction>;
+}
 
 import EditRow from "../edit-row";
 
-const AddRow: React.FC = () => {
+const AddRow: React.FC<TableProps> = ({ dispatch }) => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
 
   const handleIsAdd = () => {
@@ -43,7 +63,7 @@ const AddRow: React.FC = () => {
           </button>
         </th>
       </tr>
-      {isAdd && <EditRow />}
+      {isAdd && <EditRow dispatch={dispatch} />}
     </>
   );
 };
