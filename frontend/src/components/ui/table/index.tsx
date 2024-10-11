@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import HeaderRow from "./_components/header-row";
 import AddRow from "./_components/add-row";
 
 interface TableProps {
@@ -9,17 +10,11 @@ interface TableProps {
   footer: { id: string; type?: string; initialValue?: string }[];
 }
 
-const Table: React.FC<TableProps> = (props) => {
+const Table: React.FC = () => {
   return (
     <table className="w-full table-fixed border border-gray-400">
       <thead className="bg-blue-800 text-white">
-        <tr className="">
-          {props.header.map(({ content, className = "" }) => (
-            <th key={className} className={className}>
-              {content}
-            </th>
-          ))}
-        </tr>
+        <HeaderRow />
       </thead>
       <tfoot className="bg-gray-800 text-white">
         <AddRow />
