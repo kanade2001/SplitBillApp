@@ -43,7 +43,7 @@ const BodyRow: React.FC<BodyRowProps> = ({ item, dispatch }) => {
         </th>
         <th className="border border-gray-400 p-2">
           <button
-            className="flex h-full w-full justify-center bg-red-500"
+            className="flex h-full w-full justify-center"
             onClick={() => handleIsEdit()}
           >
             <EditIcon />

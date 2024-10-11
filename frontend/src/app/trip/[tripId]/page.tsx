@@ -1,10 +1,13 @@
 "use client";
-import { useState } from "react";
 
-import AddButton from "./_components/add-button";
-import EditButton from "./_components/edit-button";
-import CompleteButton from "./_components/complete-button";
+import { useReducer } from "react";
+
+import { Info } from "@/components/Alert/Alert";
+import Table from "@/components/ui/table";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
+
 import PaymentList from "./_components/payment-list";
+import { initialStateList, ItemReducer } from "./_types/type";
 
 type Props = {
   params: { tripId: string }; // TripID
@@ -13,25 +16,19 @@ type Props = {
 
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
-
-  const [items, setItems] = useState<string[]>([]);
-
-  const handleSetItem = (item: string) => {
-    setItems([...items, item]);
-  };
-
-  const [isEditable, setIsEditable] = useState<boolean>(false);
+  const [state, dispatch] = useReducer(ItemReducer, initialStateList);
 
   return (
     <div className="space-y-5 p-5">
       <h1>TRIP_ID = {params.tripId}</h1>
-      <h2>{key}</h2>
-      <AddButton onClick={handleSetItem} item="ITEM" />
-      <PaymentList items={items} />
-      <div className="flex">
-        <EditButton onClick={setIsEditable} isEditable={isEditable} />
-        <CompleteButton item={items} />
-      </div>
+      <h2>PUBLIC_KEY = {key}</h2>
+      <PaymentList />
+      <Table state={state} dispatch={dispatch} />
+      {state.length === 0 /* 要素がない場合 */ && (
+        <div className="">
+          <Info title="データがありません" message="データを追加してください" />
+        </div>
+      )}
     </div>
   );
 }
