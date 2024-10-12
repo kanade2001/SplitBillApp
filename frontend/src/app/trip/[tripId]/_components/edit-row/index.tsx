@@ -201,25 +201,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
             ]}
           />
         </th>
-        <th className="p-2">
-          <input
-            type="text"
-            id="currency"
-            className={[
-              "w-full rounded-md border px-2 text-sm text-gray-900",
-              error["currencyError"]
-                ? "border-red-600 bg-red-200"
-                : "border-gray-600 bg-white",
-            ].join(" ")}
-            value={state.currency}
-            onChange={(e) =>
-              dispatchItem({
-                type: "FORM_UPDATE",
-                payload: { field: "currency", value: e.target.value },
-              })
-            }
-          />
-        </th>
+        <th className="p-2"></th>
         <th className="p-2">
           <NumberCurrencyDropDown
             numbererror={error.amountError}
