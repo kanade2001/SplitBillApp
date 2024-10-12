@@ -1,7 +1,12 @@
 import React, { useReducer, FormEvent } from "react";
 
 import { ItemAction, FormState, ErrorState } from "../../_types/type";
-import { TextInput, DropDown, NumberCurrencyDropDown } from "@/components/ui";
+import {
+  TextInput,
+  DropDown,
+  NumberCurrencyDropDown,
+  DateTimeInput,
+} from "@/components/ui";
 
 interface EditRowProps {
   visible: {
@@ -226,24 +231,17 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
             ]}
           />
         </th>
-
         <th className="p-2">
-          <input
-            type="datetime-local"
-            id="datetime"
-            className={[
-              "w-full rounded-md border px-2 text-sm text-gray-900",
-              error["datetimeError"]
-                ? "border-red-600 bg-red-200"
-                : "border-gray-600 bg-white",
-            ].join(" ")}
-            value={state.datetime}
+          <DateTimeInput
+            error={error.datetimeError}
+            value={new Date(state.datetime)}
             onChange={(e) =>
               dispatchItem({
                 type: "FORM_UPDATE",
-                payload: { field: "datetime", value: e.target.value },
+                payload: { field: "datetime", value: new Date(e.target.value) },
               })
             }
+            required={true}
           />
         </th>
         <th></th>
