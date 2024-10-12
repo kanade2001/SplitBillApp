@@ -11,11 +11,6 @@ interface EditRowProps {
   dispatch: React.Dispatch<ItemAction>;
 }
 
-interface EditRowItem {
-  id: keyof FormState;
-  type?: string;
-}
-
 type FormAction =
   | {
       type: "FORM_UPDATE";
@@ -166,52 +161,106 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
     dispatch({ type: "DELETE_ITEM", payload: { id: BigInt(0) } });
   };
 
-  const items: EditRowItem[] = [
-    {
-      id: "title",
-    },
-    {
-      id: "member",
-    },
-    {
-      id: "currency",
-    },
-    {
-      id: "amount",
-      type: "number",
-    },
-    {
-      id: "datetime",
-      type: "datetime-local",
-    },
-  ];
-
   return (
     <>
+      {" "}
       <tr className="bg-gray-400">
         <th></th>
-        {items.map(({ id, type = "text" }) => (
-          <th key={id} className="p-2">
-            <input
-              type={type}
-              id={id}
-              className={[
-                "w-full rounded-md border px-2 text-sm text-gray-900",
-                error[`${id}Error` as keyof ErrorState]
-                  ? "border-red-600 bg-red-200"
-                  : "border-gray-600 bg-white",
-              ].join(" ")}
-              // TODO DateTimeが正常に表示されない
-              value={state[id as keyof FormState]}
-              onChange={(e) =>
-                dispatchItem({
-                  type: "FORM_UPDATE",
-                  payload: { field: id, value: e.target.value },
-                })
-              }
-            />
-          </th>
-        ))}
+        <th className="p-2">
+          <input
+            type="text"
+            id="title"
+            className={[
+              "w-full rounded-md border px-2 text-sm text-gray-900",
+              error["titleError"]
+                ? "border-red-600 bg-red-200"
+                : "border-gray-600 bg-white",
+            ].join(" ")}
+            value={state.title}
+            onChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "title", value: e.target.value },
+              })
+            }
+          />
+        </th>
+        <th className="p-2">
+          <input
+            type="text"
+            id="member"
+            className={[
+              "w-full rounded-md border px-2 text-sm text-gray-900",
+              error["memberError"]
+                ? "border-red-600 bg-red-200"
+                : "border-gray-600 bg-white",
+            ].join(" ")}
+            value={state.member}
+            onChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "member", value: e.target.value },
+              })
+            }
+          />
+        </th>
+        <th className="p-2">
+          <input
+            type="text"
+            id="currency"
+            className={[
+              "w-full rounded-md border px-2 text-sm text-gray-900",
+              error["currencyError"]
+                ? "border-red-600 bg-red-200"
+                : "border-gray-600 bg-white",
+            ].join(" ")}
+            value={state.currency}
+            onChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "currency", value: e.target.value },
+              })
+            }
+          />
+        </th>
+        <th className="p-2">
+          <input
+            type="number"
+            id="amount"
+            className={[
+              "w-full rounded-md border px-2 text-sm text-gray-900",
+              error["amountError"]
+                ? "border-red-600 bg-red-200"
+                : "border-gray-600 bg-white",
+            ].join(" ")}
+            value={state.amount}
+            onChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "amount", value: e.target.value },
+              })
+            }
+          />
+        </th>
+        <th className="p-2">
+          <input
+            type="datetime-local"
+            id="datetime"
+            className={[
+              "w-full rounded-md border px-2 text-sm text-gray-900",
+              error["datetimeError"]
+                ? "border-red-600 bg-red-200"
+                : "border-gray-600 bg-white",
+            ].join(" ")}
+            value={state.datetime}
+            onChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "datetime", value: e.target.value },
+              })
+            }
+          />
+        </th>
         <th></th>
       </tr>
       <tr className="bg-gray-400">

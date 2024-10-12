@@ -6,7 +6,7 @@ interface DropDownProps {
   ChildClassName?: string;
 }
 
-const DropDwown: React.FC<DropDownProps> = (props) => {
+const DropDown: React.FC<DropDownProps> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
@@ -68,4 +68,4 @@ const AngleDown = () => {
   );
 };
 
-export default DropDwown;
+export default DropDown;
