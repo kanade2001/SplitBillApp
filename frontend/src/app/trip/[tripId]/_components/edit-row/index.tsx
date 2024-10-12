@@ -2,6 +2,7 @@ import React, { useReducer, FormEvent } from "react";
 
 import { ItemAction, FormState, ErrorState } from "../../_types/type";
 import TextInput from "@/components/ui/text-input";
+import DropDown from "@/components/ui/dropdown";
 
 interface EditRowProps {
   visible: {
@@ -182,14 +183,9 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
           />
         </th>
         <th className="p-2">
-          <select
-            id="member"
-            className={[
-              "block w-full rounded-md border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
-              error["memberError"]
-                ? "border-red-600 bg-red-200"
-                : "border-gray-600 bg-white",
-            ].join(" ")}
+          <DropDown
+            id="member-select"
+            error={error.memberError}
             value={state.member}
             onChange={(e) =>
               dispatchItem({
@@ -197,13 +193,14 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
                 payload: { field: "member", value: e.target.value },
               })
             }
-          >
-            <option value="">Choose a member</option>
-            <option value="1">Kanade</option>
-            <option value="2">Tomoka</option>
-            <option value="3">Sayu</option>
-            <option value="4">Ao</option>
-          </select>
+            required={true}
+            items={[
+              { key: "", item: "Choose a member" },
+              { key: "1", item: "Member 1" },
+              { key: "2", item: "Member 2" },
+              { key: "3", item: "Member 3" },
+            ]}
+          />
         </th>
         <th className="p-2">
           <input
