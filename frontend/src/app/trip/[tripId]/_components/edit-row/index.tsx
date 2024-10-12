@@ -1,8 +1,7 @@
 import React, { useReducer, FormEvent } from "react";
 
 import { ItemAction, FormState, ErrorState } from "../../_types/type";
-import TextInput from "@/components/ui/text-input";
-import DropDown from "@/components/ui/dropdown";
+import { TextInput, DropDown } from "@/components/ui";
 
 interface EditRowProps {
   visible: {
