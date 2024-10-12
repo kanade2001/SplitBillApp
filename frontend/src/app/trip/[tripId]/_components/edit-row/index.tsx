@@ -45,7 +45,7 @@ const initialItemState: FormState = {
   member: "",
   currency: "",
   amount: 0,
-  datetime: new Date().toISOString(),
+  datetime: new Date(),
 };
 
 const initialErrorState: ErrorState = {
@@ -234,7 +234,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
         <th className="p-2">
           <DateTimeInput
             error={error.datetimeError}
-            value={new Date(state.datetime)}
+            value={state.datetime}
             onChange={(e) =>
               dispatchItem({
                 type: "FORM_UPDATE",
