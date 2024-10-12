@@ -45,7 +45,7 @@ export interface FormState {
   currency: string;
   // TODO セントとかの扱い
   amount: number;
-  datetime: string;
+  datetime: Date;
 }
 
 export interface ErrorState {

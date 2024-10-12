@@ -8,9 +8,6 @@ export default function Home() {
         <h2>Links to other pages</h2>
         <ul>
           <li>
-            <Link href="/trip">/trip</Link>
-          </li>
-          <li>
             <Link href="/trip/123">/trip/123</Link>
           </li>
           <li>
@@ -21,6 +18,9 @@ export default function Home() {
           </li>
           <li>
             <Link href="/user/signup">/user/signup</Link>
+          </li>
+          <li>
+            <Link href="/debug">/debug</Link>
           </li>
         </ul>
       </main>

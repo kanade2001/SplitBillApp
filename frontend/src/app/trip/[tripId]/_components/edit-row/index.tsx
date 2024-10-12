@@ -1,6 +1,12 @@
 import React, { useReducer, FormEvent } from "react";
 
 import { ItemAction, FormState, ErrorState } from "../../_types/type";
+import {
+  TextInput,
+  DropDown,
+  NumberCurrencyDropDown,
+  DateTimeInput,
+} from "@/components/ui";
 
 interface EditRowProps {
   visible: {
@@ -9,11 +15,6 @@ interface EditRowProps {
     delete: boolean;
   };
   dispatch: React.Dispatch<ItemAction>;
-}
-
-interface EditRowItem {
-  id: keyof FormState;
-  type?: string;
 }
 
 type FormAction =
@@ -44,7 +45,7 @@ const initialItemState: FormState = {
   member: "",
   currency: "",
   amount: 0,
-  datetime: new Date().toISOString(),
+  datetime: new Date(),
 };
 
 const initialErrorState: ErrorState = {
@@ -166,52 +167,83 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
     dispatch({ type: "DELETE_ITEM", payload: { id: BigInt(0) } });
   };
 
-  const items: EditRowItem[] = [
-    {
-      id: "title",
-    },
-    {
-      id: "member",
-    },
-    {
-      id: "currency",
-    },
-    {
-      id: "amount",
-      type: "number",
-    },
-    {
-      id: "datetime",
-      type: "datetime-local",
-    },
-  ];
-
   return (
     <>
+      {" "}
       <tr className="bg-gray-400">
         <th></th>
-        {items.map(({ id, type = "text" }) => (
-          <th key={id} className="p-2">
-            <input
-              type={type}
-              id={id}
-              className={[
-                "w-full rounded-md border px-2 text-sm text-gray-900",
-                error[`${id}Error` as keyof ErrorState]
-                  ? "border-red-600 bg-red-200"
-                  : "border-gray-600 bg-white",
-              ].join(" ")}
-              // TODO DateTimeが正常に表示されない
-              value={state[id as keyof FormState]}
-              onChange={(e) =>
-                dispatchItem({
-                  type: "FORM_UPDATE",
-                  payload: { field: id, value: e.target.value },
-                })
-              }
-            />
-          </th>
-        ))}
+        <th className="p-2">
+          <TextInput
+            id="title-input"
+            error={error.titleError}
+            value={state.title}
+            onChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "title", value: e.target.value },
+              })
+            }
+            required={true}
+          />
+        </th>
+        <th className="p-2">
+          <DropDown
+            id="member-select"
+            error={error.memberError}
+            value={state.member}
+            onChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "member", value: e.target.value },
+              })
+            }
+            required={true}
+            items={[
+              { key: "", item: "Choose a member" },
+              { key: "1", item: "Member 1" },
+              { key: "2", item: "Member 2" },
+              { key: "3", item: "Member 3" },
+            ]}
+          />
+        </th>
+        <th className="p-2"></th>
+        <th className="p-2">
+          <NumberCurrencyDropDown
+            numbererror={error.amountError}
+            numbervalue={state.amount}
+            numberonChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "amount", value: e.target.value },
+              })
+            }
+            currencyerror={error.currencyError}
+            currencyvalue={state.currency}
+            currencyonChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "currency", value: e.target.value },
+              })
+            }
+            currencies={[
+              { key: "jp", item: "JPY" },
+              { key: "us", item: "USD" },
+            ]}
+          />
+        </th>
+        <th className="p-2">
+          <DateTimeInput
+            error={error.datetimeError}
+            value={state.datetime}
+            onChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "datetime", value: new Date(e.target.value) },
+              })
+            }
+            required={true}
+          />
+        </th>
         <th></th>
       </tr>
       <tr className="bg-gray-400">
