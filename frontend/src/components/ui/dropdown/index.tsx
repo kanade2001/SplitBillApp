@@ -2,8 +2,10 @@ import { useState } from "react";
 
 interface DropDownProps {
   items: (string | JSX.Element)[];
-  ParentClassName?: string;
-  ChildClassName?: string;
+  value: string | JSX.Element;
+  onSelected: (value: string | JSX.Element) => void;
+  ParentClassName: string;
+  ChildClassName: string;
 }
 
 const DropDown: React.FC<DropDownProps> = (props) => {
@@ -16,24 +18,26 @@ const DropDown: React.FC<DropDownProps> = (props) => {
   return (
     <div className="relative w-full">
       <div
-        className={
+        className={[
+          "flex w-full justify-between rounded-md border px-2 text-sm",
           props.ParentClassName
             ? props.ParentClassName
-            : "flex w-full justify-between rounded-md border border-gray-600 px-2 text-sm text-gray-900"
-        }
+            : "border-gray-600 text-gray-900",
+        ].join(" ")}
       >
-        <div>Content</div>
+        <div>{props.value}</div>
         <button onClick={handleOpen}>
           <AngleDown />
         </button>
       </div>
       {isOpen && (
         <div
-          className={
+          className={[
+            "absolute w-full rounded-md border p-2",
             props.ChildClassName
               ? props.ChildClassName
-              : "bg-white-100 absolute w-full rounded-md border border-gray-600 p-2"
-          }
+              : "bg-white-100 border-gray-600",
+          ].join(" ")}
         >
           <ul className="flex flex-col items-center">
             {props.items.map((item, index) => (

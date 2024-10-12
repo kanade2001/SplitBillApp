@@ -186,11 +186,10 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
           />
         </th>
         <th className="p-2">
-          <input
-            type="text"
+          <select
             id="member"
             className={[
-              "w-full rounded-md border px-2 text-sm text-gray-900",
+              "block w-full rounded-md border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
               error["memberError"]
                 ? "border-red-600 bg-red-200"
                 : "border-gray-600 bg-white",
@@ -202,7 +201,13 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
                 payload: { field: "member", value: e.target.value },
               })
             }
-          />
+          >
+            <option value="">Choose a member</option>
+            <option value="1">Kanade</option>
+            <option value="2">Tomoka</option>
+            <option value="3">Sayu</option>
+            <option value="4">Ao</option>
+          </select>
         </th>
         <th className="p-2">
           <input
