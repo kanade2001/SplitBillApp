@@ -1,7 +1,7 @@
 import React, { useReducer, FormEvent } from "react";
 
 import { ItemAction, FormState, ErrorState } from "../../_types/type";
-import { TextInput, DropDown } from "@/components/ui";
+import { TextInput, DropDown, NumberCurrencyDropDown } from "@/components/ui";
 
 interface EditRowProps {
   visible: {
@@ -221,46 +221,28 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
           />
         </th>
         <th className="p-2">
-          <div className="flex">
-            <input
-              type="number"
-              id="amout-input"
-              className={[
-                "block w-full rounded-s-md border border-e-gray-600 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
-                error["amountError"]
-                  ? "border-red-600 bg-red-200"
-                  : "border-gray-600 bg-white",
-              ].join(" ")}
-              value={state.amount}
-              onChange={(e) =>
-                dispatchItem({
-                  type: "FORM_UPDATE",
-                  payload: { field: "amount", value: e.target.value },
-                })
-              }
-            />
-            <select
-              id="currency-select"
-              className={[
-                "block w-full rounded-e-md border border-s-0 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
-                error["currencyError"]
-                  ? "border-red-600 bg-red-200"
-                  : "border-gray-600 bg-white",
-              ].join(" ")}
-              value={state.currency}
-              onChange={(e) =>
-                dispatchItem({
-                  type: "FORM_UPDATE",
-                  payload: { field: "member", value: e.target.value },
-                })
-              }
-            >
-              <option value="">JPY</option>
-              <option value="US">USD</option>
-              <option value="2">CNY</option>
-              <option value="3">KRW</option>
-            </select>
-          </div>
+          <NumberCurrencyDropDown
+            numbererror={error.amountError}
+            numbervalue={state.amount}
+            numberonChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "amount", value: e.target.value },
+              })
+            }
+            currencyerror={error.currencyError}
+            currencyvalue={state.currency}
+            currencyonChange={(e) =>
+              dispatchItem({
+                type: "FORM_UPDATE",
+                payload: { field: "currency", value: e.target.value },
+              })
+            }
+            currencies={[
+              { key: "jp", item: "JPY" },
+              { key: "us", item: "USD" },
+            ]}
+          />
         </th>
 
         <th className="p-2">
