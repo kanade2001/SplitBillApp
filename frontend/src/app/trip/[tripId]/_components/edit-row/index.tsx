@@ -67,10 +67,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
     // エラーがある場合は処理を中断
     if (handleError()) return;
 
-    // TODO サーバー処理
-    setState({ ...state, id: "ID" }); // IDを設定
-
-    // 親コンポーネントへアイテムを追加
+    // Dispatch
     props.AddItem?.(state);
     handleReset(); // フォームをリセット
   };
@@ -82,15 +79,12 @@ const EditRow: React.FC<EditRowProps> = (props) => {
     // エラーがある場合は処理を中断
     if (handleError()) return;
 
-    // TODO サーバー処理
-    // 親コンポーネントへアイテムを編集
+    // Dispatch
     props.EditItem?.(state);
   };
 
   // アイテムを削除
   const handleDelete = () => {
-    // TODO サーバー処理
-    // 親コンポーネントへアイテムを削除
     props.DeleteItem?.(state.id ? state.id : "-1"); // IDがない場合は-1を返す
   };
 
