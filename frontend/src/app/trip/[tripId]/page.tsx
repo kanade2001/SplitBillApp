@@ -21,7 +21,6 @@ export default function Page({ params, searchParams }: Props) {
 
   const AddItem = useCallback(
     (item: ItemState) => {
-      console.log("AddItem");
       dispatch({
         type: "ADD_ITEM",
         payload: {

@@ -9,8 +9,6 @@ export default function Login() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("email", email);
-    console.log("password", password);
   };
   return (
     <div className="mt-10 flex flex-col items-center justify-center">

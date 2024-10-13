@@ -14,7 +14,6 @@ const BodyRow: React.FC<BodyRowProps> = ({ item, EditItem, DeleteItem }) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const handleIsEdit = () => {
-    console.log("handleIsEdit");
     setIsEdit(!isEdit);
   };
 

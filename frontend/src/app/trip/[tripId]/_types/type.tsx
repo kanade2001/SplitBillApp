@@ -18,11 +18,9 @@ export const ItemReducer = (state: ItemState[], action: ItemAction) => {
   switch (action.type) {
     // 追加
     case "ADD_ITEM":
-      console.log("ADD_ITEM");
       return [...state, action.payload.item];
     // 編集
     case "EDIT_ITEM":
-      console.log("EDIT_ITEM");
       return state.map((item) =>
         item.id === action.payload.item.id
           ? { ...item, ...action.payload.item }
@@ -30,7 +28,6 @@ export const ItemReducer = (state: ItemState[], action: ItemAction) => {
       );
     // 削除
     case "DELETE_ITEM":
-      console.log("DELETE_ITEM");
       return state.filter((item) => item.id !== action.payload.id);
   }
 };
