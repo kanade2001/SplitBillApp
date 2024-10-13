@@ -69,7 +69,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
     console.log("handleAdd");
     e.preventDefault();
     let hasError = false;
-    const errors = {
+    const errors: ErrorState = {
       titleError: false,
       memberError: false,
       currencyError: false,
