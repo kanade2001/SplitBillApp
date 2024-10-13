@@ -81,8 +81,6 @@ export default function Login() {
     }
 
     // TODO ログイン処理
-
-    console.log("email", state.email);
   };
 
   return (

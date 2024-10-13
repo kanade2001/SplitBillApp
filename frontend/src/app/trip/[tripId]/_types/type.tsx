@@ -1,11 +1,7 @@
-import { Key } from "react";
-
 export interface ItemState {
-  id: Key;
+  id?: string;
   title: string;
-  member: string;
-  member_id: bigint;
-  currency: string;
+  member_id: string;
   currency_id: string;
   amount: number;
   datetime: Date;
@@ -16,17 +12,18 @@ export const initialStateList: ItemState[] = [];
 export type ItemAction =
   | { type: "ADD_ITEM"; payload: { item: ItemState } }
   | { type: "EDIT_ITEM"; payload: { item: ItemState } }
-  | { type: "DELETE_ITEM"; payload: { id: Key } };
+  | { type: "DELETE_ITEM"; payload: { id: string } };
 
 export const ItemReducer = (state: ItemState[], action: ItemAction) => {
   switch (action.type) {
     // 追加
     case "ADD_ITEM":
-      console.log("ADD_ITEM");
-      return [...state, action.payload.item];
+      // TODO サーバー処理
+      const item = { ...action.payload.item, id: "ADD" }; // サーバーから取得した新しいIDをセット
+      return [...state, item];
     // 編集
     case "EDIT_ITEM":
-      console.log("EDIT_ITEM");
+      // TODO サーバー処理
       return state.map((item) =>
         item.id === action.payload.item.id
           ? { ...item, ...action.payload.item }
@@ -34,7 +31,7 @@ export const ItemReducer = (state: ItemState[], action: ItemAction) => {
       );
     // 削除
     case "DELETE_ITEM":
-      console.log("DELETE_ITEM");
+      // TODO サーバー処理
       return state.filter((item) => item.id !== action.payload.id);
   }
 };

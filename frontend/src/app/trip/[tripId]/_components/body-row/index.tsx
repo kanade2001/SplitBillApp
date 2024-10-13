@@ -1,19 +1,19 @@
 import { useState } from "react";
 
-import { ItemState, ItemAction } from "../../_types/type";
+import { ItemState } from "../../_types/type";
 
 import EditRow from "../edit-row";
 
 interface BodyRowProps {
   item: ItemState;
-  dispatch: React.Dispatch<ItemAction>;
+  EditItem: (item: ItemState) => void;
+  DeleteItem: (id: string) => void;
 }
 
-const BodyRow: React.FC<BodyRowProps> = ({ item, dispatch }) => {
+const BodyRow: React.FC<BodyRowProps> = ({ item, EditItem, DeleteItem }) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const handleIsEdit = () => {
-    console.log("handleIsEdit");
     setIsEdit(!isEdit);
   };
 
@@ -24,8 +24,8 @@ const BodyRow: React.FC<BodyRowProps> = ({ item, dispatch }) => {
         <th className="border border-l-0 border-gray-400 p-2 text-left">
           {item.title}
         </th>
-        <th className="border border-gray-400 p-2">{item.member}</th>
-        <th className="border border-gray-400 p-2">{item.currency}</th>
+        <th className="border border-gray-400 p-2">{item.member_id}</th>
+        <th className="border border-gray-400 p-2">{item.currency_id}</th>
         <th className="border border-gray-400 p-2 text-right">{item.amount}</th>
         <th className="border border-gray-400 p-2">
           {item.datetime.toISOString()}
@@ -40,10 +40,7 @@ const BodyRow: React.FC<BodyRowProps> = ({ item, dispatch }) => {
         </th>
       </tr>
       {isEdit && (
-        <EditRow
-          visible={{ add: false, edit: true, delete: true }}
-          dispatch={dispatch}
-        />
+        <EditRow item={item} EditItem={EditItem} DeleteItem={DeleteItem} />
       )}
     </>
   );

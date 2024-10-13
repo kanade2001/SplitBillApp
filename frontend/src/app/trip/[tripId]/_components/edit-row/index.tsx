@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from "react";
 
-import { ItemAction, FormState, ErrorState } from "../../_types/type";
+import { ErrorState, ItemState } from "../../_types/type";
 import {
   TextInput,
   DropDown,
@@ -9,23 +9,20 @@ import {
 } from "@/components/ui";
 
 interface EditRowProps {
-  visible: {
-    add: boolean;
-    edit: boolean;
-    delete: boolean;
-  };
-  dispatch: React.Dispatch<ItemAction>;
-  id?: string;
-  item?: FormState;
+  AddItem?: (item: ItemState) => void;
+  EditItem?: (item: ItemState) => void;
+  DeleteItem?: (id: string) => void;
+  item?: ItemState;
 }
 
 const EditRow: React.FC<EditRowProps> = (props) => {
-  const initialItemState: FormState = props.item
+  const initialItemState: ItemState = props.item
     ? props.item
     : {
+        id: "ADD",
         title: "",
-        memberid: 0,
-        currencyid: "jp",
+        member_id: "MEMBER_ID",
+        currency_id: "jp",
         amount: 0,
         datetime: new Date(),
       };
@@ -44,8 +41,8 @@ const EditRow: React.FC<EditRowProps> = (props) => {
   const handleError = () => {
     const errors: ErrorState = {
       titleError: !state.title,
-      memberError: !state.memberid,
-      currencyError: !state.currencyid,
+      memberError: !state.member_id,
+      currencyError: !state.currency_id,
       amountError: !state.amount,
       datetimeError: !state.datetime,
     };
@@ -57,64 +54,38 @@ const EditRow: React.FC<EditRowProps> = (props) => {
     return Object.values(errors).some((error) => error);
   };
 
+  // フォームをリセット
+  const handleReset = () => {
+    setState(initialItemState);
+    setErrors(initialErrorState);
+  };
+
+  // アイテムを追加
   const handleAdd = (e: FormEvent) => {
     e.preventDefault();
 
     // エラーがある場合は処理を中断
     if (handleError()) return;
 
-    // TODO サーバー処理
-    // 親コンポーネントへアイテムを追加
-    props.dispatch({
-      type: "ADD_ITEM",
-      payload: {
-        item: {
-          id: BigInt(0), // TODO サーバーから返却されるID
-          title: state.title,
-          member: "Member 1",
-          member_id: BigInt(0),
-          currency: "JPY",
-          currency_id: state.currencyid,
-          amount: state.amount,
-          datetime: new Date(state.datetime),
-        },
-      },
-    });
+    // Dispatch
+    props.AddItem?.(state);
     handleReset(); // フォームをリセット
   };
 
+  // アイテムを編集
   const handleEdit = (e: FormEvent) => {
     e.preventDefault();
 
     // エラーがある場合は処理を中断
     if (handleError()) return;
 
-    // TODO サーバー処理
-    // 親コンポーネントへアイテムを編集
-    props.dispatch({
-      type: "EDIT_ITEM",
-      payload: {
-        item: {
-          id: props.id ? BigInt(props.id) : BigInt(-1), // IDがない場合は-1を返す
-          title: state.title,
-          member: "Member 1",
-          member_id: BigInt(0),
-          currency: "JPY",
-          currency_id: state.currencyid,
-          amount: state.amount,
-          datetime: new Date(state.datetime),
-        },
-      },
-    });
+    // Dispatch
+    props.EditItem?.(state);
   };
 
-  const handleReset = () => {
-    setState(initialItemState);
-    setErrors(initialErrorState);
-  };
-
+  // アイテムを削除
   const handleDelete = () => {
-    props.dispatch({ type: "DELETE_ITEM", payload: { id: BigInt(0) } });
+    props.DeleteItem?.(state.id ? state.id : "ERROR"); // IDがない場合は-1を返す
   };
 
   return (
@@ -134,16 +105,14 @@ const EditRow: React.FC<EditRowProps> = (props) => {
           <DropDown
             id="member-select"
             error={errors.memberError}
-            value={state.memberid}
-            onChange={(e) =>
-              setState({ ...state, memberid: parseInt(e.target.value) })
-            }
+            value={state.member_id}
+            onChange={(e) => setState({ ...state, member_id: e.target.value })}
             required={true}
             items={[
-              { key: 0, value: "Choose a member" },
-              { key: 1, value: "Member 1" },
-              { key: 2, value: "Member 2" },
-              { key: 3, value: "Member 3" },
+              { key: "0", value: "Choose a member" },
+              { key: "1", value: "Member 1" },
+              { key: "2", value: "Member 2" },
+              { key: "3", value: "Member 3" },
             ]}
           />
         </th>
@@ -156,9 +125,9 @@ const EditRow: React.FC<EditRowProps> = (props) => {
               setState({ ...state, amount: parseInt(e.target.value) })
             }
             currencyerror={errors.currencyError}
-            currencyvalue={state.currencyid}
+            currencyvalue={state.currency_id}
             currencyonChange={(e) =>
-              setState({ ...state, currencyid: e.target.value })
+              setState({ ...state, currency_id: e.target.value })
             }
             currencies={[
               { key: "jp", value: "JPY" },
@@ -182,7 +151,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
         <th></th>
         <th colSpan={5}>
           <div className="flex justify-end p-2">
-            {props.visible.delete && (
+            {props.DeleteItem && (
               <button
                 className="x-20 ms-2 rounded-md bg-red-800 px-2 text-center text-sm text-white"
                 onClick={() => handleDelete()}
@@ -196,7 +165,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
             >
               Reset
             </button>{" "}
-            {props.visible.edit && (
+            {props.EditItem && (
               <button
                 className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
                 onClick={(e) => handleEdit(e)}
@@ -204,7 +173,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
                 Edit
               </button>
             )}
-            {props.visible.add && (
+            {props.AddItem && (
               <button
                 className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
                 onClick={(e) => handleAdd(e)}
