@@ -85,7 +85,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
 
   // アイテムを削除
   const handleDelete = () => {
-    props.DeleteItem?.(state.id ? state.id : "-1"); // IDがない場合は-1を返す
+    props.DeleteItem?.(state.id ? state.id : "ERROR"); // IDがない場合は-1を返す
   };
 
   return (
