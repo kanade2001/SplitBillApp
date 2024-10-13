@@ -62,7 +62,6 @@ const ItemReducer: React.Reducer<FormState, FormAction> = (
 
 const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
   const [state, dispatchItem] = useReducer(ItemReducer, initialItemState);
-  // const [error, dispatchError] = useReducer(ErrorReducer, initialErrorState);
   const [errors, setErrors] = useState(initialErrorState);
 
   const handleAdd = (e: FormEvent) => {
@@ -136,7 +135,6 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
 
   return (
     <>
-      {" "}
       <tr className="bg-gray-400">
         <th></th>
         <th className="p-2">
