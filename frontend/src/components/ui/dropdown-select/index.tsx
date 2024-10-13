@@ -1,10 +1,10 @@
 interface DropDownProps {
   id: string;
   error: boolean;
-  value: number; // key of items
+  value: string; // key of items
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   required?: boolean;
-  items: { key: number; value: string | JSX.Element }[];
+  items: { key: string; value: string | JSX.Element }[];
 }
 
 const DropDown: React.FC<DropDownProps> = (props) => {
