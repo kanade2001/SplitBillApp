@@ -103,6 +103,31 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
     handleReset(); // フォームをリセット
   };
 
+  const handleEdit = (e: FormEvent) => {
+    e.preventDefault();
+
+    // エラーがある場合は処理を中断
+    if (handleError()) return;
+
+    // TODO サーバー処理
+    // 親コンポーネントへアイテムを編集
+    dispatch({
+      type: "EDIT_ITEM",
+      payload: {
+        item: {
+          id: BigInt(0), // TODO サーバーから返却されるID
+          title: state.title,
+          member: "Member 1",
+          member_id: BigInt(0),
+          currency: "JPY",
+          currency_id: state.currencyid,
+          amount: state.amount,
+          datetime: new Date(state.datetime),
+        },
+      },
+    });
+  };
+
   const handleReset = () => {
     setState(initialItemState);
     setErrors(initialErrorState);
@@ -194,7 +219,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
             {visible.edit && (
               <button
                 className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
-                onClick={(e) => handleAdd(e)}
+                onClick={(e) => handleEdit(e)}
               >
                 Edit
               </button>
