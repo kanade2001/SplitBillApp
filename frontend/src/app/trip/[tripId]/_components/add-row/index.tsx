@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-import { ItemAction } from "../../_types/type";
+import { ItemState } from "../../_types/type";
 
 import EditRow from "../edit-row";
 
 interface AddRowProps {
-  dispatch: React.Dispatch<ItemAction>;
+  AddItem: (item: ItemState) => void;
 }
 
-const AddRow: React.FC<AddRowProps> = ({ dispatch }) => {
+const AddRow: React.FC<AddRowProps> = ({ AddItem }) => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
 
   const handleIsAdd = () => {
@@ -49,12 +49,7 @@ const AddRow: React.FC<AddRowProps> = ({ dispatch }) => {
           </button>
         </th>
       </tr>
-      {isAdd && (
-        <EditRow
-          visible={{ add: true, edit: false, delete: false }}
-          dispatch={dispatch}
-        />
-      )}
+      {isAdd && <EditRow AddItem={AddItem} />}
     </>
   );
 };

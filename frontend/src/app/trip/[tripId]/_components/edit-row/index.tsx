@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from "react";
 
-import { ItemAction, ErrorState, ItemState } from "../../_types/type";
+import { ErrorState, ItemState } from "../../_types/type";
 import {
   TextInput,
   DropDown,
@@ -9,12 +9,9 @@ import {
 } from "@/components/ui";
 
 interface EditRowProps {
-  visible: {
-    add: boolean;
-    edit: boolean;
-    delete: boolean;
-  };
-  dispatch: React.Dispatch<ItemAction>;
+  AddItem?: (item: ItemState) => void;
+  EditItem?: (item: ItemState) => void;
+  DeleteItem?: (id: string) => void;
   item?: ItemState;
 }
 
@@ -57,6 +54,13 @@ const EditRow: React.FC<EditRowProps> = (props) => {
     return Object.values(errors).some((error) => error);
   };
 
+  // フォームをリセット
+  const handleReset = () => {
+    setState(initialItemState);
+    setErrors(initialErrorState);
+  };
+
+  // アイテムを追加
   const handleAdd = (e: FormEvent) => {
     e.preventDefault();
 
@@ -64,23 +68,14 @@ const EditRow: React.FC<EditRowProps> = (props) => {
     if (handleError()) return;
 
     // TODO サーバー処理
+    setState({ ...state, id: "ID" }); // IDを設定
+
     // 親コンポーネントへアイテムを追加
-    props.dispatch({
-      type: "ADD_ITEM",
-      payload: {
-        item: {
-          id: "ID", // TODO サーバーから返却されるID
-          title: state.title,
-          member_id: "MEMBER_ID",
-          currency_id: state.currency_id,
-          amount: state.amount,
-          datetime: new Date(state.datetime),
-        },
-      },
-    });
+    props.AddItem?.(state);
     handleReset(); // フォームをリセット
   };
 
+  // アイテムを編集
   const handleEdit = (e: FormEvent) => {
     e.preventDefault();
 
@@ -89,28 +84,14 @@ const EditRow: React.FC<EditRowProps> = (props) => {
 
     // TODO サーバー処理
     // 親コンポーネントへアイテムを編集
-    props.dispatch({
-      type: "EDIT_ITEM",
-      payload: {
-        item: {
-          id: props.item?.id ? props.item.id : "-1", // IDがない場合は-1を返す
-          title: state.title,
-          member_id: "Member 1",
-          currency_id: state.currency_id,
-          amount: state.amount,
-          datetime: state.datetime,
-        },
-      },
-    });
+    props.EditItem?.(state);
   };
 
-  const handleReset = () => {
-    setState(initialItemState);
-    setErrors(initialErrorState);
-  };
-
+  // アイテムを削除
   const handleDelete = () => {
-    props.dispatch({ type: "DELETE_ITEM", payload: { id: "ID" } });
+    // TODO サーバー処理
+    // 親コンポーネントへアイテムを削除
+    props.DeleteItem?.(state.id ? state.id : "-1"); // IDがない場合は-1を返す
   };
 
   return (
@@ -176,7 +157,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
         <th></th>
         <th colSpan={5}>
           <div className="flex justify-end p-2">
-            {props.visible.delete && (
+            {props.DeleteItem && (
               <button
                 className="x-20 ms-2 rounded-md bg-red-800 px-2 text-center text-sm text-white"
                 onClick={() => handleDelete()}
@@ -190,7 +171,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
             >
               Reset
             </button>{" "}
-            {props.visible.edit && (
+            {props.EditItem && (
               <button
                 className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
                 onClick={(e) => handleEdit(e)}
@@ -198,7 +179,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
                 Edit
               </button>
             )}
-            {props.visible.add && (
+            {props.AddItem && (
               <button
                 className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
                 onClick={(e) => handleAdd(e)}

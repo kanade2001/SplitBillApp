@@ -1,8 +1,8 @@
 "use client";
 
-import { useReducer } from "react";
+import { useCallback, useReducer } from "react";
 
-import { initialStateList, ItemReducer } from "./_types/type";
+import { initialStateList, ItemReducer, ItemState } from "./_types/type";
 
 import { Info } from "@/components/Alert/Alert";
 import HeaderRow from "./_components/header-row";
@@ -19,6 +19,43 @@ export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
   const [state, dispatch] = useReducer(ItemReducer, initialStateList);
 
+  const AddItem = useCallback(
+    (item: ItemState) => {
+      console.log("AddItem");
+      dispatch({
+        type: "ADD_ITEM",
+        payload: {
+          item: item,
+        },
+      });
+    },
+    [dispatch],
+  );
+
+  const EditItem = useCallback(
+    (item: ItemState) => {
+      dispatch({
+        type: "EDIT_ITEM",
+        payload: {
+          item: item,
+        },
+      });
+    },
+    [dispatch],
+  );
+
+  const DeleteItem = useCallback(
+    (id: string) => {
+      dispatch({
+        type: "DELETE_ITEM",
+        payload: {
+          id: id,
+        },
+      });
+    },
+    [dispatch],
+  );
+
   return (
     <div className="space-y-5 p-5">
       <h1>TRIP_ID = {params.tripId}</h1>
@@ -27,11 +64,16 @@ export default function Page({ params, searchParams }: Props) {
         <HeaderRow />
         <tbody>
           {state.map((item) => (
-            <BodyRow key={item.id} item={item} dispatch={dispatch} />
+            <BodyRow
+              key={item.id}
+              item={item}
+              EditItem={EditItem}
+              DeleteItem={DeleteItem}
+            />
           ))}
         </tbody>
         <tfoot className="bg-gray-800 text-white">
-          <AddRow dispatch={dispatch} />
+          <AddRow AddItem={AddItem} />
         </tfoot>
       </table>
       {state.length === 0 /* 要素がない場合 */ && (
