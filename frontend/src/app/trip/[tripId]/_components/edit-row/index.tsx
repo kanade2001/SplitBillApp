@@ -1,4 +1,4 @@
-import React, { useReducer, FormEvent } from "react";
+import React, { useReducer, useState, FormEvent } from "react";
 
 import { ItemAction, FormState, ErrorState } from "../../_types/type";
 import {
@@ -26,19 +26,6 @@ type FormAction =
       };
     }
   | { type: "FORM_RESET" };
-
-type ErrorAction =
-  | { type: "ERROR_RESET" }
-  | {
-      type: "ERROR_CHECK";
-      payload: {
-        titleError: boolean;
-        memberError: boolean;
-        currencyError: boolean;
-        amountError: boolean;
-        datetimeError: boolean;
-      };
-    };
 
 const initialItemState: FormState = {
   title: "",
@@ -73,30 +60,10 @@ const ItemReducer: React.Reducer<FormState, FormAction> = (
   }
 };
 
-const ErrorReducer: React.Reducer<ErrorState, ErrorAction> = (
-  state: ErrorState,
-  action: ErrorAction,
-) => {
-  switch (action.type) {
-    case "ERROR_CHECK":
-      return {
-        ...state,
-        titleError: action.payload.titleError,
-        memberError: action.payload.memberError,
-        currencyError: action.payload.currencyError,
-        amountError: action.payload.amountError,
-        datetimeError: action.payload.datetimeError,
-      };
-    case "ERROR_RESET":
-      return initialErrorState;
-    default:
-      return state;
-  }
-};
-
 const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
   const [state, dispatchItem] = useReducer(ItemReducer, initialItemState);
-  const [error, dispatchError] = useReducer(ErrorReducer, initialErrorState);
+  // const [error, dispatchError] = useReducer(ErrorReducer, initialErrorState);
+  const [errors, setErrors] = useState(initialErrorState);
 
   const handleAdd = (e: FormEvent) => {
     console.log("handleAdd");
@@ -133,7 +100,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
     }
 
     // エラーを更新
-    dispatchError({ type: "ERROR_CHECK", payload: errors });
+    setErrors(errors);
 
     // エラーがある場合は処理を中断
     if (hasError) return;
@@ -160,7 +127,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
 
   const handleReset = () => {
     dispatchItem({ type: "FORM_RESET" });
-    dispatchError({ type: "ERROR_RESET" });
+    setErrors(initialErrorState);
   };
 
   const handleDelete = () => {
@@ -175,7 +142,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
         <th className="p-2">
           <TextInput
             id="title-input"
-            error={error.titleError}
+            error={errors.titleError}
             value={state.title}
             onChange={(e) =>
               dispatchItem({
@@ -189,7 +156,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
         <th className="p-2">
           <DropDown
             id="member-select"
-            error={error.memberError}
+            error={errors.memberError}
             value={state.member}
             onChange={(e) =>
               dispatchItem({
@@ -209,7 +176,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
         <th className="p-2"></th>
         <th className="p-2">
           <NumberCurrencyDropDown
-            numbererror={error.amountError}
+            numbererror={errors.amountError}
             numbervalue={state.amount}
             numberonChange={(e) =>
               dispatchItem({
@@ -217,7 +184,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
                 payload: { field: "amount", value: e.target.value },
               })
             }
-            currencyerror={error.currencyError}
+            currencyerror={errors.currencyError}
             currencyvalue={state.currency}
             currencyonChange={(e) =>
               dispatchItem({
@@ -233,7 +200,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
         </th>
         <th className="p-2">
           <DateTimeInput
-            error={error.datetimeError}
+            error={errors.datetimeError}
             value={state.datetime}
             onChange={(e) =>
               dispatchItem({
