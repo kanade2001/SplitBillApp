@@ -39,42 +39,19 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
   const [errors, setErrors] = useState(initialErrorState);
 
   const handleError = () => {
-    let hasError = false;
     const errors: ErrorState = {
-      titleError: false,
-      memberError: false,
-      currencyError: false,
-      amountError: false,
-      datetimeError: false,
+      titleError: !state.title,
+      memberError: !state.memberid,
+      currencyError: !state.currencyid,
+      amountError: !state.amount,
+      datetimeError: !state.datetime,
     };
-
-    // フォームに空欄がある場合はエラーを追加
-    if (!state.title) {
-      errors.titleError = true;
-      hasError = true;
-    }
-    if (!state.memberid) {
-      errors.memberError = true;
-      hasError = true;
-    }
-    if (!state.currencyid) {
-      errors.currencyError = true;
-      hasError = true;
-    }
-    if (!state.amount) {
-      errors.amountError = true;
-      hasError = true;
-    }
-    if (!state.datetime) {
-      errors.datetimeError = true;
-      hasError = true;
-    }
 
     // エラーを更新
     setErrors(errors);
 
     // エラーがあったかどうかを返す
-    return hasError;
+    return Object.values(errors).some((error) => error);
   };
 
   const handleAdd = (e: FormEvent) => {
