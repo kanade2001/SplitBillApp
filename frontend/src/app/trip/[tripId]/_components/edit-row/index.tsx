@@ -1,4 +1,4 @@
-import React, { useReducer, useState, FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 
 import { ItemAction, FormState, ErrorState } from "../../_types/type";
 import {
@@ -17,16 +17,6 @@ interface EditRowProps {
   dispatch: React.Dispatch<ItemAction>;
 }
 
-type FormAction =
-  | {
-      type: "FORM_UPDATE";
-      payload: {
-        field: keyof FormState;
-        value: string | bigint | number | Date;
-      };
-    }
-  | { type: "FORM_RESET" };
-
 const initialItemState: FormState = {
   title: "",
   memberid: 0,
@@ -43,25 +33,9 @@ const initialErrorState: ErrorState = {
   datetimeError: false,
 };
 
-const ItemReducer: React.Reducer<FormState, FormAction> = (
-  state: FormState,
-  action: FormAction,
-) => {
-  switch (action.type) {
-    case "FORM_UPDATE":
-      return {
-        ...state,
-        [action.payload.field]: action.payload.value,
-      };
-    case "FORM_RESET":
-      return initialItemState;
-    default:
-      return state;
-  }
-};
-
 const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
-  const [state, dispatchItem] = useReducer(ItemReducer, initialItemState);
+  //const [state, dispatchItem] = useReducer(ItemReducer, initialItemState);
+  const [state, setState] = useState(initialItemState);
   const [errors, setErrors] = useState(initialErrorState);
 
   const handleAdd = (e: FormEvent) => {
@@ -125,7 +99,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
   };
 
   const handleReset = () => {
-    dispatchItem({ type: "FORM_RESET" });
+    setState(initialItemState);
     setErrors(initialErrorState);
   };
 
@@ -142,12 +116,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
             id="title-input"
             error={errors.titleError}
             value={state.title}
-            onChange={(e) =>
-              dispatchItem({
-                type: "FORM_UPDATE",
-                payload: { field: "title", value: e.target.value },
-              })
-            }
+            onChange={(e) => setState({ ...state, title: e.target.value })}
             required={true}
           />
         </th>
@@ -157,10 +126,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
             error={errors.memberError}
             value={state.memberid}
             onChange={(e) =>
-              dispatchItem({
-                type: "FORM_UPDATE",
-                payload: { field: "memberid", value: e.target.value },
-              })
+              setState({ ...state, memberid: parseInt(e.target.value) })
             }
             required={true}
             items={[
@@ -177,18 +143,12 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
             numbererror={errors.amountError}
             numbervalue={state.amount}
             numberonChange={(e) =>
-              dispatchItem({
-                type: "FORM_UPDATE",
-                payload: { field: "amount", value: e.target.value },
-              })
+              setState({ ...state, amount: parseInt(e.target.value) })
             }
             currencyerror={errors.currencyError}
             currencyvalue={state.currencyid}
             currencyonChange={(e) =>
-              dispatchItem({
-                type: "FORM_UPDATE",
-                payload: { field: "currencyid", value: e.target.value },
-              })
+              setState({ ...state, currencyid: e.target.value })
             }
             currencies={[
               { key: "jp", value: "JPY" },
@@ -201,10 +161,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
             error={errors.datetimeError}
             value={state.datetime}
             onChange={(e) =>
-              dispatchItem({
-                type: "FORM_UPDATE",
-                payload: { field: "datetime", value: new Date(e.target.value) },
-              })
+              setState({ ...state, datetime: new Date(e.target.value) })
             }
             required={true}
           />
