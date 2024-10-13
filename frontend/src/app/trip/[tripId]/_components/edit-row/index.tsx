@@ -15,26 +15,29 @@ interface EditRowProps {
     delete: boolean;
   };
   dispatch: React.Dispatch<ItemAction>;
+  id?: string;
+  item?: FormState;
 }
 
-const initialItemState: FormState = {
-  title: "",
-  memberid: 0,
-  currencyid: "jp",
-  amount: 0,
-  datetime: new Date(),
-};
+const EditRow: React.FC<EditRowProps> = (props) => {
+  const initialItemState: FormState = props.item
+    ? props.item
+    : {
+        title: "",
+        memberid: 0,
+        currencyid: "jp",
+        amount: 0,
+        datetime: new Date(),
+      };
 
-const initialErrorState: ErrorState = {
-  titleError: false,
-  memberError: false,
-  currencyError: false,
-  amountError: false,
-  datetimeError: false,
-};
+  const initialErrorState: ErrorState = {
+    titleError: false,
+    memberError: false,
+    currencyError: false,
+    amountError: false,
+    datetimeError: false,
+  };
 
-const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
-  //const [state, dispatchItem] = useReducer(ItemReducer, initialItemState);
   const [state, setState] = useState(initialItemState);
   const [errors, setErrors] = useState(initialErrorState);
 
@@ -62,7 +65,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
 
     // TODO サーバー処理
     // 親コンポーネントへアイテムを追加
-    dispatch({
+    props.dispatch({
       type: "ADD_ITEM",
       payload: {
         item: {
@@ -88,7 +91,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
 
     // TODO サーバー処理
     // 親コンポーネントへアイテムを編集
-    dispatch({
+    props.dispatch({
       type: "EDIT_ITEM",
       payload: {
         item: {
@@ -111,7 +114,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
   };
 
   const handleDelete = () => {
-    dispatch({ type: "DELETE_ITEM", payload: { id: BigInt(0) } });
+    props.dispatch({ type: "DELETE_ITEM", payload: { id: BigInt(0) } });
   };
 
   return (
@@ -179,7 +182,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
         <th></th>
         <th colSpan={5}>
           <div className="flex justify-end p-2">
-            {visible.delete && (
+            {props.visible.delete && (
               <button
                 className="x-20 ms-2 rounded-md bg-red-800 px-2 text-center text-sm text-white"
                 onClick={() => handleDelete()}
@@ -193,7 +196,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
             >
               Reset
             </button>{" "}
-            {visible.edit && (
+            {props.visible.edit && (
               <button
                 className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
                 onClick={(e) => handleEdit(e)}
@@ -201,7 +204,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
                 Edit
               </button>
             )}
-            {visible.add && (
+            {props.visible.add && (
               <button
                 className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
                 onClick={(e) => handleAdd(e)}
