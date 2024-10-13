@@ -1,10 +1,10 @@
 interface DropDownProps {
   id: string;
   error: boolean;
-  value: string;
+  value: number; // key of items
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   required?: boolean;
-  items: { key: string; item: string | JSX.Element }[];
+  items: { key: number; value: string | JSX.Element }[];
 }
 
 const DropDown: React.FC<DropDownProps> = (props) => {
@@ -12,15 +12,15 @@ const DropDown: React.FC<DropDownProps> = (props) => {
     <select
       id="member"
       className={[
-        "block w-full rounded-md border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
+        "block h-10 w-full rounded-md border bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
         props.error ? "border-red-600 bg-red-200" : "border-gray-600 bg-white",
       ].join(" ")}
-      value={props.value}
+      value={props.items.find((item) => item.key === props.value)?.key}
       onChange={props.onChange}
     >
       {props.items.map((item) => (
         <option key={item.key} value={item.key}>
-          <>{item.item}</>
+          <>{item.value}</>
         </option>
       ))}
     </select>
