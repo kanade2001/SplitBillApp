@@ -95,7 +95,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
       type: "EDIT_ITEM",
       payload: {
         item: {
-          id: BigInt(0), // TODO サーバーから返却されるID
+          id: props.id ? BigInt(props.id) : BigInt(-1), // IDがない場合は-1を返す
           title: state.title,
           member: "Member 1",
           member_id: BigInt(0),
