@@ -6,9 +6,9 @@ interface NumberCurrencyDropDownProps {
 
   currencyfieldid?: string;
   currencyerror: boolean;
-  currencyidvalue: string; // currency id
+  currencyvalue: string; // currency id
   currencyonChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  currencies: { key: string; item: string }[]; // currency list
+  currencies: { key: string; value: string }[]; // currency list
 }
 
 const NumberCurrencyDropDown: React.FC<NumberCurrencyDropDownProps> = (
@@ -36,12 +36,16 @@ const NumberCurrencyDropDown: React.FC<NumberCurrencyDropDownProps> = (
             ? "border-red-600 bg-red-200"
             : "border-gray-600 bg-white",
         ].join(" ")}
-        value={props.currencyidvalue}
+        value={
+          props.currencies.find(
+            (currency) => currency.key === props.currencyvalue,
+          )?.key
+        }
         onChange={props.currencyonChange}
       >
         {props.currencies.map((currency) => (
           <option key={currency.key} value={currency.key}>
-            {currency.item}
+            {currency.value}
           </option>
         ))}
       </select>

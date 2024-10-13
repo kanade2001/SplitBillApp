@@ -22,15 +22,15 @@ type FormAction =
       type: "FORM_UPDATE";
       payload: {
         field: keyof FormState;
-        value: string | number | Date;
+        value: string | bigint | number | Date;
       };
     }
   | { type: "FORM_RESET" };
 
 const initialItemState: FormState = {
   title: "",
-  member: "",
-  currency: "",
+  memberid: 0,
+  currencyid: "jp",
   amount: 0,
   datetime: new Date(),
 };
@@ -82,11 +82,11 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
       errors.titleError = true;
       hasError = true;
     }
-    if (!state.member) {
+    if (!state.memberid) {
       errors.memberError = true;
       hasError = true;
     }
-    if (!state.currency) {
+    if (!state.currencyid) {
       errors.currencyError = true;
       hasError = true;
     }
@@ -113,10 +113,10 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
         item: {
           id: BigInt(0), // TODO サーバーから返却されるID
           title: state.title,
-          member: state.member,
+          member: "Member 1",
           member_id: BigInt(0),
-          currency: state.currency,
-          currency_id: "jp",
+          currency: "JPY",
+          currency_id: state.currencyid,
           amount: state.amount,
           datetime: new Date(state.datetime),
         },
@@ -157,19 +157,19 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
           <DropDown
             id="member-select"
             error={errors.memberError}
-            value={state.member}
+            value={state.memberid}
             onChange={(e) =>
               dispatchItem({
                 type: "FORM_UPDATE",
-                payload: { field: "member", value: e.target.value },
+                payload: { field: "memberid", value: e.target.value },
               })
             }
             required={true}
             items={[
-              { key: "", item: "Choose a member" },
-              { key: "1", item: "Member 1" },
-              { key: "2", item: "Member 2" },
-              { key: "3", item: "Member 3" },
+              { key: 0, value: "Choose a member" },
+              { key: 1, value: "Member 1" },
+              { key: 2, value: "Member 2" },
+              { key: 3, value: "Member 3" },
             ]}
           />
         </th>
@@ -185,16 +185,16 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
               })
             }
             currencyerror={errors.currencyError}
-            currencyvalue={state.currency}
+            currencyvalue={state.currencyid}
             currencyonChange={(e) =>
               dispatchItem({
                 type: "FORM_UPDATE",
-                payload: { field: "currency", value: e.target.value },
+                payload: { field: "currencyid", value: e.target.value },
               })
             }
             currencies={[
-              { key: "jp", item: "JPY" },
-              { key: "us", item: "USD" },
+              { key: "jp", value: "JPY" },
+              { key: "us", value: "USD" },
             ]}
           />
         </th>
