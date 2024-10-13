@@ -23,10 +23,8 @@ export default function Page({ params, searchParams }: Props) {
     <div className="space-y-5 p-5">
       <h1>TRIP_ID = {params.tripId}</h1>
       <h2>PUBLIC_KEY = {key}</h2>
-
       <table className="w-full table-fixed border border-gray-400">
         <HeaderRow />
-
         <tbody>
           {state.map((item) => (
             <BodyRow key={item.id} item={item} dispatch={dispatch} />
