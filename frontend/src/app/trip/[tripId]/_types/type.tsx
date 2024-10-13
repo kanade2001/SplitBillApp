@@ -1,11 +1,7 @@
-import { Key } from "react";
-
 export interface ItemState {
-  id: Key;
+  id?: string;
   title: string;
-  member: string;
-  member_id: bigint;
-  currency: string;
+  member_id: string;
   currency_id: string;
   amount: number;
   datetime: Date;
@@ -16,7 +12,7 @@ export const initialStateList: ItemState[] = [];
 export type ItemAction =
   | { type: "ADD_ITEM"; payload: { item: ItemState } }
   | { type: "EDIT_ITEM"; payload: { item: ItemState } }
-  | { type: "DELETE_ITEM"; payload: { id: Key } };
+  | { type: "DELETE_ITEM"; payload: { id: string } };
 
 export const ItemReducer = (state: ItemState[], action: ItemAction) => {
   switch (action.type) {
