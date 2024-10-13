@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from "react";
 
-import { ItemAction, FormState, ErrorState } from "../../_types/type";
+import { ItemAction, ErrorState, ItemState } from "../../_types/type";
 import {
   TextInput,
   DropDown,
@@ -15,17 +15,17 @@ interface EditRowProps {
     delete: boolean;
   };
   dispatch: React.Dispatch<ItemAction>;
-  id?: string;
-  item?: FormState;
+  item?: ItemState;
 }
 
 const EditRow: React.FC<EditRowProps> = (props) => {
-  const initialItemState: FormState = props.item
+  const initialItemState: ItemState = props.item
     ? props.item
     : {
+        id: "ADD",
         title: "",
-        memberid: 0,
-        currencyid: "jp",
+        member_id: "MEMBER_ID",
+        currency_id: "jp",
         amount: 0,
         datetime: new Date(),
       };
@@ -44,8 +44,8 @@ const EditRow: React.FC<EditRowProps> = (props) => {
   const handleError = () => {
     const errors: ErrorState = {
       titleError: !state.title,
-      memberError: !state.memberid,
-      currencyError: !state.currencyid,
+      memberError: !state.member_id,
+      currencyError: !state.currency_id,
       amountError: !state.amount,
       datetimeError: !state.datetime,
     };
@@ -69,12 +69,10 @@ const EditRow: React.FC<EditRowProps> = (props) => {
       type: "ADD_ITEM",
       payload: {
         item: {
-          id: BigInt(0), // TODO サーバーから返却されるID
+          id: "ID", // TODO サーバーから返却されるID
           title: state.title,
-          member: "Member 1",
-          member_id: BigInt(0),
-          currency: "JPY",
-          currency_id: state.currencyid,
+          member_id: "MEMBER_ID",
+          currency_id: state.currency_id,
           amount: state.amount,
           datetime: new Date(state.datetime),
         },
@@ -95,14 +93,12 @@ const EditRow: React.FC<EditRowProps> = (props) => {
       type: "EDIT_ITEM",
       payload: {
         item: {
-          id: props.id ? BigInt(props.id) : BigInt(-1), // IDがない場合は-1を返す
+          id: props.item?.id ? props.item.id : "-1", // IDがない場合は-1を返す
           title: state.title,
-          member: "Member 1",
-          member_id: BigInt(0),
-          currency: "JPY",
-          currency_id: state.currencyid,
+          member_id: "Member 1",
+          currency_id: state.currency_id,
           amount: state.amount,
-          datetime: new Date(state.datetime),
+          datetime: state.datetime,
         },
       },
     });
@@ -114,7 +110,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
   };
 
   const handleDelete = () => {
-    props.dispatch({ type: "DELETE_ITEM", payload: { id: BigInt(0) } });
+    props.dispatch({ type: "DELETE_ITEM", payload: { id: "ID" } });
   };
 
   return (
@@ -134,16 +130,14 @@ const EditRow: React.FC<EditRowProps> = (props) => {
           <DropDown
             id="member-select"
             error={errors.memberError}
-            value={state.memberid}
-            onChange={(e) =>
-              setState({ ...state, memberid: parseInt(e.target.value) })
-            }
+            value={state.member_id}
+            onChange={(e) => setState({ ...state, member_id: e.target.value })}
             required={true}
             items={[
-              { key: 0, value: "Choose a member" },
-              { key: 1, value: "Member 1" },
-              { key: 2, value: "Member 2" },
-              { key: 3, value: "Member 3" },
+              { key: "0", value: "Choose a member" },
+              { key: "1", value: "Member 1" },
+              { key: "2", value: "Member 2" },
+              { key: "3", value: "Member 3" },
             ]}
           />
         </th>
@@ -156,9 +150,9 @@ const EditRow: React.FC<EditRowProps> = (props) => {
               setState({ ...state, amount: parseInt(e.target.value) })
             }
             currencyerror={errors.currencyError}
-            currencyvalue={state.currencyid}
+            currencyvalue={state.currency_id}
             currencyonChange={(e) =>
-              setState({ ...state, currencyid: e.target.value })
+              setState({ ...state, currency_id: e.target.value })
             }
             currencies={[
               { key: "jp", value: "JPY" },
