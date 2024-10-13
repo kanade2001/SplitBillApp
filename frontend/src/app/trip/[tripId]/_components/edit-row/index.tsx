@@ -38,9 +38,7 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
   const [state, setState] = useState(initialItemState);
   const [errors, setErrors] = useState(initialErrorState);
 
-  const handleAdd = (e: FormEvent) => {
-    console.log("handleAdd");
-    e.preventDefault();
+  const handleError = () => {
     let hasError = false;
     const errors: ErrorState = {
       titleError: false,
@@ -75,8 +73,15 @@ const EditRow: React.FC<EditRowProps> = ({ visible, dispatch }) => {
     // エラーを更新
     setErrors(errors);
 
+    // エラーがあったかどうかを返す
+    return hasError;
+  };
+
+  const handleAdd = (e: FormEvent) => {
+    e.preventDefault();
+
     // エラーがある場合は処理を中断
-    if (hasError) return;
+    if (handleError()) return;
 
     // TODO サーバー処理
     // 親コンポーネントへアイテムを追加
