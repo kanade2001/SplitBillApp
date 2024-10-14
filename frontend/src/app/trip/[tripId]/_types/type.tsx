@@ -7,8 +7,6 @@ export interface ItemState {
   datetime: Date;
 }
 
-export const initialStateList: ItemState[] = [];
-
 export type ItemAction =
   | { type: "ADD_ITEM"; payload: { item: ItemState } }
   | { type: "EDIT_ITEM"; payload: { item: ItemState } }
