@@ -22,10 +22,11 @@ export interface CurrencyDataState {
 
 export interface MemberState {
   id: string;
-  data: {
-    id: string;
-    name: string;
-  };
+  data: MemberDataState;
+}
+
+export interface MemberDataState {
+  name: string;
 }
 
 export type ItemAction =
