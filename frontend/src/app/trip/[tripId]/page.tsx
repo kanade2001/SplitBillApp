@@ -22,7 +22,7 @@ export default function Page({ params, searchParams }: Props) {
   const AddItem = useCallback(
     (item: ItemState) => {
       dispatch({
-        type: "ADD_ITEM",
+        type: "POST_ITEM",
         payload: {
           item: item,
         },
@@ -34,7 +34,7 @@ export default function Page({ params, searchParams }: Props) {
   const EditItem = useCallback(
     (item: ItemState) => {
       dispatch({
-        type: "EDIT_ITEM",
+        type: "PATCH_ITEM",
         payload: {
           item: item,
         },

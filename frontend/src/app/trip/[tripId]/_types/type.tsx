@@ -8,19 +8,25 @@ export interface ItemState {
 }
 
 export type ItemAction =
-  | { type: "ADD_ITEM"; payload: { item: ItemState } }
-  | { type: "EDIT_ITEM"; payload: { item: ItemState } }
+  | { type: "GET" }
+  | { type: "POST_ITEM"; payload: { item: ItemState } }
+  | { type: "PATCH_ITEM"; payload: { item: ItemState } }
   | { type: "DELETE_ITEM"; payload: { id: string } };
 
 export const ItemReducer = (state: ItemState[], action: ItemAction) => {
   switch (action.type) {
+    // 取得
+    case "GET":
+      // TODO サーバー処理
+      state = [];
+      return state;
     // 追加
-    case "ADD_ITEM":
+    case "POST_ITEM":
       // TODO サーバー処理
       const item = { ...action.payload.item, id: "ADD" }; // サーバーから取得した新しいIDをセット
       return [...state, item];
     // 編集
-    case "EDIT_ITEM":
+    case "PATCH_ITEM":
       // TODO サーバー処理
       return state.map((item) =>
         item.id === action.payload.item.id
