@@ -36,15 +36,6 @@ export const ItemReducer = (state: ItemState[], action: ItemAction) => {
   }
 };
 
-export interface FormState {
-  title: string;
-  memberid: number;
-  currencyid: string;
-  // TODO セントとかの扱い
-  amount: number;
-  datetime: Date;
-}
-
 export interface ErrorState {
   titleError: boolean;
   memberError: boolean;
