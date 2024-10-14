@@ -44,7 +44,10 @@ export type ItemAction =
     }
   | { type: "DELETE_ITEM"; payload: { id: string } };
 
-export const ItemReducer = (state: ItemState[], action: ItemAction) => {
+export const ItemReducer = (
+  state: ItemState[] | CurrencyState[] | MemberState[],
+  action: ItemAction,
+) => {
   switch (action.type) {
     // 取得
     case "GET":
