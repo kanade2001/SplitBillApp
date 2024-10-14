@@ -11,13 +11,7 @@ export interface DataState {
   datetime: Date;
 }
 
-export interface CurrencyState {
-  id: string;
-  data: {
-    id: string;
-    name: string;
-  };
-}
+
 
 export interface MemberState {
   id: string;
