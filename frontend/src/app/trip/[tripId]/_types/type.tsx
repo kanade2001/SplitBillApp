@@ -1,9 +1,13 @@
 export interface ItemState {
   id: string;
-  data: DataState;
+  data: BaseDataState;
 }
 
-export interface DataState {
+interface BaseDataState {
+  label: string;
+}
+
+export interface DataState extends BaseDataState {
   title: string;
   member_id: string;
   currency_id: string;
@@ -11,21 +15,11 @@ export interface DataState {
   datetime: Date;
 }
 
-export interface CurrencyState {
-  id: string;
-  data: CurrencyDataState;
-}
-
-export interface CurrencyDataState {
+export interface CurrencyDataState extends BaseDataState {
   name: string;
 }
 
-export interface MemberState {
-  id: string;
-  data: MemberDataState;
-}
-
-export interface MemberDataState {
+export interface MemberDataState extends BaseDataState {
   name: string;
 }
 
@@ -33,21 +27,18 @@ export type ItemAction =
   | { type: "GET" }
   | {
       type: "POST_ITEM";
-      payload: { data: DataState | CurrencyDataState | MemberDataState };
+      payload: { data: BaseDataState };
     }
   | {
       type: "PATCH_ITEM";
       payload: {
         id: string;
-        data: DataState | CurrencyDataState | MemberDataState;
+        data: BaseDataState;
       };
     }
   | { type: "DELETE_ITEM"; payload: { id: string } };
 
-export const ItemReducer = (
-  state: ItemState[] | CurrencyState[] | MemberState[],
-  action: ItemAction,
-) => {
+export const ItemReducer = (state: ItemState[], action: ItemAction) => {
   switch (action.type) {
     // 取得
     case "GET":

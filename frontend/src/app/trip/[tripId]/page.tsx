@@ -2,7 +2,7 @@
 
 import { useCallback, useReducer } from "react";
 
-import { ItemReducer, DataState } from "./_types/type";
+import { ItemState, ItemReducer, DataState } from "./_types/type";
 
 import { Info } from "@/components/Alert/Alert";
 import HeaderRow from "./_components/header-row";
@@ -17,7 +17,8 @@ type Props = {
 
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
-  const [state, dispatch] = useReducer(ItemReducer, []); // ItemState[]
+  const initialState: ItemState[] = [];
+  const [state, dispatch] = useReducer(ItemReducer, initialState); // ItemState[]
 
   const AddItem = useCallback(
     (data: DataState) => {
@@ -67,7 +68,7 @@ export default function Page({ params, searchParams }: Props) {
             <BodyRow
               key={item.id}
               id={item.id}
-              data={item.data}
+              data={item.data as DataState}
               EditItem={EditItem}
               DeleteItem={DeleteItem}
             />
