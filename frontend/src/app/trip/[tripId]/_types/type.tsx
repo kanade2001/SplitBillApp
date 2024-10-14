@@ -15,11 +15,12 @@ export interface DataState extends BaseDataState {
 }
 
 export interface CurrencyDataState extends BaseDataState {
-  name: string;
+  rate: number;
 }
 
 export interface MemberDataState extends BaseDataState {
-  name: string;
+  icon: string;
+  color: string;
 }
 
 export type ItemAction =
