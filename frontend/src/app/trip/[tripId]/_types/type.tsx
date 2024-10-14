@@ -1,5 +1,9 @@
 export interface ItemState {
-  id?: string;
+  id: string;
+  data: DataState;
+}
+
+export interface DataState {
   title: string;
   member_id: string;
   currency_id: string;
@@ -9,8 +13,8 @@ export interface ItemState {
 
 export type ItemAction =
   | { type: "GET" }
-  | { type: "POST_ITEM"; payload: { item: ItemState } }
-  | { type: "PATCH_ITEM"; payload: { item: ItemState } }
+  | { type: "POST_ITEM"; payload: { data: DataState } }
+  | { type: "PATCH_ITEM"; payload: { id: string; data: DataState } }
   | { type: "DELETE_ITEM"; payload: { id: string } };
 
 export const ItemReducer = (state: ItemState[], action: ItemAction) => {
@@ -23,14 +27,13 @@ export const ItemReducer = (state: ItemState[], action: ItemAction) => {
     // 追加
     case "POST_ITEM":
       // TODO サーバー処理
-      const item = { ...action.payload.item, id: "ADD" }; // サーバーから取得した新しいIDをセット
-      return [...state, item];
+      return [...state, { id: "ID", data: action.payload.data }];
     // 編集
     case "PATCH_ITEM":
       // TODO サーバー処理
       return state.map((item) =>
-        item.id === action.payload.item.id
-          ? { ...item, ...action.payload.item }
+        item.id === action.payload.id
+          ? { id: action.payload.id, data: action.payload.data }
           : item,
       );
     // 削除

@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from "react";
 
-import { ErrorState, ItemState } from "../../_types/type";
+import { ErrorState, DataState } from "../../_types/type";
 import {
   TextInput,
   DropDown,
@@ -9,17 +9,17 @@ import {
 } from "@/components/ui";
 
 interface EditRowProps {
-  AddItem?: (item: ItemState) => void;
-  EditItem?: (item: ItemState) => void;
+  AddItem?: (data: DataState) => void;
+  EditItem?: (id: string, data: DataState) => void;
   DeleteItem?: (id: string) => void;
-  item?: ItemState;
+  id?: string;
+  data?: DataState;
 }
 
 const EditRow: React.FC<EditRowProps> = (props) => {
-  const initialItemState: ItemState = props.item
-    ? props.item
+  const initialDataState: DataState = props.data
+    ? props.data
     : {
-        id: "ADD",
         title: "",
         member_id: "MEMBER_ID",
         currency_id: "jp",
@@ -35,7 +35,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
     datetimeError: false,
   };
 
-  const [state, setState] = useState(initialItemState);
+  const [state, setState] = useState(initialDataState);
   const [errors, setErrors] = useState(initialErrorState);
 
   const handleError = () => {
@@ -56,7 +56,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
 
   // フォームをリセット
   const handleReset = () => {
-    setState(initialItemState);
+    setState(initialDataState);
     setErrors(initialErrorState);
   };
 
@@ -80,12 +80,12 @@ const EditRow: React.FC<EditRowProps> = (props) => {
     if (handleError()) return;
 
     // Dispatch
-    props.EditItem?.(state);
+    props.EditItem?.(props.id ? props.id : "-1", state);
   };
 
   // アイテムを削除
   const handleDelete = () => {
-    props.DeleteItem?.(state.id ? state.id : "ERROR"); // IDがない場合は-1を返す
+    props.DeleteItem?.(props.id ? props.id : "-1"); // IDがない場合は-1を返す
   };
 
   return (
