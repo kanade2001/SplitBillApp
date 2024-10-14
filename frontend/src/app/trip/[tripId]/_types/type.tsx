@@ -13,9 +13,11 @@ export interface DataState {
 
 export interface CurrencyState {
   id: string;
-  data: {
-    name: string;
-  };
+  data: CurrencyDataState;
+}
+
+export interface CurrencyDataState {
+  name: string;
 }
 
 export interface MemberState {
