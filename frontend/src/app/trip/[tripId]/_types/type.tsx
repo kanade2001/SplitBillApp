@@ -11,7 +11,12 @@ export interface DataState {
   datetime: Date;
 }
 
-
+export interface CurrencyState {
+  id: string;
+  data: {
+    name: string;
+  };
+}
 
 export interface MemberState {
   id: string;
@@ -23,8 +28,8 @@ export interface MemberState {
 
 export type ItemAction =
   | { type: "GET" }
-  | { type: "POST_ITEM"; payload: { data: DataState } }
-  | { type: "PATCH_ITEM"; payload: { id: string; data: DataState } }
+  | { type: "POST_ITEM"; payload: { data: DataState | CurrencyState | MemberState } }
+  | { type: "PATCH_ITEM"; payload: { id: string; data: DataState | CurrencyState | MemberState } }
   | { type: "DELETE_ITEM"; payload: { id: string } };
 
 export const ItemReducer = (state: ItemState[], action: ItemAction) => {
