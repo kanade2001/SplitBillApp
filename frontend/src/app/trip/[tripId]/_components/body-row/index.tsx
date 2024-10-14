@@ -1,16 +1,22 @@
 import { useState } from "react";
 
-import { ItemState } from "../../_types/type";
+import { DataState } from "../../_types/type";
 
 import EditRow from "../edit-row";
 
 interface BodyRowProps {
-  item: ItemState;
-  EditItem: (item: ItemState) => void;
+  id: string;
+  data: DataState;
+  EditItem: (id: string, data: DataState) => void;
   DeleteItem: (id: string) => void;
 }
 
-const BodyRow: React.FC<BodyRowProps> = ({ item, EditItem, DeleteItem }) => {
+const BodyRow: React.FC<BodyRowProps> = ({
+  id,
+  data,
+  EditItem,
+  DeleteItem,
+}) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const handleIsEdit = () => {
@@ -22,13 +28,13 @@ const BodyRow: React.FC<BodyRowProps> = ({ item, EditItem, DeleteItem }) => {
       <tr>
         <th className="border border-r-0 border-gray-400 p-2">{}</th>
         <th className="border border-l-0 border-gray-400 p-2 text-left">
-          {item.title}
+          {data.title}
         </th>
-        <th className="border border-gray-400 p-2">{item.member_id}</th>
-        <th className="border border-gray-400 p-2">{item.currency_id}</th>
-        <th className="border border-gray-400 p-2 text-right">{item.amount}</th>
+        <th className="border border-gray-400 p-2">{data.member_id}</th>
+        <th className="border border-gray-400 p-2">{data.currency_id}</th>
+        <th className="border border-gray-400 p-2 text-right">{data.amount}</th>
         <th className="border border-gray-400 p-2">
-          {item.datetime.toISOString()}
+          {data.datetime.toISOString()}
         </th>
         <th className="border border-gray-400 p-2">
           <button
@@ -40,7 +46,12 @@ const BodyRow: React.FC<BodyRowProps> = ({ item, EditItem, DeleteItem }) => {
         </th>
       </tr>
       {isEdit && (
-        <EditRow item={item} EditItem={EditItem} DeleteItem={DeleteItem} />
+        <EditRow
+          id={id}
+          data={data}
+          EditItem={EditItem}
+          DeleteItem={DeleteItem}
+        />
       )}
     </>
   );

@@ -2,7 +2,7 @@
 
 import { useCallback, useReducer } from "react";
 
-import { initialStateList, ItemReducer, ItemState } from "./_types/type";
+import { ItemReducer, DataState } from "./_types/type";
 
 import { Info } from "@/components/Alert/Alert";
 import HeaderRow from "./_components/header-row";
@@ -17,14 +17,14 @@ type Props = {
 
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
-  const [state, dispatch] = useReducer(ItemReducer, initialStateList);
+  const [state, dispatch] = useReducer(ItemReducer, []); // ItemState[]
 
   const AddItem = useCallback(
-    (item: ItemState) => {
+    (data: DataState) => {
       dispatch({
-        type: "ADD_ITEM",
+        type: "POST_ITEM",
         payload: {
-          item: item,
+          data: data,
         },
       });
     },
@@ -32,11 +32,12 @@ export default function Page({ params, searchParams }: Props) {
   );
 
   const EditItem = useCallback(
-    (item: ItemState) => {
+    (id: string, data: DataState) => {
       dispatch({
-        type: "EDIT_ITEM",
+        type: "PATCH_ITEM",
         payload: {
-          item: item,
+          id: id,
+          data: data,
         },
       });
     },
@@ -65,7 +66,8 @@ export default function Page({ params, searchParams }: Props) {
           {state.map((item) => (
             <BodyRow
               key={item.id}
-              item={item}
+              id={item.id}
+              data={item.data}
               EditItem={EditItem}
               DeleteItem={DeleteItem}
             />

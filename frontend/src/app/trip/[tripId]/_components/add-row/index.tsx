@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import { ItemState } from "../../_types/type";
+import { DataState } from "../../_types/type";
 
 import EditRow from "../edit-row";
 
 interface AddRowProps {
-  AddItem: (item: ItemState) => void;
+  AddItem: (data: DataState) => void;
 }
 
 const AddRow: React.FC<AddRowProps> = ({ AddItem }) => {
