@@ -8,7 +8,6 @@ interface BaseDataState {
 }
 
 export interface DataState extends BaseDataState {
-  title: string;
   member_id: string;
   currency_id: string;
   amount: number;

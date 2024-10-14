@@ -20,7 +20,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
   const initialDataState: DataState = props.data
     ? props.data
     : {
-        title: "",
+        label: "",
         member_id: "MEMBER_ID",
         currency_id: "jp",
         amount: 0,
@@ -40,7 +40,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
 
   const handleError = () => {
     const errors: ErrorState = {
-      titleError: !state.title,
+      titleError: !state.label,
       memberError: !state.member_id,
       currencyError: !state.currency_id,
       amountError: !state.amount,
@@ -96,8 +96,8 @@ const EditRow: React.FC<EditRowProps> = (props) => {
           <TextInput
             id="title-input"
             error={errors.titleError}
-            value={state.title}
-            onChange={(e) => setState({ ...state, title: e.target.value })}
+            value={state.label}
+            onChange={(e) => setState({ ...state, label: e.target.value })}
             required={true}
           />
         </th>

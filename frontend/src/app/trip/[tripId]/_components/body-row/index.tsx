@@ -28,7 +28,7 @@ const BodyRow: React.FC<BodyRowProps> = ({
       <tr>
         <th className="border border-r-0 border-gray-400 p-2">{}</th>
         <th className="border border-l-0 border-gray-400 p-2 text-left">
-          {data.title}
+          {data.label}
         </th>
         <th className="border border-gray-400 p-2">{data.member_id}</th>
         <th className="border border-gray-400 p-2">{data.currency_id}</th>
