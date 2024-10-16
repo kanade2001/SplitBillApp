@@ -12,7 +12,7 @@ import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 type Props = {
   params: { tripId: string }; // TripID
-  searchParams: { key: string | undefined }; // Public Key in params
+  searchParams: { key: string | undefined; tab: string | undefined }; // Public Key in params
 };
 
 export default function Page({ params, searchParams }: Props) {
@@ -60,6 +60,7 @@ export default function Page({ params, searchParams }: Props) {
     <div className="space-y-5 p-5">
       <h1>TRIP_ID = {params.tripId}</h1>
       <h2>PUBLIC_KEY = {key}</h2>
+      <h2>TAB = {searchParams.tab}</h2>
       <table className="w-full table-fixed border border-gray-400">
         <HeaderRow />
         <tbody>
