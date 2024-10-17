@@ -21,16 +21,15 @@ export const PaymentReducer = (state: PaymentState[], action: PaymentAction) => 
   switch (action.type) {
     // 取得
     case "FETCH":
-      // TODO サーバー処理
+
       state = [];
       return state;
     // 追加
     case "ADD":
-      // TODO サーバー処理
+
       return [...state, { id: "ID", data: action.payload.data }];
     // 編集
     case "PATCH":
-      // TODO サーバー処理
       return state.map((item) =>
         item.id === action.payload.id
           ? { id: action.payload.id, data: action.payload.data }
@@ -38,7 +37,6 @@ export const PaymentReducer = (state: PaymentState[], action: PaymentAction) => 
       );
     // 削除
     case "DELETE":
-      // TODO サーバー処理
       return state.filter((item) => item.id !== action.payload.id);
   }
 };
