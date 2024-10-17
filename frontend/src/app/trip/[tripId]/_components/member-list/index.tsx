@@ -1,3 +1,4 @@
+import EditableTable from "@/components/table/table";
 import TableHeader from "@/components/table/table-header";
 import TableAddFooter from "@/components/table/table-add-footer";
 
@@ -21,6 +22,16 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
         />
         <TableAddFooter key="member-table-footer" col={4} />
       </table>
+
+      <EditableTable
+        key="member-table"
+        items={[
+          { key: "name", label: "Name" },
+          { key: "email", label: "Email" },
+          { key: "role", label: "Role" },
+          { key: "action", label: "Action" },
+        ]}
+      />
     </div>
   );
 };
