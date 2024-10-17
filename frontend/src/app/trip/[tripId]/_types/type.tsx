@@ -3,28 +3,20 @@ export interface ItemState {
   data: DataState;
 }
 
-export interface BaseState {
+export interface DataState {
   label: string;
 }
 
-export interface PaymentState extends BaseState {
+export interface PaymentState extends DataState {
   member_id: string;
   currency_id: string;
   amount: number;
   datetime: Date;
 }
 
-export interface TripState extends BaseState {
+export interface TripState extends DataState {
   member: { member_id: string; name: string }[];
   currency: { currency_id: string; name: string }[];
-}
-
-export interface DataState {
-  title: string;
-  member_id: string;
-  currency_id: string;
-  amount: number;
-  datetime: Date;
 }
 
 export interface CurrencyState {
