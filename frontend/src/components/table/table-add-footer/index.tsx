@@ -15,6 +15,8 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, col, items }) => {
     setIsAdd(!isAdd);
   };
 
+  const colnum = col ? col + 1 : items ? items.length + 1 : 0;
+
   return (
     <tfoot key={key}>
       <tr className="border border-r-0 border-gray-400 bg-gray-800">
@@ -22,7 +24,7 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, col, items }) => {
           <PlusIcon />
         </th>
         <th
-          colSpan={col}
+          colSpan={colnum}
           className="border border-l-0 border-gray-400 bg-gray-800 text-white"
         >
           <button
