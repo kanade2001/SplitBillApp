@@ -6,12 +6,6 @@ interface MemberListProps {
 }
 
 const MemberList: React.FC<MemberListProps> = ({ id }) => {
-  const [isAdd, setIsAdd] = useState<boolean>(false);
-
-  const handleAdd = () => {
-    setIsAdd(!isAdd);
-  };
-
   return (
     <div>
       <p>MemberList {id} works!</p>
