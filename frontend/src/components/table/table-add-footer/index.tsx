@@ -39,7 +39,11 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, col, items }) => {
         <th></th>
         {items &&
           items.map((item) => {
-            return <th key={item.key}>{item.form}</th>;
+            return (
+              <th key={item.key} className="p-2">
+                {item.form}
+              </th>
+            );
           })}
         <th></th>
       </tr>
