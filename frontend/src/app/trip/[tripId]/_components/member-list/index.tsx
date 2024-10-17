@@ -1,4 +1,5 @@
 import TableHeader from "@/components/table/table-header";
+import TableAddFooter from "@/components/table/table-add-footer";
 
 interface MemberListProps {
   id: string;
@@ -18,6 +19,7 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
             { key: "action", label: "Action" },
           ]}
         />
+        <TableAddFooter key="member-table-footer" col={4} />
       </table>
     </div>
   );
