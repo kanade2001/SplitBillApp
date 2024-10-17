@@ -12,24 +12,24 @@ export interface PaymentDataState {
 }
 
 export type PaymentAction =
-  | { type: "GET" }
-  | { type: "POST_ITEM"; payload: { data: PaymentDataState } }
-  | { type: "PATCH_ITEM"; payload: { id: string; data: PaymentDataState } }
-  | { type: "DELETE_ITEM"; payload: { id: string } };
+  | { type: "FETCH" }
+  | { type: "ADD"; payload: { data: PaymentDataState } }
+  | { type: "PATCH"; payload: { id: string; data: PaymentDataState } }
+  | { type: "DELETE"; payload: { id: string } };
 
 export const PaymentReducer = (state: PaymentState[], action: PaymentAction) => {
   switch (action.type) {
     // 取得
-    case "GET":
+    case "FETCH":
       // TODO サーバー処理
       state = [];
       return state;
     // 追加
-    case "POST_ITEM":
+    case "ADD":
       // TODO サーバー処理
       return [...state, { id: "ID", data: action.payload.data }];
     // 編集
-    case "PATCH_ITEM":
+    case "PATCH":
       // TODO サーバー処理
       return state.map((item) =>
         item.id === action.payload.id
@@ -37,7 +37,7 @@ export const PaymentReducer = (state: PaymentState[], action: PaymentAction) => 
           : item,
       );
     // 削除
-    case "DELETE_ITEM":
+    case "DELETE":
       // TODO サーバー処理
       return state.filter((item) => item.id !== action.payload.id);
   }

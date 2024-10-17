@@ -36,7 +36,7 @@ export default function Page({ params, searchParams }: Props) {
   const AddItem = useCallback(
     (data: PaymentDataState) => {
       dispatch({
-        type: "POST_ITEM",
+        type: "ADD",
         payload: {
           data: data,
         },
@@ -48,7 +48,7 @@ export default function Page({ params, searchParams }: Props) {
   const EditItem = useCallback(
     (id: string, data: PaymentDataState) => {
       dispatch({
-        type: "PATCH_ITEM",
+        type: "PATCH",
         payload: {
           id: id,
           data: data,
@@ -61,7 +61,7 @@ export default function Page({ params, searchParams }: Props) {
   const DeleteItem = useCallback(
     (id: string) => {
       dispatch({
-        type: "DELETE_ITEM",
+        type: "DELETE",
         payload: {
           id: id,
         },
