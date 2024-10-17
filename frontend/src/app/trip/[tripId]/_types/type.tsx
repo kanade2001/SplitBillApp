@@ -14,10 +14,6 @@ export interface PaymentState extends DataState {
   datetime: Date;
 }
 
-export interface TripState extends DataState {
-  member: { member_id: string; name: string }[];
-  currency: { currency_id: string; name: string }[];
-}
 
 
 export type ItemAction =
