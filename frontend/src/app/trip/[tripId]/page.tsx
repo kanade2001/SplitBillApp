@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useReducer } from "react";
+import { useCallback, useState, useReducer } from "react";
 
 import { ItemReducer, DataState, PaymentState } from "./_types/type";
 
@@ -18,6 +18,20 @@ type Props = {
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
   const [state, dispatch] = useReducer(ItemReducer, []); // ItemState[]
+  const [config, setConfig] = useState({
+    members: [
+      { id: "1", data: { label: "Member1" } },
+      { id: "2", data: { label: "Member2" } },
+    ],
+    currencies: [
+      { id: "jp", label: "JPY" },
+      { id: "us", label: "USD" },
+    ],
+  });
+  const [configDraft, setConfigDraft] = useState({
+    members: [],
+    currencies: [],
+  });
 
   const AddItem = useCallback(
     (data: DataState) => {
@@ -85,9 +99,20 @@ export default function Page({ params, searchParams }: Props) {
       )}
 
       <h2>Config</h2>
-      {config.map((item) => (
-        <div key={item.id}>{item.data.label}</div>
+      {config.members.map((member) => (
+        <div key={member.id}>{member.data.label}</div>
       ))}
+      <button onClick={() => setConfig(configDraft)}>Set Config</button>
+      <button
+        onClick={() =>
+          setConfigDraft({
+            members: [],
+            currencies: [],
+          })
+        }
+      >
+        Set Config Draft
+      </button>
     </div>
   );
 }
