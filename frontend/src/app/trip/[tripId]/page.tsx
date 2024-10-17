@@ -19,6 +19,7 @@ export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
   const [state, dispatch] = useReducer(PaymentReducer, []); // ItemState[]
   const [config, setConfig] = useState({
+    label: "title",
     members: [
       { id: "1", data: { label: "Member1" } },
       { id: "2", data: { label: "Member2" } },
@@ -29,6 +30,7 @@ export default function Page({ params, searchParams }: Props) {
     ],
   });
   const [configDraft, setConfigDraft] = useState({
+    label: "title",
     members: [],
     currencies: [],
   });
@@ -106,6 +108,7 @@ export default function Page({ params, searchParams }: Props) {
       <button
         onClick={() =>
           setConfigDraft({
+            label: "title",
             members: [],
             currencies: [],
           })
