@@ -1,5 +1,6 @@
-import EditableTable from "@/components/table/table";
+import { useState } from "react";
 
+import EditableTable from "@/components/table/table";
 import { TextInput } from "@/components/ui";
 
 interface MemberListProps {
@@ -7,6 +8,12 @@ interface MemberListProps {
 }
 
 const MemberList: React.FC<MemberListProps> = ({ id }) => {
+  const [Add, setAdd] = useState({
+    name: "",
+    email: "",
+    role: "",
+  });
+
   return (
     <div>
       <p>MemberList {id} works!</p>
@@ -21,8 +28,10 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
               <TextInput
                 id="name-input"
                 error={false}
-                value=""
-                onChange={() => {}}
+                value={Add.name}
+                onChange={(e) => {
+                  setAdd({ ...Add, name: e.target.value });
+                }}
                 required={true}
               />
             ),
@@ -34,8 +43,10 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
               <TextInput
                 id="email-input"
                 error={false}
-                value=""
-                onChange={() => {}}
+                value={Add.email}
+                onChange={(e) => {
+                  setAdd({ ...Add, email: e.target.value });
+                }}
                 required={true}
               />
             ),
@@ -47,8 +58,10 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
               <TextInput
                 id="role-input"
                 error={false}
-                value=""
-                onChange={() => {}}
+                value={Add.role}
+                onChange={(e) => {
+                  setAdd({ ...Add, role: e.target.value });
+                }}
                 required={true}
               />
             ),
