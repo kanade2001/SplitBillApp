@@ -3,6 +3,10 @@ export interface ItemState {
   data: DataState;
 }
 
+export interface BaseState {
+  label: string;
+}
+
 export interface DataState {
   title: string;
   member_id: string;
