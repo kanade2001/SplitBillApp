@@ -2,7 +2,7 @@
 
 import { useCallback, useReducer } from "react";
 
-import { ItemReducer, DataState } from "./_types/type";
+import { ItemReducer, DataState, PaymentState } from "./_types/type";
 
 import { Info } from "@/components/Alert/Alert";
 import HeaderRow from "./_components/header-row";
@@ -69,7 +69,7 @@ export default function Page({ params, searchParams }: Props) {
             <BodyRow
               key={item.id}
               id={item.id}
-              data={item.data}
+              data={item.data as PaymentState}
               EditItem={EditItem}
               DeleteItem={DeleteItem}
             />

@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import { DataState } from "../../_types/type";
+import { DataState, PaymentState } from "../../_types/type";
 
 import EditRow from "../edit-row";
 
 interface BodyRowProps {
   id: string;
-  data: DataState;
+  data: PaymentState;
   EditItem: (id: string, data: DataState) => void;
   DeleteItem: (id: string) => void;
 }
@@ -28,7 +28,7 @@ const BodyRow: React.FC<BodyRowProps> = ({
       <tr>
         <th className="border border-r-0 border-gray-400 p-2">{}</th>
         <th className="border border-l-0 border-gray-400 p-2 text-left">
-          {data.title}
+          {data.label}
         </th>
         <th className="border border-gray-400 p-2">{data.member_id}</th>
         <th className="border border-gray-400 p-2">{data.currency_id}</th>
