@@ -25,6 +25,9 @@ const TableHeader: React.FC<TableHeaderProps> = ({ key, items }) => {
             {label}
           </th>
         ))}
+        <th key="edit" className="w-16 border border-gray-400 p-2">
+          Edit
+        </th>
       </tr>
     </thead>
   );
