@@ -2,20 +2,17 @@ import { useState } from "react";
 
 interface TableAddFooterProps {
   key: string;
-  col: number;
-  items?: {
+  items: {
     key: string;
     form: JSX.Element;
   }[];
 }
 
-const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, col, items }) => {
+const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, items }) => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
   const handleIsAdd = () => {
     setIsAdd(!isAdd);
   };
-
-  const colnum = col ? col + 1 : items ? items.length + 1 : 0;
 
   return (
     <tfoot key={key}>
@@ -24,7 +21,7 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, col, items }) => {
           <PlusIcon />
         </th>
         <th
-          colSpan={colnum}
+          colSpan={items.length + 1}
           className="border border-l-0 border-gray-400 bg-gray-800 text-white"
         >
           <button

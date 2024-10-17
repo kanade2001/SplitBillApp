@@ -17,7 +17,6 @@ const EditableTable: React.FC<TableProps> = ({ key, items }) => {
       />
       <TableAddFooter
         key="member-table-footer"
-        col={items.length}
         items={items.map((item) => {
           return { key: item.key, form: item.form };
         })}
