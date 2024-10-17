@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import { DataState, PaymentState } from "../../_types/type";
+import { PaymentDataState } from "../../_types/type";
 
 import EditRow from "../edit-row";
 
 interface BodyRowProps {
   id: string;
-  data: PaymentState;
-  EditItem: (id: string, data: DataState) => void;
+  data: PaymentDataState;
+  EditItem: (id: string, data: PaymentDataState) => void;
   DeleteItem: (id: string) => void;
 }
 

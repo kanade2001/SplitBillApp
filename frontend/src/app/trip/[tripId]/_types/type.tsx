@@ -1,28 +1,23 @@
-export interface ItemState {
+export interface PaymentState {
   id: string;
-  data: DataState;
+  data: PaymentDataState;
 }
 
-export interface DataState {
+export interface PaymentDataState {
   label: string;
-}
-
-export interface PaymentState extends DataState {
   member_id: string;
   currency_id: string;
   amount: number;
   datetime: Date;
 }
 
-
-
 export type ItemAction =
   | { type: "GET" }
-  | { type: "POST_ITEM"; payload: { data: DataState } }
-  | { type: "PATCH_ITEM"; payload: { id: string; data: DataState } }
+  | { type: "POST_ITEM"; payload: { data: PaymentDataState } }
+  | { type: "PATCH_ITEM"; payload: { id: string; data: PaymentDataState } }
   | { type: "DELETE_ITEM"; payload: { id: string } };
 
-export const ItemReducer = (state: ItemState[], action: ItemAction) => {
+export const ItemReducer = (state: PaymentState[], action: ItemAction) => {
   switch (action.type) {
     // 取得
     case "GET":

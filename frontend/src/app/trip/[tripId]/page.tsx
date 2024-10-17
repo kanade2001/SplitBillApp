@@ -2,7 +2,7 @@
 
 import { useCallback, useState, useReducer } from "react";
 
-import { ItemReducer, DataState, PaymentState } from "./_types/type";
+import { ItemReducer, PaymentDataState } from "./_types/type";
 
 import { Info } from "@/components/Alert/Alert";
 import HeaderRow from "./_components/header-row";
@@ -34,7 +34,7 @@ export default function Page({ params, searchParams }: Props) {
   });
 
   const AddItem = useCallback(
-    (data: DataState) => {
+    (data: PaymentDataState) => {
       dispatch({
         type: "POST_ITEM",
         payload: {
@@ -46,7 +46,7 @@ export default function Page({ params, searchParams }: Props) {
   );
 
   const EditItem = useCallback(
-    (id: string, data: DataState) => {
+    (id: string, data: PaymentDataState) => {
       dispatch({
         type: "PATCH_ITEM",
         payload: {
@@ -82,7 +82,7 @@ export default function Page({ params, searchParams }: Props) {
             <BodyRow
               key={item.id}
               id={item.id}
-              data={item.data as PaymentState}
+              data={item.data as PaymentDataState}
               EditItem={EditItem}
               DeleteItem={DeleteItem}
             />
