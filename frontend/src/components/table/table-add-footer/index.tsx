@@ -3,9 +3,13 @@ import { useState } from "react";
 interface TableAddFooterProps {
   key: string;
   col: number;
+  items?: {
+    key: string;
+    form: JSX.Element;
+  }[];
 }
 
-const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, col }) => {
+const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, col, items }) => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
   const handleIsAdd = () => {
     setIsAdd(!isAdd);
@@ -28,6 +32,14 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, col }) => {
             {isAdd ? "Cancel" : "Add"}
           </button>
         </th>
+      </tr>
+      <tr className="bg-gray-400">
+        <th></th>
+        {items &&
+          items.map((item) => {
+            return <th key={item.key}>{item.form}</th>;
+          })}
+        <th></th>
       </tr>
     </tfoot>
   );

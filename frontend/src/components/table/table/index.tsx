@@ -3,7 +3,7 @@ import TableAddFooter from "../table-add-footer";
 
 interface TableProps {
   key: string;
-  items: { key: string; label: string }[];
+  items: { key: string; label: string; form: JSX.Element }[];
 }
 
 const EditableTable: React.FC<TableProps> = ({ key, items }) => {
@@ -15,7 +15,13 @@ const EditableTable: React.FC<TableProps> = ({ key, items }) => {
           return { key: item.key, label: item.label };
         })}
       />
-      <TableAddFooter key="member-table-footer" col={items.length} />
+      <TableAddFooter
+        key="member-table-footer"
+        col={items.length}
+        items={items.map((item) => {
+          return { key: item.key, form: item.form };
+        })}
+      />
     </table>
   );
 };

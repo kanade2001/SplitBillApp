@@ -29,7 +29,6 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
           { key: "name", label: "Name" },
           { key: "email", label: "Email" },
           { key: "role", label: "Role" },
-          { key: "action", label: "Action" },
         ]}
       />
     </div>
