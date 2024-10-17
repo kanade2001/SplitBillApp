@@ -11,13 +11,13 @@ export interface PaymentDataState {
   datetime: Date;
 }
 
-export type ItemAction =
+export type PaymentAction =
   | { type: "GET" }
   | { type: "POST_ITEM"; payload: { data: PaymentDataState } }
   | { type: "PATCH_ITEM"; payload: { id: string; data: PaymentDataState } }
   | { type: "DELETE_ITEM"; payload: { id: string } };
 
-export const ItemReducer = (state: PaymentState[], action: ItemAction) => {
+export const ItemReducer = (state: PaymentState[], action: PaymentAction) => {
   switch (action.type) {
     // 取得
     case "GET":
