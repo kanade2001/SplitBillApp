@@ -7,6 +7,18 @@ export interface BaseState {
   label: string;
 }
 
+export interface PaymentState extends BaseState {
+  member_id: string;
+  currency_id: string;
+  amount: number;
+  datetime: Date;
+}
+
+export interface TripState extends BaseState {
+  member: { member_id: string; name: string }[];
+  currency: { currency_id: string; name: string }[];
+}
+
 export interface DataState {
   title: string;
   member_id: string;
