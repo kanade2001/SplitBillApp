@@ -18,7 +18,6 @@ type Props = {
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
   const [state, dispatch] = useReducer(ItemReducer, []); // ItemState[]
-  const [config, dispatchconfig] = useReducer(ItemReducer, []); // ErrorState[]
 
   const AddItem = useCallback(
     (data: DataState) => {
@@ -55,19 +54,6 @@ export default function Page({ params, searchParams }: Props) {
       });
     },
     [dispatch],
-  );
-
-  const PatchConfig = useCallback(
-    (id: string, data: DataState) => {
-      dispatchconfig({
-        type: "PATCH_ITEM",
-        payload: {
-          id: id,
-          data: data,
-        },
-      });
-    },
-    [dispatchconfig],
   );
 
   return (
