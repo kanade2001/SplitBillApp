@@ -19,20 +19,6 @@ export interface TripState extends DataState {
   currency: { currency_id: string; name: string }[];
 }
 
-export interface CurrencyState {
-  id: string;
-  data: {
-    name: string;
-  };
-}
-
-export interface MemberState {
-  id: string;
-  data: {
-    id: string;
-    name: string;
-  };
-}
 
 export type ItemAction =
   | { type: "GET" }
