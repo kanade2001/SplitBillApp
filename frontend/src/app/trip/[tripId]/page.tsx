@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useReducer } from "react";
+import { useCallback, useState, useReducer } from "react";
 
-import { ItemReducer, DataState } from "./_types/type";
+import { PaymentReducer, PaymentDataState, ConfigState } from "./_types/type";
 
 import { Info } from "@/components/Alert/Alert";
 import HeaderRow from "./_components/header-row";
@@ -12,17 +12,33 @@ import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 type Props = {
   params: { tripId: string }; // TripID
-  searchParams: { key: string | undefined }; // Public Key in params
+  searchParams: { key: string | undefined; tab: string | undefined }; // Public Key in params
 };
 
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
-  const [state, dispatch] = useReducer(ItemReducer, []); // ItemState[]
+  const [state, dispatch] = useReducer(PaymentReducer, []); // ItemState[]
+  const [config, setConfig] = useState<ConfigState>({
+    label: "title",
+    members: [
+      { id: "1", data: { label: "Member1" } },
+      { id: "2", data: { label: "Member2" } },
+    ],
+    currencies: [
+      { id: "jp", label: "JPY" },
+      { id: "us", label: "USD" },
+    ],
+  });
+  const [configDraft, setConfigDraft] = useState<ConfigState>({
+    label: "title",
+    members: [],
+    currencies: [],
+  });
 
   const AddItem = useCallback(
-    (data: DataState) => {
+    (data: PaymentDataState) => {
       dispatch({
-        type: "POST_ITEM",
+        type: "ADD",
         payload: {
           data: data,
         },
@@ -32,9 +48,9 @@ export default function Page({ params, searchParams }: Props) {
   );
 
   const EditItem = useCallback(
-    (id: string, data: DataState) => {
+    (id: string, data: PaymentDataState) => {
       dispatch({
-        type: "PATCH_ITEM",
+        type: "PATCH",
         payload: {
           id: id,
           data: data,
@@ -47,7 +63,7 @@ export default function Page({ params, searchParams }: Props) {
   const DeleteItem = useCallback(
     (id: string) => {
       dispatch({
-        type: "DELETE_ITEM",
+        type: "DELETE",
         payload: {
           id: id,
         },
@@ -60,6 +76,7 @@ export default function Page({ params, searchParams }: Props) {
     <div className="space-y-5 p-5">
       <h1>TRIP_ID = {params.tripId}</h1>
       <h2>PUBLIC_KEY = {key}</h2>
+      <h2>TAB = {searchParams.tab}</h2>
       <table className="w-full table-fixed border border-gray-400">
         <HeaderRow />
         <tbody>
@@ -67,7 +84,7 @@ export default function Page({ params, searchParams }: Props) {
             <BodyRow
               key={item.id}
               id={item.id}
-              data={item.data}
+              data={item.data as PaymentDataState}
               EditItem={EditItem}
               DeleteItem={DeleteItem}
             />
@@ -82,6 +99,23 @@ export default function Page({ params, searchParams }: Props) {
           <Info title="データがありません" message="データを追加してください" />
         </div>
       )}
+
+      <h2>Config</h2>
+      {config.members.map((member) => (
+        <div key={member.id}>{member.data.label}</div>
+      ))}
+      <button onClick={() => setConfig(configDraft)}>Set Config</button>
+      <button
+        onClick={() =>
+          setConfigDraft({
+            label: "title",
+            members: [],
+            currencies: [],
+          })
+        }
+      >
+        Set Config Draft
+      </button>
     </div>
   );
 }

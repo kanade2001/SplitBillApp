@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from "react";
 
-import { ErrorState, DataState } from "../../_types/type";
+import { ErrorState, PaymentDataState } from "../../_types/type";
 import {
   TextInput,
   DropDown,
@@ -9,18 +9,18 @@ import {
 } from "@/components/ui";
 
 interface EditRowProps {
-  AddItem?: (data: DataState) => void;
-  EditItem?: (id: string, data: DataState) => void;
+  AddItem?: (data: PaymentDataState) => void;
+  EditItem?: (id: string, data: PaymentDataState) => void;
   DeleteItem?: (id: string) => void;
   id?: string;
-  data?: DataState;
+  data?: PaymentDataState;
 }
 
 const EditRow: React.FC<EditRowProps> = (props) => {
-  const initialDataState: DataState = props.data
+  const initialDataState: PaymentDataState = props.data
     ? props.data
     : {
-        title: "",
+        label: "",
         member_id: "MEMBER_ID",
         currency_id: "jp",
         amount: 0,
@@ -40,7 +40,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
 
   const handleError = () => {
     const errors: ErrorState = {
-      titleError: !state.title,
+      titleError: !state.label,
       memberError: !state.member_id,
       currencyError: !state.currency_id,
       amountError: !state.amount,
@@ -96,8 +96,8 @@ const EditRow: React.FC<EditRowProps> = (props) => {
           <TextInput
             id="title-input"
             error={errors.titleError}
-            value={state.title}
-            onChange={(e) => setState({ ...state, title: e.target.value })}
+            value={state.label}
+            onChange={(e) => setState({ ...state, label: e.target.value })}
             required={true}
           />
         </th>

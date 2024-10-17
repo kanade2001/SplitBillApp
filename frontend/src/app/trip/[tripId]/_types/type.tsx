@@ -1,62 +1,52 @@
-export interface ItemState {
+export interface PaymentState {
   id: string;
-  data: DataState;
+  data: PaymentDataState;
 }
 
-export interface DataState {
-  title: string;
+export interface PaymentDataState {
+  label: string;
   member_id: string;
   currency_id: string;
   amount: number;
   datetime: Date;
 }
 
-export interface CurrencyState {
-  id: string;
-  data: {
-    name: string;
-  };
-}
+export type PaymentAction =
+  | { type: "FETCH" }
+  | { type: "ADD"; payload: { data: PaymentDataState } }
+  | { type: "PATCH"; payload: { id: string; data: PaymentDataState } }
+  | { type: "DELETE"; payload: { id: string } };
 
-export interface MemberState {
-  id: string;
-  data: {
-    id: string;
-    name: string;
-  };
-}
-
-export type ItemAction =
-  | { type: "GET" }
-  | { type: "POST_ITEM"; payload: { data: DataState } }
-  | { type: "PATCH_ITEM"; payload: { id: string; data: DataState } }
-  | { type: "DELETE_ITEM"; payload: { id: string } };
-
-export const ItemReducer = (state: ItemState[], action: ItemAction) => {
+export const PaymentReducer = (
+  state: PaymentState[],
+  action: PaymentAction,
+) => {
   switch (action.type) {
     // 取得
-    case "GET":
-      // TODO サーバー処理
+    case "FETCH":
       state = [];
       return state;
     // 追加
-    case "POST_ITEM":
-      // TODO サーバー処理
+    case "ADD":
       return [...state, { id: "ID", data: action.payload.data }];
     // 編集
-    case "PATCH_ITEM":
-      // TODO サーバー処理
+    case "PATCH":
       return state.map((item) =>
         item.id === action.payload.id
           ? { id: action.payload.id, data: action.payload.data }
           : item,
       );
     // 削除
-    case "DELETE_ITEM":
-      // TODO サーバー処理
+    case "DELETE":
       return state.filter((item) => item.id !== action.payload.id);
   }
 };
+
+export interface ConfigState {
+  label: string;
+  members: { id: string; data: { label: string } }[];
+  currencies: { id: string; label: string }[];
+}
 
 export interface ErrorState {
   titleError: boolean;
