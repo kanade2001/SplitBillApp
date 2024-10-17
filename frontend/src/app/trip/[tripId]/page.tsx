@@ -2,7 +2,7 @@
 
 import { useCallback, useState, useReducer } from "react";
 
-import { PaymentReducer, PaymentDataState } from "./_types/type";
+import { PaymentReducer, PaymentDataState, ConfigState } from "./_types/type";
 
 import { Info } from "@/components/Alert/Alert";
 import HeaderRow from "./_components/header-row";
@@ -18,7 +18,7 @@ type Props = {
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
   const [state, dispatch] = useReducer(PaymentReducer, []); // ItemState[]
-  const [config, setConfig] = useState({
+  const [config, setConfig] = useState<ConfigState>({
     label: "title",
     members: [
       { id: "1", data: { label: "Member1" } },
@@ -29,7 +29,7 @@ export default function Page({ params, searchParams }: Props) {
       { id: "us", label: "USD" },
     ],
   });
-  const [configDraft, setConfigDraft] = useState({
+  const [configDraft, setConfigDraft] = useState<ConfigState>({
     label: "title",
     members: [],
     currencies: [],
