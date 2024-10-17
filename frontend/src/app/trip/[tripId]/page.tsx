@@ -57,6 +57,19 @@ export default function Page({ params, searchParams }: Props) {
     [dispatch],
   );
 
+  const PatchConfig = useCallback(
+    (id: string, data: DataState) => {
+      dispatchconfig({
+        type: "PATCH_ITEM",
+        payload: {
+          id: id,
+          data: data,
+        },
+      });
+    },
+    [dispatchconfig],
+  );
+
   return (
     <div className="space-y-5 p-5">
       <h1>TRIP_ID = {params.tripId}</h1>
@@ -84,6 +97,11 @@ export default function Page({ params, searchParams }: Props) {
           <Info title="データがありません" message="データを追加してください" />
         </div>
       )}
+
+      <h2>Config</h2>
+      {config.map((item) => (
+        <div key={item.id}>{item.data.label}</div>
+      ))}
     </div>
   );
 }
