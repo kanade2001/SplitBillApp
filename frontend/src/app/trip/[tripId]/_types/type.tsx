@@ -17,7 +17,7 @@ export type PaymentAction =
   | { type: "PATCH_ITEM"; payload: { id: string; data: PaymentDataState } }
   | { type: "DELETE_ITEM"; payload: { id: string } };
 
-export const ItemReducer = (state: PaymentState[], action: PaymentAction) => {
+export const PaymentReducer = (state: PaymentState[], action: PaymentAction) => {
   switch (action.type) {
     // 取得
     case "GET":

@@ -2,7 +2,7 @@
 
 import { useCallback, useState, useReducer } from "react";
 
-import { ItemReducer, PaymentDataState } from "./_types/type";
+import { PaymentReducer, PaymentDataState } from "./_types/type";
 
 import { Info } from "@/components/Alert/Alert";
 import HeaderRow from "./_components/header-row";
@@ -17,7 +17,7 @@ type Props = {
 
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
-  const [state, dispatch] = useReducer(ItemReducer, []); // ItemState[]
+  const [state, dispatch] = useReducer(PaymentReducer, []); // ItemState[]
   const [config, setConfig] = useState({
     members: [
       { id: "1", data: { label: "Member1" } },
