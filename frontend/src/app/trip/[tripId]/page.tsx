@@ -18,6 +18,7 @@ type Props = {
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
   const [state, dispatch] = useReducer(ItemReducer, []); // ItemState[]
+  const [config, dispatchconfig] = useReducer(ItemReducer, []); // ErrorState[]
 
   const AddItem = useCallback(
     (data: DataState) => {
