@@ -8,6 +8,7 @@ import { Info } from "@/components/Alert/Alert";
 import HeaderRow from "./_components/header-row";
 import BodyRow from "./_components/body-row";
 import AddRow from "./_components/add-row";
+import MemberList from "./_components/member-list";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 type Props = {
@@ -116,6 +117,8 @@ export default function Page({ params, searchParams }: Props) {
       >
         Set Config Draft
       </button>
+
+      <MemberList id={params.tripId} />
     </div>
   );
 }
