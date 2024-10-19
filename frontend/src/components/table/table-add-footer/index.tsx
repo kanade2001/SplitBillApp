@@ -33,18 +33,40 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, items }) => {
         </th>
       </tr>
       {isAdd && (
-        <tr className="bg-gray-400">
-          <th></th>
-          {items &&
-            items.map((item) => {
-              return (
-                <th key={item.key} className="p-2">
-                  {item.form}
-                </th>
-              );
-            })}
-          <th></th>
-        </tr>
+        <>
+          <tr className="bg-gray-400">
+            <th></th>
+            {items &&
+              items.map((item) => {
+                return (
+                  <th key={item.key} className="p-2">
+                    {item.form}
+                  </th>
+                );
+              })}
+            <th></th>
+          </tr>
+          <tr className="bg-gray-400">
+            <th></th>
+            <th colSpan={items.length}>
+              <div className="flex justify-end p-2">
+                <button className="x-20 ms-2 rounded-md bg-red-800 px-2 text-center text-sm text-white">
+                  Delete
+                </button>
+                <button className="x-20 ms-2 rounded-md bg-gray-800 px-2 text-center text-sm text-white">
+                  Reset
+                </button>{" "}
+                <button className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white">
+                  Edit
+                </button>
+                <button className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white">
+                  Add
+                </button>
+              </div>
+            </th>
+            <th></th>
+          </tr>
+        </>
       )}
     </tfoot>
   );
