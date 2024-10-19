@@ -7,7 +7,7 @@ interface TableAddFooterProps {
     form: JSX.Element;
   }[];
   actions: {
-    AddItem: (data: string) => void;
+    AddItem: () => void;
     ResetItem: () => void;
   };
 }
@@ -64,7 +64,10 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({
                 >
                   Reset
                 </button>
-                <button className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white">
+                <button
+                  className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"
+                  onClick={() => actions.AddItem()}
+                >
                   Add
                 </button>
               </div>
