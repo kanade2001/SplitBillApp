@@ -18,9 +18,6 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({
   actions,
 }) => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
-  const handleIsAdd = () => {
-    setIsAdd(!isAdd);
-  };
 
   return (
     <tfoot key={key}>
@@ -34,7 +31,7 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({
         >
           <button
             className="h-full w-full p-2 text-left"
-            onClick={() => handleIsAdd()}
+            onClick={() => setIsAdd(!isAdd)}
           >
             {isAdd ? "Cancel" : "Add"}
           </button>
