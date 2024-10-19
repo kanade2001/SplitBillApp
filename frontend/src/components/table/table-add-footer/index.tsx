@@ -6,6 +6,9 @@ interface TableAddFooterProps {
     key: string;
     form: JSX.Element;
   }[];
+  actions: {
+    AddItem: (data: string) => void;
+  };
 }
 
 const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, items }) => {
