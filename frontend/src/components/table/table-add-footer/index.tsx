@@ -8,10 +8,15 @@ interface TableAddFooterProps {
   }[];
   actions: {
     AddItem: (data: string) => void;
+    ResetItem: () => void;
   };
 }
 
-const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, items }) => {
+const TableAddFooter: React.FC<TableAddFooterProps> = ({
+  key,
+  items,
+  actions,
+}) => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
   const handleIsAdd = () => {
     setIsAdd(!isAdd);
@@ -53,7 +58,10 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({ key, items }) => {
             <th></th>
             <th colSpan={items.length}>
               <div className="flex justify-end p-2">
-                <button className="x-20 ms-2 rounded-md bg-gray-800 px-2 text-center text-sm text-white">
+                <button
+                  className="x-20 ms-2 rounded-md bg-gray-800 px-2 text-center text-sm text-white"
+                  onClick={() => actions.ResetItem()}
+                >
                   Reset
                 </button>
                 <button className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white">
