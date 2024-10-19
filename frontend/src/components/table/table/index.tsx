@@ -5,10 +5,10 @@ interface TableProps {
   key: string;
   items: { key: string; label: string; form: JSX.Element }[];
   actions: {
-    AddItem: () => void;
-    EditItem: () => void;
-    DeleteItem: () => void;
-    ResetItem: () => void;
+    AddItem?: () => void;
+    EditItem?: () => void;
+    DeleteItem?: () => void;
+    ResetItem?: () => void;
   };
 }
 
@@ -27,8 +27,8 @@ const EditableTable: React.FC<TableProps> = ({ key, items, actions }) => {
           return { key: item.key, form: item.form };
         })}
         actions={{
-          AddItem: actions.AddItem,
-          ResetItem: actions.ResetItem,
+          AddItem: actions.AddItem || (() => {}),
+          ResetItem: actions.ResetItem || (() => {}),
         }}
       />
     </table>
