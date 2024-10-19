@@ -14,6 +14,18 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
     role: "",
   });
 
+  const handleAdd = () => {
+    console.log("Add", Add);
+  };
+  const handleReset = () => {
+    console.log("Reset", Add);
+    setAdd({
+      name: "",
+      email: "",
+      role: "",
+    });
+  };
+
   return (
     <div>
       <p>MemberList {id} works!</p>
@@ -67,6 +79,10 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
             ),
           },
         ]}
+        actions={{
+          AddItem: handleAdd,
+          ResetItem: handleReset,
+        }}
       />
     </div>
   );
