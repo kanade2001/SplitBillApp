@@ -1,5 +1,13 @@
 import { useState } from "react";
 
+export interface TextFormType {
+  value: string;
+  error: boolean;
+  handleSet: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCheck: () => void;
+  handleReset: () => void;
+}
+
 export const useTextForm = (
   initiaiValue: string = "",
   errorValues: string[] = [""],
