@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import EditableTable from "@/components/table/table";
 import { TextInput } from "@/components/ui";
+import { useTextForm } from "@/hook/textform";
+import { useForm } from "@/hook/form";
 
 interface MemberListProps {
   id: string;
@@ -15,6 +17,7 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
   });
 
   const handleAdd = () => {
+    Data.handleCheck();
     console.log("Add", Add);
   };
   const handleReset = () => {
@@ -24,7 +27,23 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
       email: "",
       role: "",
     });
+    Data.handleReset();
   };
+
+  const Data = useForm([
+    {
+      key: "name",
+      form: useTextForm(),
+    },
+    {
+      key: "email",
+      form: useTextForm(),
+    },
+    {
+      key: "role",
+      form: useTextForm(),
+    },
+  ]);
 
   return (
     <div>
