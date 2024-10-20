@@ -7,11 +7,11 @@ export const useTextForm = (
   const [value, setValue] = useState<string>(initiaiValue);
   const [error, setError] = useState<boolean>(false);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSet = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
-  const handleError = () => {
+  const handleCheck = () => {
     if (!errorValues.includes(value)) {
       setError(true);
     } else {
@@ -19,10 +19,16 @@ export const useTextForm = (
     }
   };
 
+  const handleReset = () => {
+    setValue(initiaiValue);
+    setError(false);
+  };
+
   return {
     value,
     error,
-    onChange,
-    handleError,
+    handleSet,
+    handleCheck,
+    handleReset,
   };
 };
