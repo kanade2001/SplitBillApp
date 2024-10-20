@@ -17,6 +17,7 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
   });
 
   const handleAdd = () => {
+    Data.handleCheck();
     console.log("Add", Add);
   };
   const handleReset = () => {
@@ -26,6 +27,7 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
       email: "",
       role: "",
     });
+    Data.handleReset();
   };
 
   const Data = useForm([
