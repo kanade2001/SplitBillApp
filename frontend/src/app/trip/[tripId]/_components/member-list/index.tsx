@@ -28,9 +28,9 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
 
   const handleReset = () => {
     console.log("Reset");
-    Data.email.handleReset();
-    Data.name.handleReset();
-    Data.role.handleReset();
+    (["name", "email", "role"] as DataKeys[]).forEach((key) => {
+      Data[key].handleReset();
+    });
   };
 
   return (
