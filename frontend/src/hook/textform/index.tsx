@@ -4,7 +4,7 @@ export interface TextFormType {
   value: string;
   error: boolean;
   handleSet: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleCheck: () => void;
+  handleCheck: () => boolean;
   handleReset: () => void;
 }
 
@@ -25,6 +25,7 @@ export const useTextForm = (
     } else {
       setError(false);
     }
+    return error;
   };
 
   const handleReset = () => {
