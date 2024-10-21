@@ -17,12 +17,13 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
   };
 
   const handleAdd = () => {
-    const error = Object.keys(Data).some((key) =>
-      Data[key as keyof DataType].handleCheck(),
-    );
+    let error = false;
+    Object.keys(Data).forEach((key) => {
+      error = Data[key as keyof DataType].handleCheck() || error;
+    });
 
     if (error) {
-      console.log("Error");
+      console.log(error, Data.name.error, Data.email.error, Data.role.error);
     }
   };
 
@@ -38,10 +39,9 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
       <p>MemberList {id} works!</p>
 
       <EditableTable
-        key="member-table"
         items={[
           {
-            key: "name",
+            id: "name",
             label: "Name",
             form: (
               <TextInput
@@ -56,7 +56,7 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
             ),
           },
           {
-            key: "email",
+            id: "email",
             label: "Email",
             form: (
               <TextInput
@@ -71,7 +71,7 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
             ),
           },
           {
-            key: "role",
+            id: "role",
             label: "Role",
             form: (
               <TextInput
