@@ -28,8 +28,8 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
 
   const handleReset = () => {
     console.log("Reset");
-    (["name", "email", "role"] as DataKeys[]).forEach((key) => {
-      Data[key].handleReset();
+    Object.keys(Data).forEach((key) => {
+      Data[key as keyof DataType].handleReset();
     });
   };
 
