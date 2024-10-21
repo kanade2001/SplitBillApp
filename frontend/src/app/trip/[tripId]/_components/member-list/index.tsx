@@ -18,6 +18,7 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
   const handleAdd = () => {
     console.log("Add", Add);
   };
+
   const handleReset = () => {
     console.log("Reset", Add);
     setAdd({
