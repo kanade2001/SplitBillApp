@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import EditableTable from "@/components/table/table";
 import { TextInput } from "@/components/ui";
 import { useTextForm } from "@/hook/textform";
@@ -9,23 +7,14 @@ interface MemberListProps {
 }
 
 const MemberList: React.FC<MemberListProps> = ({ id }) => {
-  const [Add, setAdd] = useState({
-    name: "",
-    email: "",
-    role: "",
-  });
+
 
   const handleAdd = () => {
-    console.log("Add", Add);
+    console.log("Add");
   };
 
   const handleReset = () => {
-    console.log("Reset", Add);
-    setAdd({
-      name: "",
-      email: "",
-      role: "",
-    });
+    console.log("Reset");
     Data.email.handleReset();
     Data.name.handleReset();
     Data.role.handleReset();
