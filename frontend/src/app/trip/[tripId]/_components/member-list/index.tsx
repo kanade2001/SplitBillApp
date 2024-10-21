@@ -26,6 +26,9 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
       email: "",
       role: "",
     });
+    Data.email.handleReset();
+    Data.name.handleReset();
+    Data.role.handleReset();
   };
 
   const Data = {
