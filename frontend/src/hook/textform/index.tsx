@@ -20,12 +20,13 @@ export const useTextForm = (
   };
 
   const handleCheck = () => {
-    if (!errorValues.includes(value)) {
+    if (errorValues.includes(value)) {
       setError(true);
+      return true;
     } else {
       setError(false);
+      return false;
     }
-    return error;
   };
 
   const handleReset = () => {
