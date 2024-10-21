@@ -17,8 +17,8 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
   };
 
   const handleAdd = () => {
-    const error = (["name", "email", "role"] as DataKeys[]).some((key) =>
-      Data[key].handleCheck(),
+    const error = Object.keys(Data).some((key) =>
+      Data[key as keyof DataType].handleCheck(),
     );
 
     if (error) {
