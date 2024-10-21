@@ -7,10 +7,13 @@ interface MemberListProps {
 }
 
 const MemberList: React.FC<MemberListProps> = ({ id }) => {
-
-
   const handleAdd = () => {
-    console.log("Add");
+    const error =
+      Data.name.handleCheck() ||
+      Data.email.handleCheck() ||
+      Data.role.handleCheck();
+
+    console.log(error);
   };
 
   const handleReset = () => {
