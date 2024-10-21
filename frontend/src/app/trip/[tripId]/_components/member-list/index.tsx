@@ -1,97 +1,85 @@
-import { useState } from "react";
-
 import EditableTable from "@/components/table/table";
 import { TextInput } from "@/components/ui";
 import { useTextForm } from "@/hook/textform";
-import { useForm } from "@/hook/form";
 
 interface MemberListProps {
   id: string;
 }
 
+type DataKeys = "name" | "email" | "role";
+type DataType = Record<DataKeys, ReturnType<typeof useTextForm>>;
+
 const MemberList: React.FC<MemberListProps> = ({ id }) => {
-  const [Add, setAdd] = useState({
-    name: "",
-    email: "",
-    role: "",
-  });
+  const Data: DataType = {
+    name: useTextForm(),
+    email: useTextForm(),
+    role: useTextForm(),
+  };
 
   const handleAdd = () => {
-    Data.handleCheck();
-    console.log("Add", Add);
-  };
-  const handleReset = () => {
-    console.log("Reset", Add);
-    setAdd({
-      name: "",
-      email: "",
-      role: "",
+    let error = false;
+    Object.keys(Data).forEach((key) => {
+      error = Data[key as keyof DataType].handleCheck() || error;
     });
-    Data.handleReset();
+
+    if (error) {
+      console.log(error, Data.name.error, Data.email.error, Data.role.error);
+    }
   };
 
-  const Data = useForm([
-    {
-      key: "name",
-      form: useTextForm(),
-    },
-    {
-      key: "email",
-      form: useTextForm(),
-    },
-    {
-      key: "role",
-      form: useTextForm(),
-    },
-  ]);
+  const handleReset = () => {
+    console.log("Reset");
+    Object.keys(Data).forEach((key) => {
+      Data[key as keyof DataType].handleReset();
+    });
+  };
 
   return (
     <div>
       <p>MemberList {id} works!</p>
 
       <EditableTable
-        key="member-table"
         items={[
           {
-            key: "name",
+            id: "name",
             label: "Name",
             form: (
               <TextInput
                 id="name-input"
-                error={false}
-                value={Add.name}
+                error={Data.name.error}
+                value={Data.name.value}
                 onChange={(e) => {
-                  setAdd({ ...Add, name: e.target.value });
+                  Data.name.handleSet(e);
                 }}
                 required={true}
               />
             ),
           },
           {
-            key: "email",
+            id: "email",
             label: "Email",
             form: (
               <TextInput
                 id="email-input"
-                error={false}
-                value={Add.email}
+                error={Data.email.error}
+                value={Data.email.value}
                 onChange={(e) => {
-                  setAdd({ ...Add, email: e.target.value });
+                  Data.email.handleSet(e);
                 }}
                 required={true}
               />
             ),
           },
           {
-            key: "role",
+            id: "role",
             label: "Role",
             form: (
               <TextInput
                 id="role-input"
-                error={false}
-                value={Add.role}
+                error={Data.role.error}
+                value={Data.role.value}
                 onChange={(e) => {
-                  setAdd({ ...Add, role: e.target.value });
+                  Data.role.handleSet(e);
                 }}
                 required={true}
               />

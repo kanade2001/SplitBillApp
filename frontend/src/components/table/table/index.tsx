@@ -2,8 +2,7 @@ import TableHeader from "../table-header";
 import TableAddFooter from "../table-add-footer";
 
 interface TableProps {
-  key: string;
-  items: { key: string; label: string; form: JSX.Element }[];
+  items: { id: string; label: string; form: JSX.Element }[];
   actions: {
     AddItem?: () => void;
     EditItem?: () => void;
@@ -12,19 +11,17 @@ interface TableProps {
   };
 }
 
-const EditableTable: React.FC<TableProps> = ({ key, items, actions }) => {
+const EditableTable: React.FC<TableProps> = ({ items, actions }) => {
   return (
-    <table key={key} className="w-full table-fixed border border-gray-400">
+    <table className="w-full table-fixed border border-gray-400">
       <TableHeader
-        key="member-table"
         items={items.map((item) => {
-          return { key: item.key, label: item.label };
+          return { key: item.id, label: item.label };
         })}
       />
       <TableAddFooter
-        key="member-table-footer"
         items={items.map((item) => {
-          return { key: item.key, form: item.form };
+          return { id: item.id, form: item.form };
         })}
         actions={{
           AddItem: actions.AddItem || (() => {}),

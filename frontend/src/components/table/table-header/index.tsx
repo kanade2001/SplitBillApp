@@ -1,5 +1,4 @@
 interface TableHeaderProps {
-  key: string;
   items: {
     key: string;
     className?: string;
@@ -7,9 +6,9 @@ interface TableHeaderProps {
   }[];
 }
 
-const TableHeader: React.FC<TableHeaderProps> = ({ key, items }) => {
+const TableHeader: React.FC<TableHeaderProps> = ({ items }) => {
   return (
-    <thead key={key} className="bg-blue-800 text-white">
+    <thead className="bg-blue-800 text-white">
       <tr>
         <th key="icon" className="w-10 border border-r-0 border-gray-400 p-2">
           <StopIcon />
@@ -50,8 +49,8 @@ const StopIcon: React.FC = () => {
         x="6"
         y="6"
         stroke="currentColor"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinejoin="round"
+        strokeWidth="2"
         rx="1"
       />
     </svg>

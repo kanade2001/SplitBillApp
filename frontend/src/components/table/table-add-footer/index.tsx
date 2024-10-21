@@ -1,9 +1,8 @@
 import { useState } from "react";
 
 interface TableAddFooterProps {
-  key: string;
   items: {
-    key: string;
+    id: string;
     form: JSX.Element;
   }[];
   actions: {
@@ -12,15 +11,11 @@ interface TableAddFooterProps {
   };
 }
 
-const TableAddFooter: React.FC<TableAddFooterProps> = ({
-  key,
-  items,
-  actions,
-}) => {
+const TableAddFooter: React.FC<TableAddFooterProps> = ({ items, actions }) => {
   const [isAdd, setIsAdd] = useState<boolean>(false);
 
   return (
-    <tfoot key={key}>
+    <tfoot>
       <tr className="border border-r-0 border-gray-400 bg-gray-800">
         <th>
           <PlusIcon />
@@ -44,7 +39,7 @@ const TableAddFooter: React.FC<TableAddFooterProps> = ({
             {items &&
               items.map((item) => {
                 return (
-                  <th key={item.key} className="p-2">
+                  <th key={item.id} className="p-2">
                     {item.form}
                   </th>
                 );
