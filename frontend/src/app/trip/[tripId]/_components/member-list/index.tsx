@@ -6,14 +6,24 @@ interface MemberListProps {
   id: string;
 }
 
-const MemberList: React.FC<MemberListProps> = ({ id }) => {
-  const handleAdd = () => {
-    const error =
-      Data.name.handleCheck() ||
-      Data.email.handleCheck() ||
-      Data.role.handleCheck();
+type DataKeys = "name" | "email" | "role";
+type DataType = Record<DataKeys, ReturnType<typeof useTextForm>>;
 
-    console.log(error);
+const MemberList: React.FC<MemberListProps> = ({ id }) => {
+  const Data: DataType = {
+    name: useTextForm(),
+    email: useTextForm(),
+    role: useTextForm(),
+  };
+
+  const handleAdd = () => {
+    const error = (["name", "email", "role"] as DataKeys[]).some((key) =>
+      Data[key].handleCheck(),
+    );
+
+    if (error) {
+      console.log("Error");
+    }
   };
 
   const handleReset = () => {
@@ -21,12 +31,6 @@ const MemberList: React.FC<MemberListProps> = ({ id }) => {
     Data.email.handleReset();
     Data.name.handleReset();
     Data.role.handleReset();
-  };
-
-  const Data = {
-    name: useTextForm(),
-    email: useTextForm(),
-    role: useTextForm(),
   };
 
   return (
