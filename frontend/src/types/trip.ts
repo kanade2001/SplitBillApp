@@ -89,7 +89,7 @@ function tripReducer(state: TripState, action: Action): TripState {
   }
 }
 
-export function useTrips() {
+export function useTrip() {
   const [state, dispatch] = useReducer(tripReducer, initialTripState);
 
   useEffect(() => {
