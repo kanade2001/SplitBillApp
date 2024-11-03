@@ -1,5 +1,3 @@
-import {use}
-
 export default function Page() {
   return (
     <div>

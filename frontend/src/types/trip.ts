@@ -156,6 +156,7 @@ export function useTrips() {
         },
       });
     } catch (error) {
+      console.error(`Error at createTrip: ${error}`);
       throw new Error(`Error at createTrip: ${error}`);
     }
   };
@@ -174,6 +175,7 @@ export function useTrips() {
       */
       dispatch({ type: "UPDATE", payload: { id, trip: updatedTrip } });
     } catch (error) {
+      console.error(`Error at updateTrip: ${error}`);
       throw new Error(`Error at updateTrip: ${error}`);
     }
   };
@@ -188,6 +190,7 @@ export function useTrips() {
   return {
     trips: state.trips,
     loading: state.loading,
+    error: state.error,
     createTrip,
     updateTrip,
     sortTrips,
