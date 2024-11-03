@@ -1,11 +1,28 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 import { useTrip } from "@/types/trip";
 
 import GalleryView from "@/components/view/gallery";
 
 export default function Page() {
   const { trips } = useTrip();
+  const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleRoute = (id: string) => {
+    if (isClient) {
+      console.log(id);
+      router.push(`/trip/${id}`);
+    }
+  };
+
   return (
     <div>
       <h1>TRIP</h1>
@@ -24,19 +41,27 @@ export default function Page() {
         ))}
       </p>
       <GalleryView
-        items={[
-          {
-            title: "Title",
-            optionalFields: {
-              description: {
-                label: "Description",
-                value:
-                  "ここは詳細を入力するフィールドです。ここは詳細を入力するフィールドです。ここは詳細を入力するフィールドです。",
-              },
-              date: { label: "Date", value: new Date() },
+        items={trips.map((trip) => ({
+          id: trip.id,
+          headerImage: "",
+          title: trip.title,
+          optionalFields: {
+            description: {
+              label: "Description",
+              value: trip.description,
+            },
+            updated_at: {
+              label: "更新日時",
+              value: trip.updated_at,
             },
           },
-        ]}
+        }))}
+        onClick={(id) => {
+          handleRoute(id);
+        }}
+        onCreate={() => {
+          console.log("create");
+        }}
       />
     </div>
   );
