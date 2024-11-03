@@ -43,7 +43,7 @@ const initialTripState: TripState = {
   error: null,
 };
 
-export function tripReducer(state: TripState, action: Action): TripState {
+function tripReducer(state: TripState, action: Action): TripState {
   switch (action.type) {
     case "FETCH":
       return {
