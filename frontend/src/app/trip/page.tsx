@@ -2,8 +2,10 @@
 
 import { useTrip } from "@/types/trip";
 
+import GalleryView from "@/components/view/gallery";
+
 export default function Page() {
-  const { trips, loading, error } = useTrip();
+  const { trips } = useTrip();
   return (
     <div>
       <h1>TRIP</h1>
@@ -21,6 +23,21 @@ export default function Page() {
           </div>
         ))}
       </p>
+      <GalleryView
+        items={[
+          {
+            title: "Title",
+            optionalFields: {
+              description: {
+                label: "Description",
+                value:
+                  "ここは詳細を入力するフィールドです。ここは詳細を入力するフィールドです。ここは詳細を入力するフィールドです。",
+              },
+              date: { label: "Date", value: new Date() },
+            },
+          },
+        ]}
+      />
     </div>
   );
 }
