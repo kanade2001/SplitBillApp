@@ -2,7 +2,7 @@ import { useReducer, useEffect } from "react";
 
 import { MemberState } from "./member";
 
-export interface TripState {
+export interface Trip {
   id: string;
   title: string;
   created_at: Date;
@@ -13,15 +13,15 @@ export interface TripState {
 }
 
 type Action =
-  | { type: "FETCH"; payload: { states: TripState[] } }
-  | { type: "CREATE"; payload: { state: TripState } }
-  | { type: "UPDATE"; payload: { id: string; state: TripState } }
+  | { type: "FETCH"; payload: { trips: Trip[] } }
+  | { type: "CREATE"; payload: { trip: Trip } }
+  | { type: "UPDATE"; payload: { id: string; trip: Trip } }
   | {
       type: "SORT";
-      payload: { sortBy: keyof TripState; orderBy: "ascending" | "descending" };
+      payload: { sortBy: keyof Trip; orderBy: "ascending" | "descending" };
     };
 
-export const initialTripState: TripState = {
+export const initialTrip: Trip = {
   id: "",
   title: "",
   created_at: new Date(),
@@ -31,47 +31,47 @@ export const initialTripState: TripState = {
   description: "",
 };
 
-interface TripStates {
-  states: TripState[];
+interface TripState {
+  trips: Trip[];
   loading: boolean;
   error: string | null;
 }
 
-const initialTripStates: TripStates = {
-  states: [],
+const initialTripState: TripState = {
+  trips: [],
   loading: true,
   error: null,
 };
 
-export function tripReducer(state: TripStates, action: Action): TripStates {
+export function tripReducer(state: TripState, action: Action): TripState {
   switch (action.type) {
     case "FETCH":
       return {
         ...state,
-        states: action.payload.states,
+        trips: action.payload.trips,
         loading: false,
         error: null,
       };
     case "CREATE":
       return {
         ...state,
-        states: [...state.states, action.payload.state],
+        trips: [...state.trips, action.payload.trip],
         loading: false,
         error: null,
       };
 
     case "UPDATE":
-      const updatedStates = state.states.map((trip) =>
-        trip.id === action.payload.state.id ? action.payload.state : trip,
+      const updatedtrips = state.trips.map((trip) =>
+        trip.id === action.payload.trip.id ? action.payload.trip : trip,
       );
       return {
         ...state,
-        states: updatedStates,
+        trips: updatedtrips,
         loading: false,
         error: null,
       };
     case "SORT":
-      const sortedStates = state.states.sort((a, b) => {
+      const sortedtrips = state.trips.sort((a, b) => {
         if (action.payload.orderBy === "ascending") {
           return a[action.payload.sortBy] > b[action.payload.sortBy] ? 1 : -1;
         } else {
@@ -80,7 +80,7 @@ export function tripReducer(state: TripStates, action: Action): TripStates {
       });
       return {
         ...state,
-        states: sortedStates,
+        trips: sortedtrips,
         loading: false,
         error: null,
       };
@@ -90,7 +90,7 @@ export function tripReducer(state: TripStates, action: Action): TripStates {
 }
 
 export function useTrips() {
-  const [state, dispatch] = useReducer(tripReducer, initialTripStates);
+  const [state, dispatch] = useReducer(tripReducer, initialTripState);
 
   useEffect(() => {
     const fetchTrips = async () => {
@@ -100,7 +100,7 @@ export function useTrips() {
         // const data = await response.json();
 
         // デバッグ用の固定値
-        const data: TripState[] = [
+        const data: Trip[] = [
           {
             id: "1",
             title: "Trip to Tokyo",
@@ -120,7 +120,7 @@ export function useTrips() {
             description: "A trip to Kyoto",
           },
         ];
-        dispatch({ type: "FETCH", payload: { states: data } });
+        dispatch({ type: "FETCH", payload: { trips: data } });
       } catch (error) {
         throw new Error(`Error at fetchTrips: ${error}`);
       }
@@ -128,7 +128,7 @@ export function useTrips() {
     fetchTrips();
   }, []);
 
-  const createTrip = async (newTrip: Omit<TripState, "id">) => {
+  const createTrip = async (newTrip: Omit<Trip, "id">) => {
     try {
       // サーバー通信を行って新しいIDを取得
       /* TODO_SERVER
@@ -147,8 +147,8 @@ export function useTrips() {
       dispatch({
         type: "CREATE",
         payload: {
-          state: {
-            id: `${state.states.length + 1}`,
+          trip: {
+            id: `${state.trips.length + 1}`,
             ...newTrip,
             created_at: new Date(),
             updated_at: new Date(),
@@ -160,7 +160,7 @@ export function useTrips() {
     }
   };
 
-  const updateTrip = async (id: string, updatedTrip: TripState) => {
+  const updateTrip = async (id: string, updatedTrip: Trip) => {
     try {
       // サーバー通信を行って既存のIDを使用して更新
       /* TODO_SERVER
@@ -172,21 +172,21 @@ export function useTrips() {
         body: JSON.stringify(updatedTrip),
       });
       */
-      dispatch({ type: "UPDATE", payload: { id, state: updatedTrip } });
+      dispatch({ type: "UPDATE", payload: { id, trip: updatedTrip } });
     } catch (error) {
       throw new Error(`Error at updateTrip: ${error}`);
     }
   };
 
   const sortTrips = (
-    sortBy: keyof TripState,
+    sortBy: keyof Trip,
     orderBy: "ascending" | "descending",
   ) => {
     dispatch({ type: "SORT", payload: { sortBy, orderBy } });
   };
 
   return {
-    trips: state.states,
+    trips: state.trips,
     loading: state.loading,
     createTrip,
     updateTrip,
