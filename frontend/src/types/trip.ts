@@ -2,6 +2,7 @@ import { useReducer, useEffect } from "react";
 
 import { MemberState } from "./member";
 
+// Interface
 export interface Trip {
   id: string;
   title: string;
@@ -24,20 +25,7 @@ interface TripState {
   error: string | null;
 }
 
-type Action =
-  | { type: "FETCH"; payload: { trips: Trip[] } }
-  | {
-      type: "SORT";
-      payload: { sortBy: keyof Trip; orderBy: "ascending" | "descending" };
-    };
-
-type DetailAction =
-  | { type: "FETCH_DETAIL"; payload: { trip: TripDetail } }
-  | {
-      type: "SET_FIELD";
-      payload: { field: "title" | "status" | "description"; value: string };
-    };
-
+// Initial State
 export const initialTrip: Trip = {
   id: "",
   title: "",
@@ -54,13 +42,38 @@ const initialTripState: TripState = {
 };
 
 const initialTripDetail: TripDetail = {
-  ...initialTrip,
+  id: "newtrip",
+  title: "",
+  created_at: new Date(),
+  updated_at: new Date(),
+  status: "",
+  description: "",
   members: [],
   currencies: [],
   loading: false,
   error: null,
 };
 
+// Action
+type Action =
+  | { type: "FETCH"; payload: { trips: Trip[] } }
+  | {
+      type: "SORT";
+      payload: { sortBy: keyof Trip; orderBy: "ascending" | "descending" };
+    }
+  | { type: "SET_LOADING"; payload: { loading: boolean } };
+
+type DetailAction =
+  | { type: "FETCH_DETAIL"; payload: { trip: TripDetail } }
+  | {
+      type: "SET_FIELD";
+      payload: { field: "title" | "status" | "description"; value: string };
+    }
+  | { type: "SERVER_CREATE"; payload: { state: TripDetail } }
+  | { type: "SERVER_UPDATE"; payload: { state: TripDetail } }
+  | { type: "SET_LOADING"; payload: { loading: boolean } };
+
+// Reducer
 function tripReducer(state: TripState, action: Action): TripState {
   switch (action.type) {
     case "FETCH":
@@ -71,7 +84,7 @@ function tripReducer(state: TripState, action: Action): TripState {
         error: null,
       };
     case "SORT":
-      const sortedtrips = state.trips.sort((a, b) => {
+      const sortedtrips = [...state.trips].sort((a, b) => {
         if (action.payload.orderBy === "ascending") {
           return a[action.payload.sortBy] > b[action.payload.sortBy] ? 1 : -1;
         } else {
@@ -82,6 +95,12 @@ function tripReducer(state: TripState, action: Action): TripState {
         ...state,
         trips: sortedtrips,
         loading: false,
+        error: null,
+      };
+    case "SET_LOADING":
+      return {
+        ...state,
+        loading: action.payload.loading,
         error: null,
       };
     default:
@@ -108,6 +127,21 @@ function tripDetailReducer(
         loading: false,
         error: null,
       };
+    case "SERVER_CREATE":
+      return {
+        ...state,
+        ...action.payload.state,
+        loading: false,
+        error: null,
+      };
+    case "SERVER_UPDATE":
+      return {
+        ...state,
+        ...action.payload.state,
+        loading: false,
+        error: null,
+      };
+    case "SET_LOADING":
     default:
       throw new Error("Unhandled action type");
   }
@@ -121,6 +155,7 @@ export function useTrip() {
     const fetchTrips = async () => {
       // TODO: ローディングの表示
       try {
+        dispatch({ type: "SET_LOADING", payload: { loading: true } });
         // DEBUG
         // const response = await fetch("http://localhost:3001/trips");
         // const data = await response.json();
@@ -145,6 +180,7 @@ export function useTrip() {
         ];
         dispatch({ type: "FETCH", payload: { trips: data } });
       } catch (error) {
+        dispatch({ type: "SET_LOADING", payload: { loading: false } });
         throw new Error(`Error at fetchTrips: ${error}`);
       }
     };
@@ -185,6 +221,7 @@ export function useTripDetail(id: string) {
             payload: { trip: initialTripDetail },
           });
         } else {
+          dispatch({ type: "SET_LOADING", payload: { loading: true } });
           // DEBUG
           // const response = await fetch(`http://localhost:3001/trips/${id}`);
           // const data = await response.json();
@@ -204,6 +241,7 @@ export function useTripDetail(id: string) {
           dispatch({ type: "FETCH_DETAIL", payload: { trip: data } });
         }
       } catch (error) {
+        dispatch({ type: "SET_LOADING", payload: { loading: false } });
         throw new Error(`Error at fetchTrip: ${error}`);
       }
     };
@@ -219,6 +257,7 @@ export function useTripDetail(id: string) {
 
   const createTrip = async () => {
     try {
+      dispatch({ type: "SET_LOADING", payload: { loading: true } });
       // サーバー通信を行って新しいIDを取得
       /* TODO_SERVER
       const response = await fetch("http://localhost:3001/trips", {
@@ -229,7 +268,7 @@ export function useTripDetail(id: string) {
         body: JSON.stringify(newTrip),
       });
       const createdTrip = await response.json();
-      dispatch({ type: "CREATE", payload: { state: createdTrip } });
+      dispatch({ type: "SERVER_CREATE", payload: { state: createdTrip } });
       */
       // DEBUG
       console.log("Create");
@@ -240,16 +279,19 @@ export function useTripDetail(id: string) {
   };
 
   const updateTrip = async () => {
+    dispatch({ type: "SET_LOADING", payload: { loading: true } });
     try {
       // サーバー通信を行って既存のIDを使用して更新
       /* TODO_SERVER
-      await fetch(`http://localhost:3001/trips/${id}`, {
+      const response = await fetch(`http://localhost:3001/trips/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedTrip),
       });
+      const data = await response.json();
+      dispatch({ type: "SERVER_UPDATE", payload: { state: data } });
       */
       // DEBUG
       console.log("Update");
@@ -259,10 +301,13 @@ export function useTripDetail(id: string) {
     }
   };
 
+  const deleteTrip = async () => {};
+
   return {
     state,
     setTripField,
     createTrip,
     updateTrip,
+    deleteTrip,
   };
 }
