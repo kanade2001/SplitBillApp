@@ -60,7 +60,7 @@ export default function Page() {
           handleRoute(id);
         }}
         onCreate={() => {
-          console.log("create");
+          handleRoute("newtrip?tab=settings");
         }}
       />
     </div>
