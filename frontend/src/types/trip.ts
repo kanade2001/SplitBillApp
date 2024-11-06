@@ -13,16 +13,6 @@ export interface TripState {
   error: string | null;
 }
 
-// Initial State
-export const initialTrip: Trip = {
-  id: "",
-  title: "",
-  created_at: new Date(),
-  updated_at: new Date(),
-  status: "",
-  description: "",
-};
-
 export const initialTripState: TripState = {
   trips: [],
   loading: false,
