@@ -1,9 +1,9 @@
 import { useReducer, useEffect } from "react";
-import { TripDetail, initialTripDetail } from "../types/trip-detail";
-import { tripDetailReducer } from "../reducers/trip-detail";
+import { Trip, initialTrip } from "@/types/trip";
+import { tripReducer } from "@/reducers/trip";
 
-export function useTripDetail(id: string) {
-  const [state, dispatch] = useReducer(tripDetailReducer, initialTripDetail);
+export function useTrip(id: string) {
+  const [state, dispatch] = useReducer(tripReducer, initialTrip);
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -11,15 +11,14 @@ export function useTripDetail(id: string) {
         if (id === "newtrip") {
           dispatch({
             type: "FETCH_DETAIL",
-            payload: { trip: initialTripDetail },
+            payload: { trip: initialTrip },
           });
         } else {
-          dispatch({ type: "SET_LOADING", payload: { loading: true } });
           // DEBUG
           // const response = await fetch(`http://localhost:3001/trips/${id}`);
           // const data = await response.json();
           // デバッグ用の固定値
-          const data: TripDetail = {
+          const data: Trip = {
             id: "1",
             title: "Trip to Tokyo",
             created_at: new Date(),
@@ -28,13 +27,10 @@ export function useTripDetail(id: string) {
             description: "A trip to Tokyo",
             members: [],
             currencies: [],
-            loading: false,
-            error: null,
           };
           dispatch({ type: "FETCH_DETAIL", payload: { trip: data } });
         }
       } catch (error) {
-        dispatch({ type: "SET_LOADING", payload: { loading: false } });
         throw new Error(`Error at fetchTrip: ${error}`);
       }
     };
@@ -50,7 +46,6 @@ export function useTripDetail(id: string) {
 
   const createTrip = async () => {
     try {
-      dispatch({ type: "SET_LOADING", payload: { loading: true } });
       // サーバー通信を行って新しいIDを取得
       /* TODO_SERVER
       const response = await fetch("http://localhost:3001/trips", {
@@ -72,7 +67,6 @@ export function useTripDetail(id: string) {
   };
 
   const updateTrip = async () => {
-    dispatch({ type: "SET_LOADING", payload: { loading: true } });
     try {
       // サーバー通信を行って既存のIDを使用して更新
       /* TODO_SERVER

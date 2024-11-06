@@ -10,7 +10,6 @@ export function useTripList() {
     const fetchTrips = async () => {
       // TODO: ローディングの表示
       try {
-        dispatch({ type: "SET_LOADING", payload: { loading: true } });
         // DEBUG
         // const response = await fetch("http://localhost:3001/trips");
         // const data = await response.json();
@@ -35,7 +34,6 @@ export function useTripList() {
         ];
         dispatch({ type: "FETCH", payload: { trips: data } });
       } catch (error) {
-        dispatch({ type: "SET_LOADING", payload: { loading: false } });
         throw new Error(`Error at fetchTrips: ${error}`);
       }
     };

@@ -27,12 +27,6 @@ export function tripListReducer(
         loading: false,
         error: null,
       };
-    case "SET_LOADING":
-      return {
-        ...state,
-        loading: action.payload.loading,
-        error: null,
-      };
     default:
       throw new Error("Unhandled action type");
   }
