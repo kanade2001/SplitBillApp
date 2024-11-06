@@ -17,6 +17,8 @@ export interface TripList {
   error: string | null;
 }
 
+export type TripSortableKeys = "title" | "created_at" | "updated_at" | "status";
+
 export const initialTrip: Trip = {
   id: "newtrip",
   title: "",

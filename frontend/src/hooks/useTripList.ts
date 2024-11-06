@@ -1,5 +1,5 @@
 import { useReducer, useEffect } from "react";
-import { Trip, initialTripList } from "../types/trip";
+import { Trip, TripSortableKeys, initialTripList } from "../types/trip";
 import { tripListReducer } from "@/reducers/trip-list";
 
 export function useTripList() {
@@ -42,7 +42,7 @@ export function useTripList() {
 
   // ソート
   const sortTrips = (
-    sortBy: keyof Trip,
+    sortBy: TripSortableKeys,
     orderBy: "ascending" | "descending",
   ) => {
     dispatch({ type: "SORT", payload: { sortBy, orderBy } });
