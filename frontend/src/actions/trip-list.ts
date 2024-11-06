@@ -1,6 +1,6 @@
 import { Trip } from "@/types/trip";
 
-export type TripAction =
+export type TripListAction =
   | { type: "FETCH"; payload: { trips: Trip[] } }
   | {
       type: "SORT";

@@ -1,9 +1,9 @@
 import { useReducer, useEffect } from "react";
-import { Trip, initialTripState } from "../types/trip";
-import { tripReducer } from "../reducers/trip";
+import { Trip, initialTripList } from "../types/trip";
+import { tripListReducer } from "@/reducers/trip-list";
 
-export function useTrip() {
-  const [state, dispatch] = useReducer(tripReducer, initialTripState);
+export function useTripList() {
+  const [state, dispatch] = useReducer(tripListReducer, initialTripList);
 
   // トリップ一覧を取得
   useEffect(() => {

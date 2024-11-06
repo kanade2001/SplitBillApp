@@ -1,7 +1,10 @@
-import { TripState } from "@/types/trip";
-import { TripAction } from "@/actions/trip";
+import { TripList } from "@/types/trip";
+import { TripListAction } from "@/actions/trip-list";
 
-export function tripReducer(state: TripState, action: TripAction): TripState {
+export function tripListReducer(
+  state: TripList,
+  action: TripListAction,
+): TripList {
   switch (action.type) {
     case "FETCH":
       return {

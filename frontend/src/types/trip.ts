@@ -7,13 +7,13 @@ export interface Trip {
   description: string;
 }
 
-export interface TripState {
+export interface TripList {
   trips: Trip[];
   loading: boolean;
   error: string | null;
 }
 
-export const initialTripState: TripState = {
+export const initialTripList: TripList = {
   trips: [],
   loading: false,
   error: null,
