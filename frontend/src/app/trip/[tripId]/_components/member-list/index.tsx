@@ -1,6 +1,6 @@
 import EditableTable from "@/components/table/table";
 import { TextInput } from "@/components/ui";
-import { useTextForm } from "@/hook/textform";
+import { useTextForm } from "@/hooks/textform";
 
 interface MemberListProps {
   id: string;
