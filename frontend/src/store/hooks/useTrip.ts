@@ -1,9 +1,11 @@
 import { useReducer, useEffect } from "react";
 import { Trip, initialTrip } from "@/store/types/trip";
 import { tripReducer } from "@/store/reducers/trip";
+import { useMemberList } from "./useMemberList";
 
 export function useTrip(id: string) {
   const [state, dispatch] = useReducer(tripReducer, initialTrip);
+  const { members, addMember, editMember, deleteMember } = useMemberList();
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -91,10 +93,13 @@ export function useTrip(id: string) {
   const deleteTrip = async () => {};
 
   return {
-    state,
+    state: { ...state, members },
     setTripField,
     createTrip,
     updateTrip,
     deleteTrip,
+    addMember,
+    editMember,
+    deleteMember,
   };
 }

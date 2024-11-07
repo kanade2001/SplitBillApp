@@ -18,7 +18,7 @@ export function useMemberList() {
   };
 
   return {
-    memberList: state,
+    members: state,
     addMember,
     editMember,
     deleteMember,
