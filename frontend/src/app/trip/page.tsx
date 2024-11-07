@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { useTrip } from "@/types/trip";
+import { useTripList } from "@/store/hooks/useTripList";
 
 import GalleryView from "@/components/view/gallery";
 
 export default function Page() {
-  const { trips } = useTrip();
+  const { trips } = useTripList();
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
 

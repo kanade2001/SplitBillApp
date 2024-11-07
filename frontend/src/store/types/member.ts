@@ -1,6 +1,6 @@
-export interface MemberState {
+export interface Member {
   id: string;
-  label: string;
+  name: string;
   email: string;
   role: string;
 }
