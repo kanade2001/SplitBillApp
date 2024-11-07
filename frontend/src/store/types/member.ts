@@ -1,4 +1,4 @@
-export interface MemberState {
+export interface Member {
   id: string;
   label: string;
   email: string;

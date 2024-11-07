@@ -1,4 +1,4 @@
-import { MemberState } from "./member";
+import { Member } from "./member";
 
 export interface Trip {
   id: string;
@@ -7,7 +7,7 @@ export interface Trip {
   updated_at: Date;
   status: string;
   description: string;
-  members?: MemberState[];
+  members?: Member[];
   currencies?: [];
 }
 
