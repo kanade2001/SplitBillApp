@@ -1,5 +1,5 @@
-import { TripList } from "@/types/trip";
-import { TripListAction } from "@/actions/trip-list";
+import { TripList } from "@/store/types/trip";
+import { TripListAction } from "@/store/actions/trip-list";
 
 export function tripListReducer(
   state: TripList,

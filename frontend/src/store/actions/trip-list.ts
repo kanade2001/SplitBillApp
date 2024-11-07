@@ -1,4 +1,4 @@
-import { Trip, TripSortableKeys } from "@/types/trip";
+import { Trip, TripSortableKeys } from "@/store/types/trip";
 
 export type TripListAction =
   | { type: "FETCH"; payload: { trips: Trip[] } }

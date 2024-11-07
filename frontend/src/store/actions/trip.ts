@@ -1,4 +1,4 @@
-import { Trip } from "@/types/trip";
+import { Trip } from "@/store/types/trip";
 
 export type TripAction =
   | { type: "FETCH_DETAIL"; payload: { trip: Trip } }

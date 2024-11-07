@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { useTripList } from "@/hooks/useTripList";
+import { useTripList } from "@/store/hooks/useTripList";
 
 import GalleryView from "@/components/view/gallery";
 

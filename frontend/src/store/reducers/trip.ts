@@ -1,5 +1,5 @@
-import { Trip } from "@/types/trip";
-import { TripAction } from "@/actions/trip";
+import { Trip } from "@/store/types/trip";
+import { TripAction } from "@/store/actions/trip";
 
 export function tripReducer(state: Trip, action: TripAction): Trip {
   switch (action.type) {
