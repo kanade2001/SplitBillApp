@@ -1,3 +1,9 @@
+import {
+  SearchWindow,
+  FilterButton,
+  SortButton,
+  AddButton,
+} from "@/components/utility/_index";
 import { Body, Footer, Header } from "./_components";
 import { Member } from "@/store/types/member";
 
@@ -7,11 +13,30 @@ interface MemberTableProps {
 
 const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
   return (
-    <table className="w-full table-fixed overflow-hidden rounded-lg bg-gray-900">
-      <Header />
-      <Body members={members} />
-      <Footer count={members.length} />
-    </table>
+    <div className="flex w-full flex-col overflow-hidden rounded-lg bg-gray-800">
+      <div className="flex flex-col p-2">
+        <div className="flex h-10 w-full items-center justify-between gap-2">
+          <h2 className="flex-1 text-lg">Members</h2>
+          <AddButton label={"Add Member"} />
+        </div>
+        <div className="flex h-10 w-full items-center justify-between gap-2">
+          <div className="flex-1">
+            <SearchWindow setSearch={() => {}} />
+          </div>
+          <div className="w-10">
+            <FilterButton />
+          </div>
+          <div className="w-10">
+            <SortButton />
+          </div>
+        </div>
+      </div>
+      <table className="w-full table-fixed">
+        <Header />
+        <Body members={members} />
+        <Footer count={members.length} />
+      </table>
+    </div>
   );
 };
 

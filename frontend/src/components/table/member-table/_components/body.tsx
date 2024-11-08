@@ -40,7 +40,7 @@ const RoleBadge: React.FC<{ role: string }> = ({ role }) => {
         "flex items-center rounded-lg",
         role === "admin" && "bg-red-900",
         role === "member" && "bg-blue-900",
-        role === "viewer" && "bg-gray-800",
+        role === "viewer" && "bg-gray-600",
         role === "pending" && "bg-gray-800",
       ].join(" ")}
     >
