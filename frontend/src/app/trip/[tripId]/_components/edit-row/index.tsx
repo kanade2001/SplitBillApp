@@ -164,7 +164,7 @@ const EditRow: React.FC<EditRowProps> = (props) => {
               onClick={() => handleReset()}
             >
               Reset
-            </button>{" "}
+            </button>
             {props.EditItem && (
               <button
                 className="x-20 ms-2 rounded-md bg-blue-800 px-2 text-center text-sm text-white"

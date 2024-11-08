@@ -10,8 +10,8 @@ import BodyRow from "./_components/body-row";
 import AddRow from "./_components/add-row";
 import MemberList from "./_components/member-list";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import { EditTable } from "@/components/table";
-import { MemberFormProps } from "@/store/types/form";
+import MemberTable from "@/components/table/member-table";
+import { testMember1 } from "@/test/members";
 
 type Props = {
   params: { tripId: string }; // TripID
@@ -123,7 +123,7 @@ export default function Page({ params, searchParams }: Props) {
       <MemberList id={params.tripId} />
 
       <p>NEW TABLE COMPONENT</p>
-      <EditTable formProps={MemberFormProps} />
+      <MemberTable members={testMember1} />
     </div>
   );
 }
