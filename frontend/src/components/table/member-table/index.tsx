@@ -17,17 +17,17 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
       <div className="flex flex-col p-2">
         <div className="flex h-10 w-full items-center justify-between gap-2">
           <h2 className="flex-1 text-lg">Members</h2>
-          <AddButton label={"Add Member"} />
+          <AddButton label={"Add Member"} onClick={() => {}} />
         </div>
         <div className="flex h-10 w-full items-center justify-between gap-2">
           <div className="flex-1">
             <SearchWindow setSearch={() => {}} />
           </div>
           <div className="w-10">
-            <FilterButton />
+            <FilterButton onClick={() => {}} />
           </div>
           <div className="w-10">
-            <SortButton />
+            <SortButton onClick={() => {}} />
           </div>
         </div>
       </div>
