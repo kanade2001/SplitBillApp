@@ -23,9 +23,16 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
           <div className="flex-1">
             <SearchWindow setSearch={() => {}} />
           </div>
-          <div className="w-10">
-            <FilterButton onClick={() => {}} />
-          </div>
+
+          <FilterButton
+            setFilter={() => {}}
+            options={[
+              { id: "admin", label: "admin" },
+              { id: "member", label: "member" },
+              { id: "viewer", label: "viewer" },
+            ]}
+          />
+
           <div className="w-10">
             <SortButton onClick={() => {}} />
           </div>
