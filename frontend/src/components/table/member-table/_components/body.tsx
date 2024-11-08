@@ -1,4 +1,3 @@
-import DotsHorizon from "@/assets/icons/dots-horizon";
 import { Member } from "@/store/types/member";
 import {
   DotsHorizonIcon,
@@ -25,7 +24,7 @@ const Body: React.FC<BodyProps> = ({ members }) => {
           <td className="px-2">{member.email}</td>
           <td className="px-2">
             <button className="flex items-center">
-              <DotsHorizon className="h-6 w-6 text-gray-800 dark:text-white" />
+              <DotsHorizonIcon className="h-6 w-6 text-gray-800 dark:text-white" />
             </button>
           </td>
         </tr>
