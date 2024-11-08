@@ -17,7 +17,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
       <div className="flex flex-col p-2">
         <div className="flex h-10 w-full items-center justify-between gap-2">
           <h2 className="flex-1 text-lg">Members</h2>
-          <AddButton label={"Add Member"} onClick={() => {}} />
+          <AddButton onClick={() => {}} />
         </div>
         <div className="flex h-10 w-full items-center justify-between gap-2">
           <div className="flex-1">
