@@ -4,7 +4,7 @@ import {
   SortButton,
   AddButton,
 } from "@/components/utility/_index";
-import Body from "../body/body";
+import Body from "../body/member-body";
 import Footer from "../footer/footer";
 import { Header } from "../header/header";
 import { Member } from "@/store/types/member";
