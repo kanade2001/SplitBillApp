@@ -1,8 +1,4 @@
-import {
-  SearchWindow,
-  FilterButton,
-  SortButton,
-} from "@/components/utility/_index";
+import { SearchWindow, FilterButton, SortButton } from "./_components/_index";
 
 interface SFSProps {
   setSearch: (searchParam: string) => void;

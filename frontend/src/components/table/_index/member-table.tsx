@@ -1,9 +1,8 @@
 import { Member } from "@/store/types/member";
-import { AddButton } from "@/components/utility/_index";
 import { Header } from "../header/_index";
 import { MemberBody } from "../body/_index";
 import { FooterWide } from "../footer/_index";
-import { SearchFilterSort } from "../top/_index";
+import { SearchFilterSort, TitleAdd } from "../top/_index";
 
 interface MemberTableProps {
   members: Member[];
@@ -13,10 +12,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
   return (
     <div className="flex w-full flex-col overflow-hidden rounded-lg bg-gray-800">
       <div className="flex flex-col p-2">
-        <div className="flex h-10 w-full items-center justify-between gap-2">
-          <h2 className="flex-1 text-lg">Members</h2>
-          <AddButton onClick={() => {}} />
-        </div>
+        <TitleAdd title="Members" handleAdd={() => {}} />
         <SearchFilterSort
           setSearch={() => {}}
           setFilter={(filterParam: {}) => {
