@@ -1,14 +1,21 @@
-const Header = () => {
+interface HeaderProps {
+  cols: {
+    id: string;
+    label: string;
+    className?: string;
+  }[];
+}
+
+export const Header: React.FC<HeaderProps> = ({ cols }) => {
   return (
     <thead className="h-10 bg-gray-600">
       <tr>
-        <th className="">User</th>
-        <th className="w-32">Role</th>
-        <th className="">Mail</th>
-        <th className="w-10"></th>
+        {cols.map((col) => (
+          <th key={col.label} className={col.className}>
+            {col.label}
+          </th>
+        ))}
       </tr>
     </thead>
   );
 };
-
-export default Header;

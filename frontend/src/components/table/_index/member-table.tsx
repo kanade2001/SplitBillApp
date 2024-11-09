@@ -6,7 +6,7 @@ import {
 } from "@/components/utility/_index";
 import Body from "../body/body";
 import Footer from "../footer/footer";
-import Header from "../header/header";
+import { Header } from "../header/header";
 import { Member } from "@/store/types/member";
 
 interface MemberTableProps {
@@ -41,7 +41,14 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
         </div>
       </div>
       <table className="w-full table-fixed">
-        <Header />
+        <Header
+          cols={[
+            { id: "user", label: "User", className: "" },
+            { id: "role", label: "Role", className: "w-32" },
+            { id: "mail", label: "Mail", className: "" },
+            { id: "action", label: "", className: "w-10" },
+          ]}
+        />
         <Body members={members} />
         <Footer count={members.length} />
       </table>
