@@ -10,7 +10,7 @@ export const Info: React.FC<AlertProps> = ({ title, message }) => {
       role="alert"
     >
       <p className="font-bold">{title}</p>
-      <p>{message}</p>{" "}
+      <p>{message}</p>
     </div>
   );
 };
@@ -22,7 +22,7 @@ export const Warn: React.FC<AlertProps> = ({ title, message }) => {
       role="alert"
     >
       <p className="font-bold">{title}</p>
-      <p>{message}</p>{" "}
+      <p>{message}</p>
     </div>
   );
 };
@@ -34,7 +34,7 @@ export const Danger: React.FC<AlertProps> = ({ title, message }) => {
       role="alert"
     >
       <p className="font-bold">{title}</p>
-      <p>{message}</p>{" "}
+      <p>{message}</p>
     </div>
   );
 };

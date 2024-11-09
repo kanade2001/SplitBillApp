@@ -25,7 +25,6 @@ export default function Login() {
           />
         </div>
         <div className="my-2">
-          {" "}
           <label htmlFor="password">Password</label>
           <input
             type="password"
