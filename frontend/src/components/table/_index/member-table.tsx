@@ -15,7 +15,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
         <TitleAdd title="Members" handleAdd={() => {}} />
         <SearchFilterSort
           setSearch={() => {}}
-          setFilter={(filterParam: {}) => {
+          setFilter={(filterParam: { [key: string]: boolean }) => {
             console.log(filterParam);
           }}
           setSort={(sortParam: {

@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef, ReactNode } from "react";
 
 interface DropdownButtonProps {
-  parent: ReactNode;
+  button: ReactNode;
   children: ReactNode;
 }
 
 const DropdownButton: React.FC<DropdownButtonProps> = ({
-  parent,
+  button,
   children,
 }) => {
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 
   return (
     <div className="relative" ref={ref}>
-      <div onClick={() => setOpen(!open)}>{parent}</div>
+      <div onClick={() => setOpen(!open)}>{button}</div>
       {open && (
         <div
           className="absolute right-0 top-8 rounded-lg bg-gray-700 p-2"

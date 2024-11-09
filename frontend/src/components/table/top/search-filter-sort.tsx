@@ -2,7 +2,7 @@ import { SearchWindow, FilterButton, SortButton } from "./_components/_index";
 
 interface SFSProps {
   setSearch: (searchParam: string) => void;
-  setFilter: (filterParam: {}) => void;
+  setFilter: (filterParam: { [key: string]: boolean }) => void;
   setSort: (sortParam: {
     id: string | null;
     type: "ascending" | "descending" | null;

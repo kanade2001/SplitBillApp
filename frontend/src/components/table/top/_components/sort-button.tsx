@@ -14,7 +14,7 @@ interface SortProps {
 const SortButton: React.FC<SortProps> = ({ setSort, options }) => {
   const { sort, handleSort } = useSort();
 
-  const parent = (
+  const button = (
     <button
       className={[
         "flex h-6 w-10 items-center justify-center rounded-lg px-2",
@@ -77,7 +77,7 @@ const SortButton: React.FC<SortProps> = ({ setSort, options }) => {
     </>
   );
 
-  return <DropdownButton parent={parent} children={children} />;
+  return <DropdownButton button={button}>{children}</DropdownButton>;
 };
 
 export default SortButton;

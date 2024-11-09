@@ -4,7 +4,7 @@ import { useFilter } from "@/store/hooks/useFilter";
 import { FilterIcon } from "@/assets/icons/_index";
 
 interface FilterProps {
-  setFilter: (filters: any) => void;
+  setFilter: (filters: { [key: string]: boolean }) => void;
   options: {
     id: string;
     label: string;
@@ -15,13 +15,11 @@ const FilterButton: React.FC<FilterProps> = ({ setFilter, options }) => {
   const { filters, masterFilter, handleFilter, handleMasterFilter } =
     useFilter(options);
 
-  const parent = (
+  const button = (
     <button
       className={[
         "flex h-6 w-10 items-center justify-center rounded-lg px-2",
-        Object.values(filters).every((filter) => filter)
-          ? "bg-gray-600"
-          : "bg-blue-600",
+        masterFilter ? "bg-gray-600" : "bg-blue-600",
       ].join(" ")}
     >
       <FilterIcon className="h-4 w-4 text-gray-200" />
@@ -58,7 +56,7 @@ const FilterButton: React.FC<FilterProps> = ({ setFilter, options }) => {
     </>
   );
 
-  return <DropdownButton parent={parent} children={children} />;
+  return <DropdownButton button={button}>{children}</DropdownButton>;
 };
 
 export default FilterButton;
