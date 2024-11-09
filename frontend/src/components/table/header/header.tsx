@@ -6,7 +6,7 @@ interface HeaderProps {
   }[];
 }
 
-export const Header: React.FC<HeaderProps> = ({ cols }) => {
+const Header: React.FC<HeaderProps> = ({ cols }) => {
   return (
     <thead className="h-10 bg-gray-600">
       <tr>
@@ -19,3 +19,5 @@ export const Header: React.FC<HeaderProps> = ({ cols }) => {
     </thead>
   );
 };
+
+export default Header;

@@ -4,9 +4,10 @@ import {
   SortButton,
   AddButton,
 } from "@/components/utility/_index";
-import Body from "../body/member-body";
-import Footer from "../footer/footer";
-import { Header } from "../header/header";
+import { Header } from "../header/_index";
+import { MemberBody } from "../body/_index";
+import { FooterWide } from "../footer/_index";
+
 import { Member } from "@/store/types/member";
 
 interface MemberTableProps {
@@ -49,8 +50,12 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
             { id: "action", label: "", className: "w-10" },
           ]}
         />
-        <Body members={members} />
-        <Footer count={members.length} />
+        <MemberBody members={members} />
+        <FooterWide
+          className="px-2"
+          colSpan={4}
+          label={members.length + " Members"}
+        />
       </table>
     </div>
   );

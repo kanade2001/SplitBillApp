@@ -3,11 +3,11 @@ import { DotsHorizonIcon } from "@/assets/icons/_index";
 import { MemberRole } from "@/assets/status/_index";
 import React from "react";
 
-interface BodyProps {
+interface MemberBodyProps {
   members: Member[];
 }
 
-const Body: React.FC<BodyProps> = ({ members }) => {
+const MemberBody: React.FC<MemberBodyProps> = ({ members }) => {
   return (
     <tbody className="">
       {members.map((member: Member) => (
@@ -28,4 +28,4 @@ const Body: React.FC<BodyProps> = ({ members }) => {
   );
 };
 
-export default Body;
+export default MemberBody;
