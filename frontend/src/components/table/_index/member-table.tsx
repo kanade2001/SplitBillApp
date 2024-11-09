@@ -4,7 +4,9 @@ import {
   SortButton,
   AddButton,
 } from "@/components/utility/_index";
-import { Body, Footer, Header } from "./_components";
+import Body from "../body/body";
+import Footer from "../footer/footer";
+import Header from "../header/header";
 import { Member } from "@/store/types/member";
 
 interface MemberTableProps {

@@ -10,7 +10,7 @@ import BodyRow from "./_components/body-row";
 import AddRow from "./_components/add-row";
 import MemberList from "./_components/member-list";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import MemberTable from "@/components/table/member-table";
+import MemberTable from "@/components/table/_index/member-table";
 import { testMember1 } from "@/test/members";
 
 type Props = {

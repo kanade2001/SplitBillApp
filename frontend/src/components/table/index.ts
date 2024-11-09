@@ -1,1 +1,1 @@
-export { default as EditTable } from "./EditTable";
+export { default as EditTable } from "./archive/EditTable";

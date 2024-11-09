@@ -1,4 +1,4 @@
-import EditableTable from "@/components/table/table";
+import EditableTable from "@/components/table/archive/table";
 import { TextInput } from "@/components/ui";
 import { useTextForm } from "@/store/hooks/textform";
 
