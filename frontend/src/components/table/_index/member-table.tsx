@@ -1,14 +1,9 @@
-import {
-  SearchWindow,
-  FilterButton,
-  SortButton,
-  AddButton,
-} from "@/components/utility/_index";
+import { Member } from "@/store/types/member";
+import { AddButton } from "@/components/utility/_index";
 import { Header } from "../header/_index";
 import { MemberBody } from "../body/_index";
 import { FooterWide } from "../footer/_index";
-
-import { Member } from "@/store/types/member";
+import { SearchFilterSort } from "../top/_index";
 
 interface MemberTableProps {
   members: Member[];
@@ -22,24 +17,28 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
           <h2 className="flex-1 text-lg">Members</h2>
           <AddButton onClick={() => {}} />
         </div>
-        <div className="flex h-10 w-full items-center justify-between gap-2">
-          <div className="flex-1">
-            <SearchWindow setSearch={() => {}} />
-          </div>
-
-          <FilterButton
-            setFilter={() => {}}
-            options={[
-              { id: "admin", label: "admin" },
-              { id: "member", label: "member" },
-              { id: "viewer", label: "viewer" },
-            ]}
-          />
-
-          <div className="w-10">
-            <SortButton onClick={() => {}} />
-          </div>
-        </div>
+        <SearchFilterSort
+          setSearch={() => {}}
+          setFilter={(filterParam: {}) => {
+            console.log(filterParam);
+          }}
+          setSort={(sortParam: {
+            id: string | null;
+            type: "ascending" | "descending" | null;
+          }) => {
+            console.log(sortParam);
+          }}
+          filterOptions={[
+            { id: "admin", label: "admin" },
+            { id: "member", label: "member" },
+            { id: "viewer", label: "viewer" },
+          ]}
+          sortOptions={[
+            { id: "name", label: "Name" },
+            { id: "role", label: "Role" },
+            { id: "mail", label: "Mail" },
+          ]}
+        />
       </div>
       <table className="w-full table-fixed">
         <Header

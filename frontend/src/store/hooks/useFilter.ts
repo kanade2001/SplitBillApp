@@ -13,27 +13,21 @@ export function useFilter(options: { id: string }[]) {
   const [masterFilter, setMasterFilter] = useState(true);
 
   const handleFilter = (id: string) => {
-    setFilters((prev) => {
-      const newFilters = { ...prev, [id]: !prev[id] };
-
-      setMasterFilter(
-        // 全てのフィルターがtrueの場合にtrueを返す
-        Object.values(newFilters).every((value) => value === true),
-      );
-
-      return newFilters;
-    });
+    const newFilters = { ...filters, [id]: !filters[id] };
+    setFilters(newFilters);
+    setMasterFilter(Object.values(newFilters).every((value) => value === true));
+    return newFilters;
   };
 
   const handleMasterFilter = () => {
-    setFilters((prev) => {
-      const newFilters = { ...prev };
-      Object.keys(newFilters).forEach((key) => {
-        newFilters[key] = !masterFilter;
-      });
-      return newFilters;
+    const newFilters = { ...filters };
+    Object.keys(newFilters).forEach((key) => {
+      newFilters[key] = !masterFilter;
     });
+
+    setFilters(newFilters);
     setMasterFilter(!masterFilter);
+    return newFilters;
   };
 
   return {

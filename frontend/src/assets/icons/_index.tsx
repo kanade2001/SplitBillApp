@@ -7,3 +7,5 @@ export { Search as SearchIcon } from "./search";
 export { Filter as FilterIcon } from "./filter";
 export { Sort as SortIcon } from "./sort";
 export { Plus as PlusIcon } from "./plus";
+export { ArrowUp as ArrowUpIcon } from "./arrow";
+export { ArrowDown as ArrowDownIcon } from "./arrow";
