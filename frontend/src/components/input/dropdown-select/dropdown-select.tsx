@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, ReactNode } from "react";
 
 interface DropdownSelectProps {
   value: string;
@@ -6,7 +6,7 @@ interface DropdownSelectProps {
   className?: string;
   options: {
     id: string;
-    item: string | JSX.Element;
+    item: string | JSX.Element | ReactNode;
   }[];
 }
 
@@ -40,7 +40,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
   return (
     <div className="relative" ref={ref}>
       <div className={inputClassName} onClick={() => setIsOpen(!isOpen)}>
-        {value}
+        {options.find((option) => option.id === value)?.item}
       </div>
       {isOpen && (
         <div className="absolute left-0 min-w-full rounded-md border border-gray-500 bg-gray-600">
