@@ -1,4 +1,4 @@
-import { FlexColumn } from "@/components/view/flex/flex-column";
+import { FlexColumn } from "@/components/view";
 import { ReactNode } from "react";
 
 interface SubmitCancelProps {

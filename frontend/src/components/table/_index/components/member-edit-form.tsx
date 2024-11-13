@@ -2,7 +2,7 @@ import { Member } from "@/store/types/member";
 import { useMember } from "@/store/hooks/useMember";
 import { DropdownSelect, TextInput } from "@/components/input";
 import { MemberRole } from "@/assets/status/_index";
-import { FlexColumn } from "@/components/view/flex/flex-column";
+import { FlexColumn } from "@/components/view";
 import { SubmitCancel } from "@/components/template";
 
 interface MemberEditFormProps {

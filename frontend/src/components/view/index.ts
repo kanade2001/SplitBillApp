@@ -1,1 +1,1 @@
-import FlexColumn from "./flex/flex-column";
+export { FlexColumn } from "./flex/flex-column";
