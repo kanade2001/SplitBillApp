@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, ReactNode } from "react";
 
 interface DropdownSelectProps {
   value: string;
@@ -6,7 +6,7 @@ interface DropdownSelectProps {
   className?: string;
   options: {
     id: string;
-    item: string | JSX.Element;
+    item: string | JSX.Element | ReactNode;
   }[];
 }
 
@@ -34,25 +34,32 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
 
   const inputClassName = [
     className || "rounded-md",
-    "w-full border bg-gray-600 p-1 border-gray-500",
+    "w-full border bg-gray-600 p-2 border-gray-500",
   ].join(" ");
 
   return (
     <div className="relative" ref={ref}>
       <div className={inputClassName} onClick={() => setIsOpen(!isOpen)}>
-        {value}
+        {options.find((option) => option.id === value)?.item || (
+          <div className="text-center">
+            <span className="text-gray-400">Select</span>
+          </div>
+        )}
       </div>
       {isOpen && (
-        <div className="absolute left-0 min-w-full rounded-md border border-gray-500 bg-gray-600">
-          {options.map((option) => (
-            <div
-              key={option.id}
-              className="p-1"
-              onClick={() => onChange(option.id)}
-            >
-              {option.item}
-            </div>
-          ))}
+        <div className="absolute left-0 mt-2 min-w-full rounded-md border border-gray-500 bg-gray-600">
+          <div className="m-2 flex flex-col gap-1">
+            {options.map((option) => (
+              <button
+                key={option.id}
+                className="w-full text-left"
+                onClick={() => onChange(option.id)}
+                onMouseDown={(e) => e.preventDefault()} // Prevent text selection on double click
+              >
+                {option.item}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>

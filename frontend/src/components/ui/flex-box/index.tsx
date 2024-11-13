@@ -1,10 +1,11 @@
 import React from "react";
 
 interface flexBoxProps {
+  cols?: string | number;
   children: React.ReactNode;
 }
 
-const FlexBox: React.FC<flexBoxProps> = ({ children }) => {
+const FlexBox: React.FC<flexBoxProps> = ({ cols, children }) => {
   const modifiedChildren = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
       const className = [
@@ -19,7 +20,11 @@ const FlexBox: React.FC<flexBoxProps> = ({ children }) => {
     return child;
   });
 
-  return <div className="flex">{modifiedChildren}</div>;
+  return (
+    <div className={`grid grid-cols-${cols || React.Children.count(children)}`}>
+      {modifiedChildren}
+    </div>
+  );
 };
 
 export default FlexBox;

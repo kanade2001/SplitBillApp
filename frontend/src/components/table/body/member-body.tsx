@@ -5,9 +5,10 @@ import React from "react";
 
 interface MemberBodyProps {
   members: Member[];
+  handleEdit: (member: Member) => void;
 }
 
-const MemberBody: React.FC<MemberBodyProps> = ({ members }) => {
+const MemberBody: React.FC<MemberBodyProps> = ({ members, handleEdit }) => {
   return (
     <tbody className="">
       {members.map((member: Member) => (
@@ -18,7 +19,10 @@ const MemberBody: React.FC<MemberBodyProps> = ({ members }) => {
           </td>
           <td className="px-2">{member.email}</td>
           <td className="px-2">
-            <button className="flex items-center">
+            <button
+              className="flex items-center"
+              onClick={() => handleEdit(member)}
+            >
               <DotsHorizonIcon className="h-6 w-6 text-gray-800 dark:text-white" />
             </button>
           </td>
