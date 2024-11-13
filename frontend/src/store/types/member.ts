@@ -4,3 +4,5 @@ export interface Member {
   email: string;
   role: string;
 }
+
+export type MemberRole = "admin" | "editor" | "viewer" | "guest";

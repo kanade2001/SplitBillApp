@@ -1,1 +1,1 @@
-export { default as MemberAddForm } from "./member-add-form";
+export { MemberAddForm } from "./member-add-form";
