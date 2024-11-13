@@ -11,7 +11,7 @@ const TextInput: React.FC<TextInputProps> = ({
 }) => {
   const inputClassName = [
     className || "rounded-md",
-    "w-full border border-gray-500 bg-gray-600 p-1",
+    "w-full border border-gray-500 bg-gray-600 p-2",
   ].join(" ");
 
   return <input className={inputClassName} value={value} onChange={onChange} />;

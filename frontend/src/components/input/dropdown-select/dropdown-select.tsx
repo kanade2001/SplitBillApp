@@ -34,7 +34,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
 
   const inputClassName = [
     className || "rounded-md",
-    "w-full border bg-gray-600 p-1 border-gray-500",
+    "w-full border bg-gray-600 p-2 border-gray-500",
   ].join(" ");
 
   return (
