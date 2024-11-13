@@ -6,7 +6,7 @@ import FlexBox from "@/components/ui/flex-box";
 export default function Debug() {
   return (
     <div>
-      <FlexBox>
+      <FlexBox cols="[auto_1fr]">
         <DropdownSelect
           value="test"
           onChange={(value) => console.log(value)}
