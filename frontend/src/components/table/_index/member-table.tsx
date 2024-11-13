@@ -3,16 +3,20 @@ import { Header } from "../header/_index";
 import { MemberBody } from "../body/_index";
 import { FooterWide } from "../footer/_index";
 import { SearchFilterSort, TitleAdd } from "../top/_index";
+import usePopupMenu from "@/components/ui/popup-menu/use-popup-menu";
 
 interface MemberTableProps {
   members: Member[];
 }
 
 const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
+  const { PopupMenuComponent: AddPopup, open: AddPopupOpen } = usePopupMenu();
+
   return (
     <div className="flex w-full flex-col overflow-hidden rounded-lg bg-gray-800">
       <div className="flex flex-col p-2">
-        <TitleAdd title="Members" handleAdd={() => {}} />
+        <TitleAdd title="Members" handleAdd={AddPopupOpen} />
+        {/* AddPopupOpen is a function that opens the popup menu */}
         <SearchFilterSort
           setSearch={() => {}}
           setFilter={(filterParam: { [key: string]: boolean }) => {
@@ -52,6 +56,17 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
           label={members.length + " Members"}
         />
       </table>
+      <AddPopup>
+        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 text-center">
+          <p>Share</p>
+          <p>Copy Field</p>
+          <p>Copy</p>
+
+          <p>Role</p>
+          <p>Name</p>
+          <p>Add</p>
+        </div>
+      </AddPopup>
     </div>
   );
 };
