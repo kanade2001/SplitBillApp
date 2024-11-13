@@ -1,6 +1,6 @@
 "use client";
 
-import { DropdownSelect } from "@/components/input";
+import { DropdownSelect, TextInput } from "@/components/input";
 
 export default function Debug() {
   return (
@@ -13,6 +13,10 @@ export default function Debug() {
           { id: "2", item: "Option 2" },
           { id: "3", item: "Option 3" },
         ]}
+      />
+      <TextInput
+        value="test"
+        onChange={(event) => console.log(event.target.value)}
       />
     </div>
   );
