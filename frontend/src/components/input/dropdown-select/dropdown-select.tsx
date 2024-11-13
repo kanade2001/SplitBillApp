@@ -4,7 +4,6 @@ interface DropdownSelectProps {
   value: string;
   onChange: (value: string) => void;
   className?: string;
-  rounded?: string;
   options: {
     id: string;
     item: string | JSX.Element;
@@ -15,7 +14,6 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
   value,
   onChange,
   className,
-  rounded,
   options,
 }) => {
   const [isOpen, setIsOpen] = useState(false); // dropdown menu is open or not
@@ -35,8 +33,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
   }, [ref]);
 
   const inputClassName = [
-    className,
-    rounded || "rounded-md",
+    className || "rounded-md",
     "w-full border bg-gray-600 p-1 border-gray-500",
   ].join(" ");
 

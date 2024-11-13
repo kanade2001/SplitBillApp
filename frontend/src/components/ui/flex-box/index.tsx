@@ -8,6 +8,7 @@ const FlexBox: React.FC<flexBoxProps> = ({ children }) => {
   const modifiedChildren = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
       const className = [
+        child.props.className,
         index === 0 && "rounded-s-md",
         index === React.Children.count(children) - 1 && "rounded-e-md",
       ]
