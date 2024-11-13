@@ -5,7 +5,13 @@ import { LinkCopyField } from "@/components/ui";
 import { FlexColumn } from "@/components/view/flex/flex-column";
 import { SubmitCancel } from "@/components/template";
 
-export const MemberAddForm: React.FC = () => {
+interface MemberAddFormProps {
+  handleCancel: () => void;
+}
+
+export const MemberAddForm: React.FC<MemberAddFormProps> = ({
+  handleCancel, // ポップアップ画面を閉じる
+}) => {
   const { member, setMemberField } = useMember();
 
   return (
@@ -18,7 +24,7 @@ export const MemberAddForm: React.FC = () => {
       <SubmitCancel
         label="メンバーを追加"
         handleSubmit={() => {}}
-        handleCancel={() => {}}
+        handleCancel={handleCancel}
         submitLabel="追加"
       >
         <div className="flex gap-2">

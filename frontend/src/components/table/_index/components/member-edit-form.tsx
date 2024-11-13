@@ -7,10 +7,12 @@ import { SubmitCancel } from "@/components/template";
 
 interface MemberEditFormProps {
   currentMemberState: Member;
+  handleCancel: () => void;
 }
 
 export const MemberEditForm: React.FC<MemberEditFormProps> = ({
   currentMemberState,
+  handleCancel, // ポップアップ画面を閉じる
 }) => {
   const { member, setMemberField } = useMember(currentMemberState);
 
@@ -22,7 +24,7 @@ export const MemberEditForm: React.FC<MemberEditFormProps> = ({
         label="メンバーを編集"
         handleSubmit={() => {}}
         handleDelete={() => {}}
-        handleCancel={() => {}}
+        handleCancel={handleCancel}
         submitLabel="更新"
       >
         <div className="flex gap-2">

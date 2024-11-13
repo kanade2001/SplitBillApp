@@ -12,10 +12,16 @@ interface MemberTableProps {
 }
 
 const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
-  const { PopupMenuComponent: MemberAddPopup, open: MemberAddPopupOpen } =
-    usePopupMenu();
-  const { PopupMenuComponent: MemberEditPopup, open: MemberEditPopupOpen } =
-    usePopupMenu();
+  const {
+    PopupMenuComponent: MemberAddPopup,
+    open: MemberAddPopupOpen,
+    close: MemberAddPopupClose,
+  } = usePopupMenu();
+  const {
+    PopupMenuComponent: MemberEditPopup,
+    open: MemberEditPopupOpen,
+    close: MemberEditPopupClose,
+  } = usePopupMenu();
   const [selectedMember, setSelectedMember] =
     React.useState<Member>(initialMember);
 
@@ -70,11 +76,14 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
       </table>
 
       <MemberAddPopup>
-        <MemberAddForm />
+        <MemberAddForm handleCancel={MemberAddPopupClose} />
       </MemberAddPopup>
 
       <MemberEditPopup>
-        <MemberEditForm currentMemberState={selectedMember} />
+        <MemberEditForm
+          currentMemberState={selectedMember}
+          handleCancel={MemberEditPopupClose}
+        />
       </MemberEditPopup>
     </div>
   );
