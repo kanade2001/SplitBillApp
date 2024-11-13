@@ -21,6 +21,7 @@ export const MemberEditForm: React.FC<MemberEditFormProps> = ({
       <SubmitCancel
         label="メンバーを編集"
         handleSubmit={() => {}}
+        handleDelete={() => {}}
         handleCancel={() => {}}
         submitLabel="更新"
       >
