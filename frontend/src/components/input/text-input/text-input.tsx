@@ -1,4 +1,4 @@
-import PlainTextInput from "./plain-text-input";
+import BaseTextInput from "./base-text-input";
 
 interface TextInputProps {
   value: string;
@@ -8,7 +8,7 @@ interface TextInputProps {
 
 const TextInput: React.FC<TextInputProps> = ({ value, onChange, error }) => {
   return (
-    <PlainTextInput
+    <BaseTextInput
       value={value}
       onChange={onChange}
       className={[

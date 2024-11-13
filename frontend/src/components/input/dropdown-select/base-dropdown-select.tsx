@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-interface PlainDropdownSelectProps {
+interface BaseDropdownSelectProps {
   value: string;
   onChange: (value: string) => void;
   className?: string;
@@ -10,7 +10,7 @@ interface PlainDropdownSelectProps {
   }[];
 }
 
-const PlainDropdownSelect: React.FC<PlainDropdownSelectProps> = ({
+const BaseDropdownSelect: React.FC<BaseDropdownSelectProps> = ({
   value,
   onChange,
   className,
@@ -57,4 +57,4 @@ const PlainDropdownSelect: React.FC<PlainDropdownSelectProps> = ({
   );
 };
 
-export default PlainDropdownSelect;
+export default BaseDropdownSelect;

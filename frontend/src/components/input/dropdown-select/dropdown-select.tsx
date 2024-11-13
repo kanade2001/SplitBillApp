@@ -1,4 +1,4 @@
-import PlainDropdownSelect from "./plain-dropdown-select";
+import BaseDropdownSelect from "./base-dropdown-select";
 
 interface DropdownSelectProps {
   value: string;
@@ -15,7 +15,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
   options,
 }) => {
   return (
-    <PlainDropdownSelect
+    <BaseDropdownSelect
       value={value}
       onChange={onChange}
       className={["rounded", "border-gray-600"].join(" ")}

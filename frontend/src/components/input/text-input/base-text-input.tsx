@@ -1,10 +1,10 @@
-interface PlainTextInputProps {
+interface BaseTextInputProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 }
 
-const PlainTextInput: React.FC<PlainTextInputProps> = ({
+const BaseTextInput: React.FC<BaseTextInputProps> = ({
   value,
   onChange,
   className,
@@ -18,4 +18,4 @@ const PlainTextInput: React.FC<PlainTextInputProps> = ({
   );
 };
 
-export default PlainTextInput;
+export default BaseTextInput;
