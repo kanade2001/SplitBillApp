@@ -1,25 +1,28 @@
+import { Member } from "@/store/types/member";
+import { useMember } from "@/store/hooks/useMember";
 import { DropdownSelect, TextInput } from "@/components/input";
 import { MemberRole } from "@/assets/status/_index";
-import { useMember } from "@/store/hooks/useMember";
-import { LinkCopyField } from "@/components/ui";
 import { FlexColumn } from "@/components/view/flex/flex-column";
 import { SubmitCancel } from "@/components/template";
 
-export const MemberAddForm: React.FC = () => {
-  const { member, setMemberField } = useMember();
+interface MemberEditFormProps {
+  currentMemberState: Member;
+}
+
+export const MemberEditForm: React.FC<MemberEditFormProps> = ({
+  currentMemberState,
+}) => {
+  const { member, setMemberField } = useMember(currentMemberState);
 
   return (
     <FlexColumn>
-      <h2 className="text-xl">メンバーを追加</h2>
-      <FlexColumn>
-        <h3>リンクを共有</h3>
-        <LinkCopyField link="https://example.com" />
-      </FlexColumn>
+      <h2 className="text-xl">メンバーを編集</h2>
+
       <SubmitCancel
-        label="メンバーを追加"
+        label="メンバーを編集"
         handleSubmit={() => {}}
         handleCancel={() => {}}
-        submitLabel="追加"
+        submitLabel="更新"
       >
         <div className="flex gap-2">
           <div className="w-1/6 min-w-32">
