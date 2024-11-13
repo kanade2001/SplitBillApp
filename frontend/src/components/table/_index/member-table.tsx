@@ -4,7 +4,6 @@ import { MemberBody } from "../body/_index";
 import { FooterWide } from "../footer/_index";
 import { SearchFilterSort, TitleAdd } from "../top/_index";
 import usePopupMenu from "@/components/ui/popup-menu/use-popup-menu";
-import { TextInput } from "@/components/ui";
 
 interface MemberTableProps {
   members: Member[];
@@ -64,12 +63,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
           <p>Copy</p>
 
           <p>Role</p>
-          <TextInput
-            id="addMemberInput"
-            error={false}
-            value="member"
-            onChange={() => {}}
-          />
+          <p>Name</p>
           <p>Add</p>
         </div>
       </AddPopup>
