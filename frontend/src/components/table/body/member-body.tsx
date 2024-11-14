@@ -17,7 +17,7 @@ const MemberBody: React.FC<MemberBodyProps> = ({ members, handleEdit }) => {
           <td className="px-2">
             <MemberRole role={member.role} />
           </td>
-          <td className="px-2">{member.email}</td>
+          <td className="px-2">{member.mail}</td>
           <td className="px-2">
             <button
               className="flex items-center"

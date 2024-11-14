@@ -1,14 +1,14 @@
 export interface Member {
   id: string;
   name: string;
-  email: string;
+  mail: string;
   role: string;
 }
 
 export const initialMember: Member = {
   id: "",
   name: "",
-  email: "",
+  mail: "",
   role: "",
 };
 

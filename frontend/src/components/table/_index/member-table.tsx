@@ -9,9 +9,24 @@ import { MemberAddForm, MemberEditForm } from "./components";
 
 interface MemberTableProps {
   members: Member[];
+  addMember: (member: Member) => void;
+  editMember: (member: Member) => void;
+  deleteMember: (id: string) => void;
+  sortMembers: (
+    sortBy: keyof Member,
+    order: "ascending" | "descending",
+  ) => void;
+  filterMembers: (filterParam: { [key: string]: boolean }) => void;
 }
 
-const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
+const MemberTable: React.FC<MemberTableProps> = ({
+  members,
+  addMember,
+  editMember,
+  deleteMember,
+  sortMembers,
+  filterMembers,
+}) => {
   const {
     PopupMenuComponent: MemberAddPopup,
     open: MemberAddPopupOpen,
@@ -32,13 +47,16 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
         <SearchFilterSort
           setSearch={() => {}}
           setFilter={(filterParam: { [key: string]: boolean }) => {
-            console.log(filterParam);
+            filterMembers(filterParam);
           }}
           setSort={(sortParam: {
             id: string | null;
             type: "ascending" | "descending" | null;
           }) => {
-            console.log(sortParam);
+            sortMembers(
+              sortParam.id as keyof Member,
+              sortParam.type as "ascending" | "descending",
+            );
           }}
           filterOptions={[
             { id: "admin", label: "admin" },
@@ -76,13 +94,18 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
       </table>
 
       <MemberAddPopup>
-        <MemberAddForm handleCancel={MemberAddPopupClose} />
+        <MemberAddForm
+          handleCancel={MemberAddPopupClose}
+          handleAdd={addMember}
+        />
       </MemberAddPopup>
 
       <MemberEditPopup>
         <MemberEditForm
           currentMemberState={selectedMember}
           handleCancel={MemberEditPopupClose}
+          handleEdit={editMember}
+          handleDelete={deleteMember}
         />
       </MemberEditPopup>
     </div>

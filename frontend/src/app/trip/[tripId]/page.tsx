@@ -2,6 +2,7 @@
 
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MemberTable from "@/components/table/_index/member-table";
+import { useMemberList } from "@/store/hooks/useMemberList";
 import { testMember1 } from "@/test/members";
 
 type Props = {
@@ -11,6 +12,16 @@ type Props = {
 
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
+  const {
+    members,
+    addMember,
+    editMember,
+    deleteMember,
+    sortMembers,
+    filterMembers,
+  } = useMemberList({
+    initialMembers: testMember1,
+  });
 
   return (
     <div className="space-y-5 p-5">
@@ -19,7 +30,14 @@ export default function Page({ params, searchParams }: Props) {
       <h2>TAB = {searchParams.tab}</h2>
 
       <p>NEW TABLE COMPONENT</p>
-      <MemberTable members={testMember1} />
+      <MemberTable
+        members={members}
+        addMember={addMember}
+        editMember={editMember}
+        deleteMember={deleteMember}
+        sortMembers={sortMembers}
+        filterMembers={filterMembers}
+      />
     </div>
   );
 }
