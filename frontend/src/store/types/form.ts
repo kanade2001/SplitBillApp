@@ -1,7 +1,7 @@
 export interface FormProps {
   id: string;
   label: string;
-  type: "text" | "number" | "email" | "password";
+  type: "text" | "number" | "mail" | "password";
   validation: {
     accept?: string[];
     refuse?: string[];
@@ -16,9 +16,9 @@ export const MemberFormProps: FormProps[] = [
     validation: { refuse: [""] },
   },
   {
-    id: "email",
-    label: "Email",
-    type: "email",
+    id: "mail",
+    label: "Mail",
+    type: "mail",
     validation: { accept: ["[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+"] },
   },
   {

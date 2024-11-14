@@ -8,7 +8,7 @@ export function useMember(currentMemberState?: Member) {
     currentMemberState || initialMember,
   );
 
-  const setMemberField = (field: "name" | "email" | "role", value: string) => {
+  const setMemberField = (field: "name" | "mail" | "role", value: string) => {
     dispatch({ type: "SET_FIELD", payload: { field, value } });
   };
 
