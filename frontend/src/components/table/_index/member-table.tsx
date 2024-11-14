@@ -9,6 +9,9 @@ import { MemberAddForm, MemberEditForm } from "./components";
 
 interface MemberTableProps {
   members: Member[];
+  addMember: (member: Member) => void;
+  editMember: (id: string, member: Member) => void;
+  deleteMember: (id: string) => void;
 }
 
 const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
@@ -83,6 +86,8 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
         <MemberEditForm
           currentMemberState={selectedMember}
           handleCancel={MemberEditPopupClose}
+          handleEdit={() => {}}
+          handleDelete={() => {}}
         />
       </MemberEditPopup>
     </div>

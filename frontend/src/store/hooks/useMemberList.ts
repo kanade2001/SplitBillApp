@@ -2,8 +2,12 @@ import { useReducer } from "react";
 import { memberListReducer } from "../reducers/member-list";
 import { Member } from "../types/member";
 
-export function useMemberList() {
-  const [state, dispatch] = useReducer(memberListReducer, []);
+interface UseMemberListProps {
+  initialMembers?: Member[];
+}
+
+export function useMemberList({ initialMembers = [] }: UseMemberListProps) {
+  const [state, dispatch] = useReducer(memberListReducer, initialMembers);
 
   const addMember = (member: Member) => {
     dispatch({ type: "ADD", payload: { member } });

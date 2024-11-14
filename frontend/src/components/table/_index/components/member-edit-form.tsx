@@ -8,6 +8,8 @@ import { SubmitCancel } from "@/components/template";
 interface MemberEditFormProps {
   currentMemberState: Member;
   handleCancel: () => void;
+  handleEdit: (member: Member) => void;
+  handleDelete: (id: string) => void;
 }
 
 export const MemberEditForm: React.FC<MemberEditFormProps> = ({
