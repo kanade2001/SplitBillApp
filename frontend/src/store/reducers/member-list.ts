@@ -10,7 +10,7 @@ export function memberListReducer(
       return [...state, action.payload.member];
     case "EDIT":
       return state.map((member) =>
-        member.id === action.payload.id ? action.payload.member : member,
+        member.id === action.payload.member.id ? action.payload.member : member,
       );
     case "DELETE":
       return state.filter((member) => member.id !== action.payload.id);

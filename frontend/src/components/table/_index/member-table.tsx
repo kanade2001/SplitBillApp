@@ -10,7 +10,7 @@ import { MemberAddForm, MemberEditForm } from "./components";
 interface MemberTableProps {
   members: Member[];
   addMember: (member: Member) => void;
-  editMember: (id: string, member: Member) => void;
+  editMember: (member: Member) => void;
   deleteMember: (id: string) => void;
 }
 

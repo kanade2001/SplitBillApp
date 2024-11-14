@@ -13,8 +13,8 @@ export function useMemberList({ initialMembers = [] }: UseMemberListProps) {
     dispatch({ type: "ADD", payload: { member } });
   };
 
-  const editMember = (id: string, member: Member) => {
-    dispatch({ type: "EDIT", payload: { id, member } });
+  const editMember = (member: Member) => {
+    dispatch({ type: "EDIT", payload: { member } });
   };
 
   const deleteMember = (id: string) => {
