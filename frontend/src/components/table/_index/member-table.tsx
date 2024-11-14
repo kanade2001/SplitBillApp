@@ -16,6 +16,7 @@ interface MemberTableProps {
     sortBy: keyof Member,
     order: "ascending" | "descending",
   ) => void;
+  filterMembers: (filterParam: { [key: string]: boolean }) => void;
 }
 
 const MemberTable: React.FC<MemberTableProps> = ({
@@ -24,6 +25,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
   editMember,
   deleteMember,
   sortMembers,
+  filterMembers,
 }) => {
   const {
     PopupMenuComponent: MemberAddPopup,
@@ -45,7 +47,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
         <SearchFilterSort
           setSearch={() => {}}
           setFilter={(filterParam: { [key: string]: boolean }) => {
-            console.log(filterParam);
+            filterMembers(filterParam);
           }}
           setSort={(sortParam: {
             id: string | null;

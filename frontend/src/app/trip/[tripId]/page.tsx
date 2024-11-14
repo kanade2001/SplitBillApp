@@ -12,10 +12,16 @@ type Props = {
 
 export default function Page({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
-  const { members, addMember, editMember, deleteMember, sortMembers } =
-    useMemberList({
-      initialMembers: testMember1,
-    });
+  const {
+    members,
+    addMember,
+    editMember,
+    deleteMember,
+    sortMembers,
+    filterMembers,
+  } = useMemberList({
+    initialMembers: testMember1,
+  });
 
   return (
     <div className="space-y-5 p-5">
@@ -30,6 +36,7 @@ export default function Page({ params, searchParams }: Props) {
         editMember={editMember}
         deleteMember={deleteMember}
         sortMembers={sortMembers}
+        filterMembers={filterMembers}
       />
     </div>
   );
