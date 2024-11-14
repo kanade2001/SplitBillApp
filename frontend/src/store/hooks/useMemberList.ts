@@ -6,7 +6,9 @@ interface UseMemberListProps {
   initialMembers?: Member[];
 }
 
-export function useMemberList({ initialMembers = [] }: UseMemberListProps) {
+export function useMemberList({
+  initialMembers = [],
+}: UseMemberListProps = {}) {
   const [state, dispatch] = useReducer(memberListReducer, initialMembers);
   const [members, setMembers] = useState<Member[]>(initialMembers);
   const [filter, setFilter] = useState<{ [key: string]: boolean }>({});
