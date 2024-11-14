@@ -21,10 +21,18 @@ export function useMemberList({ initialMembers = [] }: UseMemberListProps) {
     dispatch({ type: "DELETE", payload: { id } });
   };
 
+  const sortMembers = (
+    sortBy: keyof Member,
+    order: "ascending" | "descending",
+  ) => {
+    dispatch({ type: "SORT", payload: { sortBy, order } });
+  };
+
   return {
     members: state,
     addMember,
     editMember,
     deleteMember,
+    sortMembers,
   };
 }

@@ -12,6 +12,10 @@ interface MemberTableProps {
   addMember: (member: Member) => void;
   editMember: (member: Member) => void;
   deleteMember: (id: string) => void;
+  sortMembers: (
+    sortBy: keyof Member,
+    order: "ascending" | "descending",
+  ) => void;
 }
 
 const MemberTable: React.FC<MemberTableProps> = ({
@@ -19,6 +23,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
   addMember,
   editMember,
   deleteMember,
+  sortMembers,
 }) => {
   const {
     PopupMenuComponent: MemberAddPopup,
@@ -46,7 +51,10 @@ const MemberTable: React.FC<MemberTableProps> = ({
             id: string | null;
             type: "ascending" | "descending" | null;
           }) => {
-            console.log(sortParam);
+            sortMembers(
+              sortParam.id as keyof Member,
+              sortParam.type as "ascending" | "descending",
+            );
           }}
           filterOptions={[
             { id: "admin", label: "admin" },
