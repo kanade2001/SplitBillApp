@@ -15,6 +15,8 @@ interface MemberEditFormProps {
 export const MemberEditForm: React.FC<MemberEditFormProps> = ({
   currentMemberState,
   handleCancel, // ポップアップ画面を閉じる
+  handleEdit,
+  handleDelete,
 }) => {
   const { member, setMemberField } = useMember(currentMemberState);
 
@@ -24,8 +26,8 @@ export const MemberEditForm: React.FC<MemberEditFormProps> = ({
 
       <SubmitCancel
         label="メンバーを編集"
-        handleSubmit={() => {}}
-        handleDelete={() => {}}
+        handleSubmit={() => handleEdit(member)}
+        handleDelete={() => handleDelete(member.id)}
         handleCancel={handleCancel}
         submitLabel="更新"
       >

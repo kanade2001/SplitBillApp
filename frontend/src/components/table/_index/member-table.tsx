@@ -14,7 +14,12 @@ interface MemberTableProps {
   deleteMember: (id: string) => void;
 }
 
-const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
+const MemberTable: React.FC<MemberTableProps> = ({
+  members,
+  addMember,
+  editMember,
+  deleteMember,
+}) => {
   const {
     PopupMenuComponent: MemberAddPopup,
     open: MemberAddPopupOpen,
@@ -79,15 +84,18 @@ const MemberTable: React.FC<MemberTableProps> = ({ members }) => {
       </table>
 
       <MemberAddPopup>
-        <MemberAddForm handleCancel={MemberAddPopupClose} />
+        <MemberAddForm
+          handleCancel={MemberAddPopupClose}
+          handleAdd={addMember}
+        />
       </MemberAddPopup>
 
       <MemberEditPopup>
         <MemberEditForm
           currentMemberState={selectedMember}
           handleCancel={MemberEditPopupClose}
-          handleEdit={() => {}}
-          handleDelete={() => {}}
+          handleEdit={editMember}
+          handleDelete={deleteMember}
         />
       </MemberEditPopup>
     </div>

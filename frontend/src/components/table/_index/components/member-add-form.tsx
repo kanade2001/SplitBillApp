@@ -4,13 +4,16 @@ import { useMember } from "@/store/hooks/useMember";
 import { LinkCopyField } from "@/components/ui";
 import { FlexColumn } from "@/components/view";
 import { SubmitCancel } from "@/components/template";
+import { Member } from "@/store/types/member";
 
 interface MemberAddFormProps {
   handleCancel: () => void;
+  handleAdd: (member: Member) => void;
 }
 
 export const MemberAddForm: React.FC<MemberAddFormProps> = ({
   handleCancel, // ポップアップ画面を閉じる
+  handleAdd,
 }) => {
   const { member, setMemberField } = useMember();
 
@@ -23,7 +26,7 @@ export const MemberAddForm: React.FC<MemberAddFormProps> = ({
       </FlexColumn>
       <SubmitCancel
         label="メンバーを追加"
-        handleSubmit={() => {}}
+        handleSubmit={() => handleAdd(member)}
         handleCancel={handleCancel}
         submitLabel="追加"
       >
