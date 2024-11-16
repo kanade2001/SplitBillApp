@@ -1,5 +1,5 @@
-import { Member } from "../types/member";
 import { MemberListAction } from "../actions/member-list";
+import { Member } from "../types/member";
 
 export function memberListReducer(
   state: Member[],

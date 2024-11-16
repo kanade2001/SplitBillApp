@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { useRouter } from "next/navigation";
 
+import GalleryView from "@/components/view/gallery";
 import { useTripList } from "@/store/hooks/useTripList";
 
-import GalleryView from "@/components/view/gallery";
 
 export default function Page() {
   const { trips } = useTripList();

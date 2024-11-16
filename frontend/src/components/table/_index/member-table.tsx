@@ -1,10 +1,13 @@
 import React from "react";
+
+import usePopupMenu from "@/components/ui/popup-menu/use-popup-menu";
 import { initialMember, Member } from "@/store/types/member";
-import { Header } from "../header/_index";
+
 import { MemberBody } from "../body/_index";
 import { FooterWide } from "../footer/_index";
+import { Header } from "../header/_index";
 import { SearchFilterSort, TitleAdd } from "../top/_index";
-import usePopupMenu from "@/components/ui/popup-menu/use-popup-menu";
+
 import { MemberAddForm, MemberEditForm } from "./components";
 
 interface MemberTableProps {

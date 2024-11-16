@@ -1,7 +1,9 @@
-import { Member } from "@/store/types/member";
+import React from "react";
+
 import { DotsHorizonIcon } from "@/assets/icons/_index";
 import { MemberRole } from "@/assets/status/_index";
-import React from "react";
+import { Member } from "@/store/types/member";
+
 
 interface MemberBodyProps {
   members: Member[];

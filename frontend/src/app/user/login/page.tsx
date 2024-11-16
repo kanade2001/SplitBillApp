@@ -1,9 +1,9 @@
 "use client";
 
+import { useLoginForm } from "@/app/user/login/loginTypes";
 import { TextInput } from "@/components/input";
 import { FlexColumn } from "@/components/view";
 import SidePadding from "@/components/view/template/side-padding";
-import { useLoginForm } from "@/app/user/login/loginTypes";
 
 export default function Login() {
   const { loginData, setEmail, setPassword } = useLoginForm();
