@@ -1,5 +1,5 @@
-import { Member } from "../types/member";
 import { MemberAction } from "../actions/member";
+import { Member } from "../types/member";
 
 export function memberReducer(state: Member, action: MemberAction): Member {
   switch (action.type) {

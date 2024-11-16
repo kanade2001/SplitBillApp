@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+
 import { TextInput } from "@/components/input";
 import { FlexColumn } from "@/components/view";
 import SidePadding from "@/components/view/template/side-padding";
+
 import { useSignupForm } from "../signupTypes";
 
 interface SignupParams {

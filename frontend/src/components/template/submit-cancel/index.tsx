@@ -1,5 +1,6 @@
-import { FlexColumn } from "@/components/view";
 import { ReactNode } from "react";
+
+import { FlexColumn } from "@/components/view";
 
 interface SubmitCancelProps {
   label?: string;

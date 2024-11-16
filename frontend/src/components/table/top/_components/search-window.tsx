@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { SearchIcon } from "@/assets/icons/_index";
 
 interface SearchProps {

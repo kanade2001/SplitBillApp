@@ -1,5 +1,6 @@
-import { IconProps } from "@/store/types/icon";
 import React from "react";
+
+import { IconProps } from "@/store/types/icon";
 
 export const ArrowUp: React.FC<IconProps> = ({ className }) => {
   return (

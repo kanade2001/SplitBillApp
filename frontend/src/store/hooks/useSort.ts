@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { SortProps, initialSort } from "../types/sort";
 
 export function useSort() {

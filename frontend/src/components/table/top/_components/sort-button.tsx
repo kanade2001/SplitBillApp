@@ -1,7 +1,7 @@
-import { useSort } from "@/store/hooks/useSort";
 import { SortIcon } from "@/assets/icons/_index";
 import { ArrowUpIcon, ArrowDownIcon } from "@/assets/icons/_index";
 import DropdownButton from "@/components/ui/dropdown-menu";
+import { useSort } from "@/store/hooks/useSort";
 
 interface SortProps {
   setSort: (sortParam: {

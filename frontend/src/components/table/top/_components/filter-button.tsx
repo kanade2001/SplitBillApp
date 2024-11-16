@@ -1,7 +1,8 @@
 import React from "react";
+
+import { FilterIcon } from "@/assets/icons/_index";
 import DropdownButton from "@/components/ui/dropdown-menu";
 import { useFilter } from "@/store/hooks/useFilter";
-import { FilterIcon } from "@/assets/icons/_index";
 
 interface FilterProps {
   setFilter: (filters: { [key: string]: boolean }) => void;
