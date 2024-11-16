@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
-
 import { TextInput } from "@/components/input";
 import { FlexColumn } from "@/components/view";
 import SidePadding from "@/components/view/template/side-padding";
+import { useState } from "react";
 
 export default function PreSignup() {
   const [email, setEmail] = useState<string>("");

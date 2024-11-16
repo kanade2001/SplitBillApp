@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import GalleryView from "@/components/view/gallery";
 import { useTripList } from "@/store/hooks/useTripList";
 
-
 export default function Page() {
   const { trips } = useTripList();
   const [isClient, setIsClient] = useState(false);
