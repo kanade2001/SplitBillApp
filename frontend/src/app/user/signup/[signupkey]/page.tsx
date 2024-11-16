@@ -28,7 +28,7 @@ export default function Signup({ params }: SignupParams) {
 
   const handleSubmit = async () => {
     // send signup data to server
-    console.log(signupKey, signupData);
+    console.log(signupKey);
   };
 
   return (
