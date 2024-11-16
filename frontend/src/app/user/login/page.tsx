@@ -35,8 +35,8 @@ export default function Login() {
         </button>
         <p>
           Don&apos;t have an account? &nbsp;
-          <a href="/register" className="text-blue-500">
-            Register
+          <a href="/user/signup" className="text-blue-500">
+            Sign up
           </a>
         </p>
       </FlexColumn>
