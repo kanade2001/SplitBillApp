@@ -2,6 +2,7 @@
 
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MemberTable from "@/components/table/_index/member-table";
+import { BlockTemplate } from "@/components/template";
 import { useMemberList } from "@/store/hooks/useMemberList";
 import { testMember1 } from "@/test/members";
 
@@ -29,7 +30,10 @@ export default function TripSettingsPage({ params, searchParams }: Props) {
       <h2>PUBLIC_KEY = {key}</h2>
       <h2>TAB = {searchParams.tab}</h2>
 
-      <p>NEW TABLE COMPONENT</p>
+      <BlockTemplate label="General">
+        <p>Template</p>
+      </BlockTemplate>
+
       <MemberTable
         members={members}
         addMember={addMember}
