@@ -1,5 +1,8 @@
 "use client";
 
+import { useState } from "react";
+
+import { TextEditInput } from "@/components/input";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MemberTable from "@/components/table/_index/member-table";
 import { BlockTemplate } from "@/components/template";
@@ -13,6 +16,7 @@ type Props = {
 
 export default function TripSettingsPage({ params, searchParams }: Props) {
   const key = typeof searchParams.key === "string" ? searchParams.key : "";
+  const [title, setTitle] = useState("");
   const {
     members,
     addMember,
@@ -31,7 +35,16 @@ export default function TripSettingsPage({ params, searchParams }: Props) {
       <h2>TAB = {searchParams.tab}</h2>
 
       <BlockTemplate label="General">
-        <p>Template</p>
+        <div className="grid w-full grid-cols-[auto_1fr] items-center gap-2">
+          <p>Title</p>
+          <TextEditInput value={title} onChange={setTitle} />
+          <p>Start Date</p>
+          <p>YYYY/MM/DD</p>
+          <p>End Date</p>
+          <p>YYYY/MM/DD</p>
+          <p>Comment</p>
+          <TextEditInput value="comment" onChange={() => {}} />
+        </div>
       </BlockTemplate>
 
       <MemberTable

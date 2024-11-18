@@ -8,7 +8,7 @@ export const FlexColumn: React.FC<FlexColumnProps> = ({
   className,
 }) => {
   return (
-    <div className={["flex flex-col gap-2", className].join(" ")}>
+    <div className={["flex w-full flex-col gap-2", className].join(" ")}>
       {children}
     </div>
   );
