@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { TextEditInput } from "@/components/input";
+import { TextEditInput, DateEditInput } from "@/components/input";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MemberTable from "@/components/table/_index/member-table";
 import { BlockTemplate } from "@/components/template";
@@ -39,7 +39,12 @@ export default function TripSettingsPage({ params, searchParams }: Props) {
           <p>Title</p>
           <TextEditInput value={title} onChange={setTitle} />
           <p>Start Date</p>
-          <p>YYYY/MM/DD</p>
+          <DateEditInput
+            value="2024-11-11"
+            handleSave={(value: string) => {
+              console.log(value);
+            }}
+          />
           <p>End Date</p>
           <p>YYYY/MM/DD</p>
           <p>Comment</p>
