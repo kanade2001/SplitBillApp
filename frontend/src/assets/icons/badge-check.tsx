@@ -1,6 +1,6 @@
 import { IconProps } from "@/store/types/icon";
 
-export const BadgeCheck = ({ className }: IconProps) => {
+export const BadgeCheck: React.FC<IconProps> = ({ className }) => {
   return (
     <svg
       className={className || "h-6 w-6 text-gray-800 dark:text-white"}

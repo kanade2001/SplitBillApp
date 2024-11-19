@@ -1,9 +1,4 @@
-import {
-  BadgeCheckIcon,
-  ClockIcon,
-  EyeIcon,
-  UserIcon,
-} from "@/assets/icons/_index";
+import { BadgeCheckIcon, ClockIcon, EyeIcon, UserIcon } from "@/assets/icons";
 
 const MemberRole: React.FC<{ role: string }> = ({ role }) => {
   return (

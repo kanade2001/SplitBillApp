@@ -8,7 +8,7 @@ interface TitleAddProps {
 const TitleAdd: React.FC<TitleAddProps> = ({ title, handleAdd }) => {
   return (
     <div className="flex h-10 w-full items-center justify-between gap-2">
-      <h2 className="flex-1 text-lg">{title}</h2>
+      <h2 className="flex-1 text-xl font-bold">{title}</h2>
       <AddButton onClick={handleAdd} />
     </div>
   );

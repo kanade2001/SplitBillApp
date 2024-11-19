@@ -1,6 +1,7 @@
 import { useReducer, useEffect } from "react";
 
 import { tripListReducer } from "@/store/reducers/trip-list";
+import { getCurrentDateISO } from "@/utils/date-utils";
 
 import { Trip, TripSortableKeys, initialTripList } from "../types/trip";
 
@@ -22,6 +23,8 @@ export function useTripList() {
             title: "Trip to Tokyo",
             created_at: new Date(),
             updated_at: new Date(),
+            start_date: getCurrentDateISO(),
+            end_date: getCurrentDateISO(),
             status: "planned",
             description: "A trip to Tokyo",
           },
@@ -30,6 +33,8 @@ export function useTripList() {
             title: "Trip to Kyoto",
             created_at: new Date(),
             updated_at: new Date(),
+            start_date: getCurrentDateISO(),
+            end_date: getCurrentDateISO(),
             status: "completed",
             description: "A trip to Kyoto",
           },

@@ -1,4 +1,4 @@
-import { PlusIcon } from "@/assets/icons/_index";
+import { PlusIcon } from "@/assets/icons";
 
 interface AddProps {
   onClick: () => void;

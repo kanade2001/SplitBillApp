@@ -14,20 +14,14 @@ export default function Login() {
         <h1 className="text-2xl">Login</h1>
         <TextInput
           type="email"
-          id="email"
           value={loginData.email}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setEmail(e.target.value)
-          }
+          onChange={(email: string) => setEmail(email)}
           placeholder="Email"
         />
         <TextInput
           type="password"
-          id="password"
           value={loginData.password}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPassword(e.target.value)
-          }
+          onChange={(password: string) => setPassword(password)}
           placeholder="Password"
         />
         <button className="w-full rounded-md bg-blue-500 p-2 text-white">

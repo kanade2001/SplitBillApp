@@ -15,11 +15,8 @@ export default function PreSignup() {
         <h1 className="text-2xl">Sign up</h1>
         <TextInput
           type="email"
-          id="email"
           value={email}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setEmail(e.target.value)
-          }
+          onChange={(email: string) => setEmail(email)}
           placeholder="Email"
         />
 
