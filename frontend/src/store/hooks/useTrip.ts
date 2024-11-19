@@ -1,6 +1,5 @@
 import { useReducer, useEffect } from "react";
 
-
 import { tripReducer } from "@/store/reducers/trip";
 import { Trip, TripSettableFields, initialTrip } from "@/store/types/trip";
 

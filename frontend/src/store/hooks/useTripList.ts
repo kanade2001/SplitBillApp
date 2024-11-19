@@ -1,6 +1,5 @@
 import { useReducer, useEffect } from "react";
 
-
 import { tripListReducer } from "@/store/reducers/trip-list";
 import { getCurrentDateISO } from "@/utils/date-utils";
 

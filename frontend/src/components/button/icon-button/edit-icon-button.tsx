@@ -2,7 +2,6 @@ import { EditIcon } from "@/assets/icons";
 
 import { IconButtonTemplate } from "./icon-button-template";
 
-
 interface EditButtonProps {
   onClick: () => void;
 }
