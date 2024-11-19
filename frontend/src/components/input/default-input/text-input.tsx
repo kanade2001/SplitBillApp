@@ -1,6 +1,7 @@
 import { DefaultInput } from "./default-input";
 
 interface TextInputProps {
+  type?: "email" | "password";
   value: string;
   onChange: (value: string) => void;
   className?: string;
@@ -9,12 +10,14 @@ interface TextInputProps {
   disabled?: boolean;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ onChange, ...props }) => {
+const TextInput: React.FC<TextInputProps> = ({ type, onChange, ...props }) => {
   const handleChange = (value: string | number) => {
     onChange(value as string);
   };
 
-  return <DefaultInput type="text" onChange={handleChange} {...props} />;
+  return (
+    <DefaultInput type={type || "text"} onChange={handleChange} {...props} />
+  );
 };
 
 export default TextInput;
