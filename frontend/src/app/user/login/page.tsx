@@ -15,13 +15,13 @@ export default function Login() {
         <TextInput
           type="email"
           value={loginData.email}
-          onChange={(value: string) => setEmail(value)}
+          onChange={(email: string) => setEmail(email)}
           placeholder="Email"
         />
         <TextInput
           type="password"
           value={loginData.password}
-          onChange={(value: string) => setPassword(value)}
+          onChange={(password: string) => setPassword(password)}
           placeholder="Password"
         />
         <button className="w-full rounded-md bg-blue-500 p-2 text-white">

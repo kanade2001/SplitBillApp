@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 
+
 import { TextInput } from "@/components/input";
 import { FlexColumn } from "@/components/view";
 import SidePadding from "@/components/view/template/side-padding";
@@ -40,40 +41,25 @@ export default function Signup({ params }: SignupParams) {
         <FlexColumn className="items-center">
           <h1 className="text-2xl">Sign up</h1>
           <TextInput
-            type="text"
-            id="firstname"
             value={signupData.name.firstname}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setFirstName(e.target.value)
-            }
+            onChange={(firstname: string) => setFirstName(firstname)}
             placeholder="First name"
           />
           <TextInput
-            type="text"
-            id="lastname"
             value={signupData.name.lastname}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setLastName(e.target.value)
-            }
+            onChange={(lastname: string) => setLastName(lastname)}
             placeholder="Last name"
           />
           <TextInput
-            type="text"
-            id="username"
             value={signupData.username}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setUsername(e.target.value)
-            }
+            onChange={(username: string) => setUsername(username)}
             placeholder="User name"
           />
 
           <TextInput
             type="password"
-            id="password"
             value={signupData.password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
+            onChange={(password: string) => setPassword(password)}
             placeholder="Password"
           />
 
