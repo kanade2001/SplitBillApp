@@ -45,7 +45,7 @@ export const MemberAddForm: React.FC<MemberAddFormProps> = ({
           <div className="grow">
             <TextInput
               value={member.name}
-              onChange={(e) => setMemberField("name", e.target.value)}
+              onChange={(name: string) => setMemberField("name", name)}
               placeholder="Name"
             />
           </div>
