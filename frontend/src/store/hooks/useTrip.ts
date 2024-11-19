@@ -1,9 +1,9 @@
 import { useReducer, useEffect } from "react";
 
+import { useMemberList } from "./useMemberList";
+
 import { tripReducer } from "@/store/reducers/trip";
 import { Trip, initialTrip } from "@/store/types/trip";
-
-import { useMemberList } from "./useMemberList";
 
 export function useTrip(id: string) {
   const [state, dispatch] = useReducer(tripReducer, initialTrip);

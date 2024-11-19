@@ -1,8 +1,8 @@
 import { useReducer, useEffect } from "react";
 
-import { tripListReducer } from "@/store/reducers/trip-list";
-
 import { Trip, TripSortableKeys, initialTripList } from "../types/trip";
+
+import { tripListReducer } from "@/store/reducers/trip-list";
 
 export function useTripList() {
   const [state, dispatch] = useReducer(tripListReducer, initialTripList);
