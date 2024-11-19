@@ -1,5 +1,5 @@
-import { SortIcon } from "@/assets/icons/_index";
-import { ArrowUpIcon, ArrowDownIcon } from "@/assets/icons/_index";
+import { SortIcon } from "@/assets/icons";
+import { ArrowUpIcon, ArrowDownIcon } from "@/assets/icons";
 import DropdownButton from "@/components/ui/dropdown-menu";
 import { useSort } from "@/store/hooks/useSort";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { SearchIcon } from "@/assets/icons/_index";
+import { SearchIcon } from "@/assets/icons";
 
 interface SearchProps {
   setSearch: (search: string) => void;

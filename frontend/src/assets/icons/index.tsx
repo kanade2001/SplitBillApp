@@ -9,3 +9,5 @@ export { Sort as SortIcon } from "./sort";
 export { Plus as PlusIcon } from "./plus";
 export { ArrowUp as ArrowUpIcon } from "./arrow";
 export { ArrowDown as ArrowDownIcon } from "./arrow";
+export { Edit as EditIcon } from "./edit";
+export { FloppyDisk as FloppyDiskIcon } from "./floppy-disk";

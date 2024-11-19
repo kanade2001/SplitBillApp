@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import GeneralSettings from "./_components/general-settings";
+
 import { TextEditInput, DateEditInput } from "@/components/input";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MemberTable from "@/components/table/_index/member-table";
@@ -33,6 +35,8 @@ export default function TripSettingsPage({ params, searchParams }: Props) {
       <h1>TRIP_ID = {params.tripId}</h1>
       <h2>PUBLIC_KEY = {key}</h2>
       <h2>TAB = {searchParams.tab}</h2>
+
+      <GeneralSettings />
 
       <BlockTemplate label="General">
         <div className="grid w-full grid-cols-[auto_1fr] items-center gap-2">

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DotsHorizonIcon } from "@/assets/icons/_index";
+import { DotsHorizonIcon } from "@/assets/icons";
 import { MemberRole } from "@/assets/status/_index";
 import { Member } from "@/store/types/member";
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FilterIcon } from "@/assets/icons/_index";
+import { FilterIcon } from "@/assets/icons";
 import DropdownButton from "@/components/ui/dropdown-menu";
 import { useFilter } from "@/store/hooks/useFilter";
 
