@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 import {
   SaveButton,
   EditButton,
@@ -13,23 +11,17 @@ interface BlockHeaderEditProps {
   title: string;
   handleSave: () => boolean;
   handleCancel: () => void;
-  onStatusChange?: (status: formStatus) => void;
+  status: formStatus;
+  setStatus: (status: formStatus) => void;
 }
 
 const BlockHeaderEdit: React.FC<BlockHeaderEditProps> = ({
   title,
   handleSave,
   handleCancel,
-  onStatusChange,
+  status,
+  setStatus,
 }) => {
-  const [status, setStatus] = useState<formStatus>("idle"); // state
-
-  useEffect(() => {
-    if (onStatusChange) {
-      onStatusChange(status);
-    }
-  }, [status, onStatusChange]);
-
   const handleEditClick = () => {
     setStatus("editing");
   }; // change state idle -> editing

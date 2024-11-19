@@ -23,7 +23,8 @@ const GeneralSettings = () => {
         title="General"
         handleSave={handleSave}
         handleCancel={handleCancel}
-        onStatusChange={(status: formStatus) => setStatus(status)}
+        status={status}
+        setStatus={setStatus}
       />
       <BlockContent key={key}>
         <GridItemEditField>
