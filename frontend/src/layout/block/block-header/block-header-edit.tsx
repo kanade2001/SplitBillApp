@@ -12,12 +12,14 @@ import { formStatus } from "@/store/types/form-status";
 interface BlockHeaderEditProps {
   title: string;
   handleSave: () => boolean;
+  handleCancel: () => void;
   onStatusChange?: (status: formStatus) => void;
 }
 
 const BlockHeaderEdit: React.FC<BlockHeaderEditProps> = ({
   title,
   handleSave,
+  handleCancel,
   onStatusChange,
 }) => {
   const [status, setStatus] = useState<formStatus>("idle"); // state
@@ -34,6 +36,7 @@ const BlockHeaderEdit: React.FC<BlockHeaderEditProps> = ({
 
   const handleCancelClick = () => {
     setStatus("idle");
+    handleCancel();
   }; // change state editing -> idle
 
   const handleSaveClick = async () => {

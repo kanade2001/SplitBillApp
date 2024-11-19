@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface InputProps {
   type: "text" | "number" | "email" | "password";
@@ -20,12 +20,6 @@ export const DefaultInput: React.FC<InputProps> = ({
   disabled,
 }) => {
   const [error, setError] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (value) {
-      setError(false);
-    }
-  }, [value]);
 
   const handleBlur = () => {
     if (required && !value) {
