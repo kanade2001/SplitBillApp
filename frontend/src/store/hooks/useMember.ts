@@ -1,8 +1,9 @@
 import { useReducer } from "react";
 
+import { Member, initialMember } from "@/store/types/member";
+
 import { memberReducer } from "../reducers/member";
 
-import { Member, initialMember } from "@/store/types/member";
 
 export function useMember(currentMemberState?: Member) {
   const [state, dispatch] = useReducer(

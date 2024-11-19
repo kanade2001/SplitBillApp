@@ -1,6 +1,6 @@
-import { Member } from "./member";
-
 import { getCurrentDateISO } from "@/utils/date-utils";
+
+import { Member } from "./member";
 
 export interface Trip {
   id: string;

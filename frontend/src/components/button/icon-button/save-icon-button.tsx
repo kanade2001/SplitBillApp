@@ -1,6 +1,7 @@
+import { FloppyDiskIcon } from "@/assets/icons";
+
 import { IconButtonTemplate } from "./icon-button-template";
 
-import { FloppyDiskIcon } from "@/assets/icons";
 
 interface SaveButtonProps {
   onClick: () => void;

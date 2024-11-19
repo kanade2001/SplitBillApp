@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 
-import GeneralSettings from "./_components/general-settings";
 
 import { TextEditInput, DateEditInput } from "@/components/input";
 import MemberTable from "@/components/table/_index/member-table";
 import { BlockTemplate } from "@/components/template";
 import { useMemberList } from "@/store/hooks/useMemberList";
 import { testMember1 } from "@/test/members";
+
+import GeneralSettings from "./_components/general-settings";
 
 type Props = {
   params: { tripId: string }; // TripID
