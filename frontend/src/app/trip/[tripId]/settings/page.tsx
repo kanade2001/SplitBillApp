@@ -5,7 +5,6 @@ import { useState } from "react";
 import GeneralSettings from "./_components/general-settings";
 
 import { TextEditInput, DateEditInput } from "@/components/input";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
 import MemberTable from "@/components/table/_index/member-table";
 import { BlockTemplate } from "@/components/template";
 import { useMemberList } from "@/store/hooks/useMemberList";
