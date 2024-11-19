@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   SaveButton,
@@ -7,28 +7,34 @@ import {
   SavedButton,
   CancelButton,
 } from "@/components/button/_index";
+import { formStatus } from "@/store/types/form-status";
 
 interface BlockHeaderEditProps {
   title: string;
-
   handleSave: () => boolean;
+  onStatusChange?: (status: formStatus) => void;
 }
 
 const BlockHeaderEdit: React.FC<BlockHeaderEditProps> = ({
   title,
   handleSave,
+  onStatusChange,
 }) => {
-  const [status, setStatus] = useState<
-    "idle" | "editing" | "saving" | "saved" | "failed"
-  >("idle");
+  const [status, setStatus] = useState<formStatus>("idle"); // state
+
+  useEffect(() => {
+    if (onStatusChange) {
+      onStatusChange(status);
+    }
+  }, [status, onStatusChange]);
 
   const handleEditClick = () => {
     setStatus("editing");
-  };
+  }; // change state idle -> editing
 
   const handleCancelClick = () => {
     setStatus("idle");
-  };
+  }; // change state editing -> idle
 
   const handleSaveClick = async () => {
     setStatus("saving");
@@ -46,14 +52,14 @@ const BlockHeaderEdit: React.FC<BlockHeaderEditProps> = ({
       console.log(error);
       handleSaveFailed();
     }
-  };
+  }; // change state editing -> saving -> saved or failed
 
   const handleSaveFailed = () => {
     setStatus("failed");
     setTimeout(() => {
       setStatus("editing");
     }, 3000);
-  };
+  }; // change state failed -> editing
 
   return (
     <div className="flex w-full items-center justify-between p-2">
