@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 interface InputProps {
-  type: "text" | "number" | "email" | "password";
+  type: "text" | "number" | "email" | "password" | "date";
   value: string | number;
   onChange: (value: string | number) => void;
   className?: string;

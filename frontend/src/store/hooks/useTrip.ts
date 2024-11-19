@@ -3,7 +3,7 @@ import { useReducer, useEffect } from "react";
 import { useMemberList } from "./useMemberList";
 
 import { tripReducer } from "@/store/reducers/trip";
-import { Trip, initialTrip } from "@/store/types/trip";
+import { Trip, TripSettableFields, initialTrip } from "@/store/types/trip";
 
 export function useTrip(id: string) {
   const [state, dispatch] = useReducer(tripReducer, initialTrip);
@@ -27,6 +27,8 @@ export function useTrip(id: string) {
             title: "Trip to Tokyo",
             created_at: new Date(),
             updated_at: new Date(),
+            start_date: "2022-01-01",
+            end_date: "2022-01-10",
             status: "planned",
             description: "A trip to Tokyo",
             members: [],
@@ -41,10 +43,7 @@ export function useTrip(id: string) {
     fetchTrip();
   }, [id]);
 
-  const setTripField = (
-    field: "title" | "status" | "description",
-    value: string,
-  ) => {
+  const setTripField = (field: TripSettableFields, value: string) => {
     dispatch({ type: "SET_FIELD", payload: { field, value } });
   };
 
