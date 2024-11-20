@@ -1,5 +1,7 @@
 import React from "react";
 
+import classNames from "classnames";
+
 import { FilterIcon } from "@/assets/icons";
 import DropdownButton from "@/components/ui/dropdown-menu";
 import { useFilter } from "@/store/hooks/useFilter";
@@ -18,10 +20,13 @@ const FilterButton: React.FC<FilterProps> = ({ setFilter, options }) => {
 
   const button = (
     <button
-      className={[
+      className={classNames(
         "flex h-6 w-10 items-center justify-center rounded-lg px-2",
-        masterFilter ? "bg-gray-600" : "bg-blue-600",
-      ].join(" ")}
+        {
+          "bg-gray-600": masterFilter,
+          "bg-blue-600": !masterFilter,
+        },
+      )}
     >
       <FilterIcon className="h-4 w-4 text-gray-200" />
     </button>

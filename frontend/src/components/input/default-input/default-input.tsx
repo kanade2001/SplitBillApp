@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import classNames from "classnames";
+
 interface InputProps {
   type: "text" | "number" | "email" | "password" | "date";
   value: string | number;
@@ -32,11 +34,14 @@ export const DefaultInput: React.FC<InputProps> = ({
   return (
     <input
       type={type}
-      className={[
+      className={classNames(
         "w-full rounded-md border bg-gray-600 px-2 py-1",
-        error ? "border-red-500" : "border-gray-600",
+        {
+          "border-red-500": error,
+          "border-gray-600": !error,
+        },
         className,
-      ].join(" ")}
+      )}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       onBlur={handleBlur}

@@ -1,5 +1,6 @@
-import { DotsHorizonIcon } from "@/assets/icons";
+import classNames from "classnames";
 
+import { DotsHorizonIcon } from "@/assets/icons";
 interface TableBodyDotsProps {
   rows: {
     id: string;
@@ -20,10 +21,9 @@ const TableBodyDots: React.FC<TableBodyDotsProps> = ({
           {row.columns.map((column, index) => (
             <td
               key={index}
-              className={[
-                "px-2",
-                centerColumns?.includes(index) && "text-center",
-              ].join(" ")}
+              className={classNames("px-2", {
+                "text-center": centerColumns?.includes(index),
+              })}
             >
               {column}
             </td>

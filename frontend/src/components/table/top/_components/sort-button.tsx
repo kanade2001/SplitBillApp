@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 import { SortIcon } from "@/assets/icons";
 import { ArrowUpIcon, ArrowDownIcon } from "@/assets/icons";
 import DropdownButton from "@/components/ui/dropdown-menu";
@@ -16,10 +18,13 @@ const SortButton: React.FC<SortProps> = ({ setSort, options }) => {
 
   const button = (
     <button
-      className={[
+      className={classNames(
         "flex h-6 w-10 items-center justify-center rounded-lg px-2",
-        sort.id ? "bg-blue-600" : "bg-gray-600",
-      ].join(" ")}
+        {
+          "bg-blue-600": sort.id,
+          "bg-gray-600": !sort.id,
+        },
+      )}
     >
       <SortIcon className="h-4 w-4 text-gray-200" />
     </button>
@@ -60,11 +65,11 @@ const SortButton: React.FC<SortProps> = ({ setSort, options }) => {
             )}
           </div>
           <button
-            className={[
-              "rounded-lg px-2",
-              sort.id === option.id &&
-                (sort.type === "ascending" ? "bg-red-900" : "bg-blue-900"),
-            ].join(" ")}
+            className={classNames("rounded-lg px-2", {
+              "bg-red-900": sort.id === option.id && sort.type === "ascending",
+              "bg-blue-900":
+                sort.id === option.id && sort.type === "descending",
+            })}
             onClick={() => {
               const newSort = handleSort(option.id);
               setSort(newSort);
