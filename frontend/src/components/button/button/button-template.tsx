@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 interface ButtonTemplateProps {
   onClick: () => void;
   className: string;
@@ -11,10 +13,10 @@ export const ButtonTemplate: React.FC<ButtonTemplateProps> = ({
 }) => {
   return (
     <button
-      className={[
+      className={classNames(
         className,
         "flex h-6 w-16 items-center justify-center gap-2 rounded-md px-2",
-      ].join(" ")}
+      )}
       onClick={onClick}
     >
       <p className="text-sm text-white">{label}</p>

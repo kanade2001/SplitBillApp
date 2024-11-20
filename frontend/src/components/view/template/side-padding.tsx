@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 interface SidePaddingProps {
   children: React.ReactNode;
   className?: string;
@@ -6,10 +8,10 @@ interface SidePaddingProps {
 const SidePadding: React.FC<SidePaddingProps> = ({ children, className }) => {
   return (
     <div
-      className={[
+      className={classNames(
         "mx-auto flex max-w-80 items-center justify-center",
         className,
-      ].join(" ")}
+      )}
     >
       {children}
     </div>

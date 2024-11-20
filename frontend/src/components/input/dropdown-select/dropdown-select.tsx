@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 
+import classNames from "classnames";
 interface DropdownSelectProps {
   value: string;
   onChange: (value: string) => void;
@@ -32,10 +33,10 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
     };
   }, [ref]);
 
-  const inputClassName = [
+  const inputClassName = classNames(
     className || "rounded-md",
     "w-full border bg-gray-600 p-2 border-gray-500",
-  ].join(" ");
+  );
 
   return (
     <div className="relative" ref={ref}>

@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 interface FooterWideProps {
   className?: string;
   colSpan: number;
@@ -12,7 +14,7 @@ const FooterWide: React.FC<FooterWideProps> = ({
   return (
     <tfoot className="h-10 bg-gray-600">
       <tr>
-        <td className={[className, "p-2"].join(" ")} colSpan={colSpan}>
+        <td className={classNames(className, "p-2")} colSpan={colSpan}>
           {label}
         </td>
       </tr>

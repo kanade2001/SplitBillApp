@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import classNames from "classnames";
 interface TextEditInputProps {
   type?: string;
   id?: string;
@@ -37,7 +38,7 @@ const TextEditInput: React.FC<TextEditInputProps> = ({
       <input
         type={type}
         id={id}
-        className={["w-full rounded-s-md bg-gray-600 p-2", className].join(" ")}
+        className={classNames("w-full rounded-s-md bg-gray-600 p-2", className)}
         value={value}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           onChange(event.target.value)
@@ -46,12 +47,11 @@ const TextEditInput: React.FC<TextEditInputProps> = ({
         disabled={status !== "editing"}
       />
       <button
-        className={[
-          "w-16 rounded-e-md p-2",
-          status === "waiting" && "bg-gray-500 text-white",
-          status === "editing" && "bg-blue-600 text-white",
-          status === "saved" && "bg-green-600 text-white",
-        ].join(" ")}
+        className={classNames("w-16 rounded-e-md p-2", {
+          "bg-gray-500 text-white": status === "waiting",
+          "bg-blue-600 text-white": status === "editing",
+          "bg-green-600 text-white": status === "saved",
+        })}
         onClick={status === "waiting" ? handleEditClick : handleSaveClick}
       >
         {status === "waiting" && "Edit"}

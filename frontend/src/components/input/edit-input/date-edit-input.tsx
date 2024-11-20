@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import classNames from "classnames";
 interface DateEditInputProps {
   value: string; // ISO8601
   className?: string;
@@ -17,7 +18,7 @@ const DateEditInput: React.FC<DateEditInputProps> = ({
     <div className="flex">
       <input
         type="date"
-        className={["w-full rounded-s-md bg-gray-600 p-2", className].join(" ")}
+        className={classNames("w-full rounded-s-md bg-gray-600 p-2", className)}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onBlur={() => handleSave(inputValue)}

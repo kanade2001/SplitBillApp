@@ -1,5 +1,6 @@
-import { IconProps } from "@/store/types/icon";
+import classNames from "classnames";
 
+import { IconProps } from "@/store/types/icon";
 interface IconButtonProps {
   onClick: () => void;
   className: string;
@@ -15,10 +16,10 @@ export const IconButtonTemplate: React.FC<IconButtonProps> = ({
 }) => {
   return (
     <button
-      className={[
+      className={classNames(
         className,
         "flex h-6 w-20 items-center justify-center gap-2 rounded-md px-2",
-      ].join(" ")}
+      )}
       onClick={onClick}
     >
       <Icon className="h-4 w-4 text-white" />

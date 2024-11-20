@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import classNames from "classnames";
+
 interface LinkCopyProps {
   link: string;
 }
@@ -19,10 +21,10 @@ const LinkCopyField: React.FC<LinkCopyProps> = ({ link }) => {
       </div>
       <div>
         <button
-          className={[
-            "w-20 rounded-e-lg p-2",
-            isCopied ? "bg-green-600" : "bg-blue-600",
-          ].join(" ")}
+          className={classNames("w-20 rounded-e-lg p-2", {
+            "bg-green-600": isCopied,
+            "bg-blue-600": !isCopied,
+          })}
           onClick={handleCopy}
         >
           {isCopied ? "Copied!" : "Copy"}
