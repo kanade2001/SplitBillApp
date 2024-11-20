@@ -1,12 +1,11 @@
+import { useCallback, useState } from "react";
+
 import TableBodyDots from "@/components/table/body/table-body-dots";
 import FooterWide from "@/components/table/footer/footer-wide";
 import TableHeader from "@/components/table/header/table-header";
 import { BlockHeaderAdd, RoundedBlock } from "@/layout/block";
-import { testCurrency1 } from "@/test/currencies";
-
 import { PopupMenu } from "@/layout/popup";
-
-import { useCallback, useState } from "react";
+import { testCurrency1 } from "@/test/currencies";
 
 import { CurrencySettingsEdit } from "./currency-settings-edit";
 
