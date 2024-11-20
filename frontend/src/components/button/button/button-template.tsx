@@ -1,4 +1,4 @@
-import classnames from "classnames";
+import classNames from "classnames";
 
 interface ButtonTemplateProps {
   onClick: () => void;
@@ -13,7 +13,7 @@ export const ButtonTemplate: React.FC<ButtonTemplateProps> = ({
 }) => {
   return (
     <button
-      className={classnames(
+      className={classNames(
         className,
         "flex h-6 w-16 items-center justify-center gap-2 rounded-md px-2",
       )}
