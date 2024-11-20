@@ -1,1 +1,1 @@
-export { default as Header } from "./header";
+export { default as TableHeader } from "./table-header";

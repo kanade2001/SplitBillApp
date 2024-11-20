@@ -5,3 +5,4 @@ export { default as SaveButton } from "./button/save-button";
 export { default as SavedButton } from "./button/saved-button";
 export { default as FailedButton } from "./button/failed-button";
 export { default as CancelButton } from "./button/cancel-button";
+export { default as AddButton } from "./button/add-button";
