@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 
+import { GeneralSettings, CurrencySettings } from "./_components/_index";
+
 import { TextEditInput, DateEditInput } from "@/components/input";
 import MemberTable from "@/components/table/_index/member-table";
 import { BlockTemplate } from "@/components/template";
 import { useMemberList } from "@/store/hooks/useMemberList";
 import { testMember1 } from "@/test/members";
-
-import GeneralSettings from "./_components/general-settings";
 
 type Props = {
   params: { tripId: string }; // TripID
@@ -36,6 +36,8 @@ export default function TripSettingsPage({ params, searchParams }: Props) {
       <h2>TAB = {searchParams.tab}</h2>
 
       <GeneralSettings />
+
+      <CurrencySettings />
 
       <BlockTemplate label="General">
         <div className="grid w-full grid-cols-[auto_1fr] items-center gap-2">

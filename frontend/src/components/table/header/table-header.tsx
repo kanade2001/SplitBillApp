@@ -1,4 +1,4 @@
-interface HeaderProps {
+interface TableHeaderProps {
   cols: {
     id: string;
     label: string;
@@ -6,7 +6,7 @@ interface HeaderProps {
   }[];
 }
 
-const Header: React.FC<HeaderProps> = ({ cols }) => {
+const TableHeader: React.FC<TableHeaderProps> = ({ cols }) => {
   return (
     <thead className="h-10 bg-gray-600">
       <tr>
@@ -20,4 +20,4 @@ const Header: React.FC<HeaderProps> = ({ cols }) => {
   );
 };
 
-export default Header;
+export default TableHeader;

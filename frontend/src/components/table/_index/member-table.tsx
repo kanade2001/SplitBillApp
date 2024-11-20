@@ -1,14 +1,14 @@
 import React from "react";
 
-import usePopupMenu from "@/components/ui/popup-menu/use-popup-menu";
-import { initialMember, Member } from "@/store/types/member";
-
 import { MemberBody } from "../body/_index";
 import { FooterWide } from "../footer/_index";
-import { Header } from "../header/_index";
+import { TableHeader } from "../header/_index";
 import { SearchFilterSort, TitleAdd } from "../top/_index";
 
 import { MemberAddForm, MemberEditForm } from "./components";
+
+import usePopupMenu from "@/components/ui/popup-menu/use-popup-menu";
+import { initialMember, Member } from "@/store/types/member";
 
 interface MemberTableProps {
   members: Member[];
@@ -74,7 +74,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
         />
       </div>
       <table className="w-full table-fixed">
-        <Header
+        <TableHeader
           cols={[
             { id: "user", label: "User", className: "" },
             { id: "role", label: "Role", className: "w-32" },
@@ -89,11 +89,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
             MemberEditPopupOpen();
           }}
         />
-        <FooterWide
-          className="px-2"
-          colSpan={4}
-          label={members.length + " Members"}
-        />
+        <FooterWide colSpan={4} label={members.length + " Members"} />
       </table>
 
       <MemberAddPopup>

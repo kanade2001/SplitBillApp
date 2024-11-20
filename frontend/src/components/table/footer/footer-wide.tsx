@@ -12,7 +12,7 @@ const FooterWide: React.FC<FooterWideProps> = ({
   return (
     <tfoot className="h-10 bg-gray-600">
       <tr>
-        <td className={className} colSpan={colSpan}>
+        <td className={[className, "p-2"].join(" ")} colSpan={colSpan}>
           {label}
         </td>
       </tr>
