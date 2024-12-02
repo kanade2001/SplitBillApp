@@ -1,13 +1,13 @@
 import { useCallback, useState } from "react";
 
-import { CurrencySettingsEdit } from "./currency-settings-edit";
-
 import TableBodyDots from "@/components/table/body/table-body-dots";
 import FooterWide from "@/components/table/footer/footer-wide";
 import TableHeader from "@/components/table/header/table-header";
 import { BlockHeaderAdd, RoundedBlock } from "@/layout/block";
 import { PopupMenu } from "@/layout/popup";
 import { testCurrency1 } from "@/test/currencies";
+
+import { CurrencySettingsEdit } from "./currency-settings-edit";
 
 const CurrencySettings = () => {
   const currencyData = testCurrency1;
