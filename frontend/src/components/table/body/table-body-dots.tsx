@@ -29,7 +29,7 @@ const TableBodyDots: React.FC<TableBodyDotsProps> = ({
             </td>
           ))}
           <td className="px-2">
-            <button className="flex items-center" onClick={row.actions}>
+            <button className="flex items-center" onClick={() => row.actions()}>
               <DotsHorizonIcon className="h-6 w-6 text-gray-800 dark:text-white" />
             </button>
           </td>
