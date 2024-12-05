@@ -8,3 +8,10 @@ services:
       - /app/frontend/node_modules
     working_dir: /app/frontend
     tty: true
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/backend
+    tty: true
