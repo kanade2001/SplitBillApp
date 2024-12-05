@@ -4,6 +4,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/app
+      - ./frontend:/app:delegated
+      - /app/node_modules
     working_dir: /app/frontend-app
     tty: true
