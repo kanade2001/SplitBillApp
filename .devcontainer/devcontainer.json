@@ -1,6 +1,6 @@
 {
   "name": "React + Django DevContainer",
-  "dockerComposeFile": "docker-compose-dev.yml",
+  "dockerComposeFile": ["../docker-compose.yml"],
   "service": "dev",
   "workspaceFolder": "/workspace",
   "postCreateCommand": "pip install -r backend/requirements.txt",
