@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@eslint/js": "^9.16.0",
     "classnames": "^2.5.1",
     "flag-icons": "^7.2.3",
     "next": "14.2.13",
