@@ -17,15 +17,7 @@
         "editor.codeActionsOnSave": {
           "source.fixAll.eslint": "always"
         },
-        /*
-        "eslint.workingDirectories": [
-          { "directory": "frontend", "changeProcessCWD": true },
-        ]
-        */
         "python.defaultInterpreterPath": "/usr/local/bin/python"
-        /*
-        "python.pythonPath": "/usr/local/bin/python"
-        */
       }
     }
   },
