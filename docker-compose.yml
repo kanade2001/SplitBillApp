@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   frontend:
     build: ./frontend
@@ -8,6 +10,7 @@ services:
       - /app/frontend/node_modules
     working_dir: /app/frontend
     tty: true
+
   backend:
     build: ./backend
     ports:
@@ -15,3 +18,14 @@ services:
     volumes:
       - ./backend:/app/backend
     tty: true
+
+  dev:
+    build:
+      context: .
+      dockerfile:  ./.devcontainer/Dockerfile
+    volumes:
+      - .:/workspace:cached
+    depends_on:
+      - frontend
+      - backend
+    command: sleep infinity
