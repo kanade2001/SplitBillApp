@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 import bcrypt
 
 class UserManager(BaseUserManager):
@@ -30,7 +30,7 @@ class UserManager(BaseUserManager):
     user.save(using=self._db)
     return user
 
-class User(AbstractUser):
+class User(AbstractBaseUser):
   email = models.EmailField(verbose_name='email', max_length=255, unique=True)
   username = models.CharField(max_length=255, unique=True)
   password_hash = models.CharField(max_length=255)
