@@ -9,6 +9,7 @@
     "vscode": {
       "extensions": [
         "ms-python.python",
+        "ms-python.black-formatter",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode"
       ],
@@ -17,7 +18,9 @@
         "editor.codeActionsOnSave": {
           "source.fixAll.eslint": "always"
         },
-        "python.defaultInterpreterPath": "/usr/local/bin/python"
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.formatting.provider": "black",
+        "python.formatting.blackArgs": ["--line-length", "88"]
       }
     }
   },
