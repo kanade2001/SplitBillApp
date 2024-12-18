@@ -4,3 +4,4 @@ django-cors-headers>=3.7.0
 python-dotenv>=1.0.0
 bcrypt>=3.2.0
 black>=21.12b0
+isort>=5.10.2
