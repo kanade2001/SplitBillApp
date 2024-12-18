@@ -4,10 +4,14 @@ from api.models import User
 from api.serializers import UserSerializer
 from api.services import UserService
 
+from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    lookup_field = "username"
 
     def perform_create(self, serializer):
         UserService.create_user(
@@ -17,10 +21,24 @@ class UserViewSet(viewsets.ModelViewSet):
         )
 
     def perform_update(self, serializer):
-        user = self.get_object()
+
+        user = get_object_or_404(User, username=self.kwargs["username"])
         UserService.update_user(
             user,
             email=serializer.validated_data.get("email"),
             username=serializer.validated_data.get("username"),
             password=serializer.validated_data.get("password"),
         )
+    
+    def update(self, request, *args, **kwargs):
+
+        username = self.kwargs.get("username")
+        user = get_object_or_404(User, username=username)
+        
+        serializer = self.get_serializer(user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception = True)
+        
+        self.perform_update(serializer)
+        
+        return Response(serializer.data)
+    
