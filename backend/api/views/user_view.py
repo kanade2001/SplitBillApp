@@ -21,7 +21,6 @@ class UserViewSet(viewsets.ModelViewSet):
         )
 
     def perform_update(self, serializer):
-
         user = get_object_or_404(User, username=self.kwargs["username"])
         UserService.update_user(
             user,
@@ -29,16 +28,5 @@ class UserViewSet(viewsets.ModelViewSet):
             username=serializer.validated_data.get("username"),
             password=serializer.validated_data.get("password"),
         )
-    
-    def update(self, request, *args, **kwargs):
-
-        username = self.kwargs.get("username")
-        user = get_object_or_404(User, username=username)
-        
-        serializer = self.get_serializer(user, data=request.data, partial=True)
-        serializer.is_valid(raise_exception = True)
-        
-        self.perform_update(serializer)
-        
-        return Response(serializer.data)
+        serializer.save()
     
