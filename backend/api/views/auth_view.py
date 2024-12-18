@@ -1,8 +1,8 @@
+from api.models import Token
 from api.serializers import AuthTokenSerializer
-
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
-from api.models import Token
+
 
 class CustomAuthToken(ObtainAuthToken):
     serializer_class = AuthTokenSerializer
