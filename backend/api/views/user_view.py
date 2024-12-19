@@ -12,6 +12,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     lookup_field = "username"  # usernameをlookup_fieldに指定
 
+    # POST ユーザーを作成
     def perform_create(self, serializer):
         UserService.create_user(  # create_userメソッドで新規作成
             email=serializer.validated_data["email"],
@@ -19,6 +20,7 @@ class UserViewSet(viewsets.ModelViewSet):
             password=serializer.validated_data["password"],
         )
 
+    # PATCH ユーザー情報を更新
     def perform_update(self, serializer):
         user = get_object_or_404(
             User, username=self.kwargs["username"]
@@ -30,3 +32,10 @@ class UserViewSet(viewsets.ModelViewSet):
             password=serializer.validated_data.get("password"),
         )
         serializer.save()
+
+    # DELETE ユーザーを削除
+    def perform_destroy(self):
+        user = get_object_or_404(
+            User, username=self.kwargs["username"]
+        )
+        UserService.delete_user(user)
